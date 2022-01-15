@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedGraph: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|CZToolKit.BehaviorTree.BehaviorTree,
     Assembly-CSharp\",\r\n    \"pan\": {\r\n        \"$type\": \"1|UnityEngine.Vector3,
-    UnityEngine.CoreModule\",\r\n        696,\r\n        -102,\r\n        0\r\n   
-    },\r\n    \"zoom\": {\r\n        \"$type\": 1,\r\n        0.8695652,\r\n       
-    0.8695652,\r\n        1\r\n    },\r\n    \"nodes\": {\r\n        \"$id\": 1,\r\n       
+    UnityEngine.CoreModule\",\r\n        704,\r\n        -14.666667,\r\n        0\r\n   
+    },\r\n    \"zoom\": {\r\n        \"$type\": 1,\r\n        0.657516241,\r\n       
+    0.657516241,\r\n        1\r\n    },\r\n    \"nodes\": {\r\n        \"$id\": 1,\r\n       
     \"$type\": \"2|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[CZToolKit.GraphProcessor.BaseNode,
     CZToolKit.GraphProcessor]], mscorlib\",\r\n        \"comparer\": {\r\n           
     \"$id\": 2,\r\n            \"$type\": \"3|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
@@ -199,5 +199,6 @@ MonoBehaviour:
     \"toPortName\": \"Parent\"\r\n            },\r\n            {\r\n               
     \"$id\": 43,\r\n                \"$type\": 15,\r\n                \"from\": \"57b72bdb-f726-4ab7-a380-d5649654f53c\",\r\n               
     \"fromPortName\": \"Children\",\r\n                \"to\": \"f5b7b674-7086-4d86-8658-6c16cfe700ec\",\r\n               
-    \"toPortName\": \"Parent\"\r\n            }\r\n        ]\r\n    }\r\n}"
+    \"toPortName\": \"Parent\"\r\n            }\r\n        ]\r\n    },\r\n    \"_entryGUID\":
+    \"7b145f8d-ce75-4509-b8c3-d85689f10c54\"\r\n}"
   graphUnityReferences: []
