@@ -72,70 +72,31 @@ namespace CZToolKit.BehaviorTree
             set { SetPropertyValue(nameof(rightFunctionName), value); }
         }
 
+        protected override void OnEnabled()
+        {
+            base.OnEnabled();
+
+            this[nameof(leftValueType)] = new BindableProperty<ValueType>(leftValueType, v => leftValueType = v);
+            this[nameof(leftValue)] = new BindableProperty<bool>(leftValue, v => { leftValue = v; });
+            this[nameof(leftFunctionName)] = new BindableProperty<string>(leftFunctionName, v => leftFunctionName = v);
+
+            this[nameof(rightValueType)] = new BindableProperty<ValueType>(rightValueType, v => rightValueType = v);
+            this[nameof(rightValue)] = new BindableProperty<bool>(rightValue, v => { rightValue = v; });
+            this[nameof(rightFunctionName)] = new BindableProperty<string>(rightFunctionName, v => rightFunctionName = v);
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
-
-            this[nameof(leftValueType)] = new BindableProperty<ValueType>(leftValueType, v =>
-            {
-                leftValueType = v;
-                Refresh();
-            });
-            this[nameof(leftValue)] = new BindableProperty<bool>(leftValue, v => { leftValue = v; });
-            this[nameof(leftFunctionName)] = new BindableProperty<string>(leftFunctionName, v =>
-            {
-                leftFunctionName = v;
-                Refresh();
-            });
-
-            this[nameof(rightValueType)] = new BindableProperty<ValueType>(rightValueType, v =>
-            {
-                rightValueType = v;
-                Refresh();
-            });
-            this[nameof(rightValue)] = new BindableProperty<bool>(rightValue, v => { rightValue = v; });
-            this[nameof(rightFunctionName)] = new BindableProperty<string>(rightFunctionName, v =>
-            {
-                rightFunctionName = v;
-                Refresh();
-            });
-
             Refresh();
 
-            void Refresh()
-            {
-                switch (leftValueType)
-                {
-                    case ValueType.Value:
-                        leftFunction = () => { return leftValue; };
-                        break;
-                    case ValueType.Function:
-                        MethodInfo method = null;
-                        if (!string.IsNullOrEmpty(leftFunctionName))
-                            method = Agent.GetType().GetMethod(leftFunctionName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                        if (method != null)
-                            leftFunction = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), Agent, method);
-                        else
-                            leftFunction = () => { return false; };
-                        break;
-                }
+            this[nameof(leftValueType)].AsBindableProperty<ValueType>().RegesterValueChangedEvent(_ => { Refresh(); });
+            this[nameof(leftValue)].AsBindableProperty<bool>().RegesterValueChangedEvent(_ => { Refresh(); });
+            this[nameof(leftFunctionName)].AsBindableProperty<string>().RegesterValueChangedEvent(_ => { Refresh(); });
 
-                switch (rightValueType)
-                {
-                    case ValueType.Value:
-                        rightFunction = () => { return rightValue; };
-                        break;
-                    case ValueType.Function:
-                        MethodInfo method = null;
-                        if (!string.IsNullOrEmpty(rightFunctionName))
-                            method = Agent.GetType().GetMethod(rightFunctionName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                        if (method != null)
-                            rightFunction = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), Agent, method);
-                        else
-                            rightFunction = () => { return false; };
-                        break;
-                }
-            }
+            this[nameof(rightValueType)].AsBindableProperty<ValueType>().RegesterValueChangedEvent(_ => { Refresh(); });
+            this[nameof(rightValue)].AsBindableProperty<bool>().RegesterValueChangedEvent(_ => { Refresh(); });
+            this[nameof(rightFunctionName)].AsBindableProperty<string>().RegesterValueChangedEvent(_ => { Refresh(); });
         }
 
         protected override TaskStatus OnUpdate()
@@ -146,6 +107,42 @@ namespace CZToolKit.BehaviorTree
                 return TaskStatus.Success;
             else
                 return TaskStatus.Failure;
+        }
+
+
+        void Refresh()
+        {
+            switch (leftValueType)
+            {
+                case ValueType.Value:
+                    leftFunction = () => { return leftValue; };
+                    break;
+                case ValueType.Function:
+                    MethodInfo method = null;
+                    if (!string.IsNullOrEmpty(leftFunctionName))
+                        method = Agent.GetType().GetMethod(leftFunctionName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (method != null)
+                        leftFunction = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), Agent, method);
+                    else
+                        leftFunction = () => { return false; };
+                    break;
+            }
+
+            switch (rightValueType)
+            {
+                case ValueType.Value:
+                    rightFunction = () => { return rightValue; };
+                    break;
+                case ValueType.Function:
+                    MethodInfo method = null;
+                    if (!string.IsNullOrEmpty(rightFunctionName))
+                        method = Agent.GetType().GetMethod(rightFunctionName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (method != null)
+                        rightFunction = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), Agent, method);
+                    else
+                        rightFunction = () => { return false; };
+                    break;
+            }
         }
     }
 }

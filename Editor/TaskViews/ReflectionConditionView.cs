@@ -24,13 +24,14 @@ namespace CZToolKit.BehaviorTree.Editors
     public class ReflectionConditionView : TaskNodeView { }
 
     [CustomObjectEditor(typeof(ReflectionConditionView))]
-    public class ReflectionConditionInspector : ObjectEditor
+    public class ReflectionConditionInspector : BaseNodeInspector
     {
         public override void OnInspectorGUI()
         {
             var view = Target as ReflectionConditionView;
             var node = view.Model as ReflectionCondition;
 
+            EditorGUILayoutExtension.BeginVerticalBoxGroup();
             node.LeftValueType = (ReflectionCondition.ValueType)EditorGUILayout.EnumPopup(node.LeftValueType);
             switch (node.LeftValueType)
             {
@@ -41,6 +42,7 @@ namespace CZToolKit.BehaviorTree.Editors
                     node.LeftFunctionName = EditorGUILayout.TextField("LeftValue", node.LeftFunctionName);
                     break;
             }
+            EditorGUILayoutExtension.EndVerticalBoxGroup();
 
             node.RightValueType = (ReflectionCondition.ValueType)EditorGUILayout.EnumPopup(node.RightValueType);
             switch (node.RightValueType)
