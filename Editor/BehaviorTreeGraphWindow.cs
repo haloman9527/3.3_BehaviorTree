@@ -43,13 +43,11 @@ namespace CZToolKit.BehaviorTree.Editors
         private void OnSelectionChange()
         {
             if (Selection.activeGameObject == null)
-            {
                 return;
-            }
             var agent = Selection.activeGameObject.GetComponent<BehaviorTreeAgent>();
             if (agent != null && (agent != (UnityObject)GraphOwner || GraphAsset != agent.GraphAsset || Graph != agent.Graph))
             {
-                Load(agent as IGraphAssetOwner);
+                Load(agent);
             }
         }
 
@@ -58,7 +56,7 @@ namespace CZToolKit.BehaviorTree.Editors
             switch (obj)
             {
                 case PlayModeStateChange.EnteredEditMode:
-                    //case PlayModeStateChange.EnteredPlayMode:
+                case PlayModeStateChange.EnteredPlayMode:
                     Reload();
                     break;
                 default:

@@ -148,14 +148,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 776691972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f053706b08664445866432b47b427d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 387c4642a2dc53d428f7e23e9ee4c0c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializedVariables: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|System.Collections.Generic.List`1[[CZToolKit.Core.SharedVariable.SharedVariable,
-    CZToolKit.Core]], mscorlib\",\r\n    \"$rlength\": 0,\r\n    \"$rcontent\": [\r\n   
-    ]\r\n}"
+  serializedVariables: 
   variablesUnityReference: []
   graphAsset: {fileID: 11400000, guid: 06781fa420ba6154ea2eed6495e73645, type: 2}
+  rightValue: 0
 --- !u!108 &776691974
 Light:
   m_ObjectHideFlags: 0
