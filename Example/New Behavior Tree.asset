@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedGraph: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|CZToolKit.BehaviorTree.BehaviorTree,
     Assembly-CSharp\",\r\n    \"pan\": {\r\n        \"$type\": \"1|UnityEngine.Vector3,
-    UnityEngine.CoreModule\",\r\n        623,\r\n        29.0000038,\r\n        0\r\n   
-    },\r\n    \"zoom\": {\r\n        \"$type\": 1,\r\n        0.657516241,\r\n       
-    0.657516241,\r\n        1\r\n    },\r\n    \"nodes\": {\r\n        \"$id\": 1,\r\n       
+    UnityEngine.CoreModule\",\r\n        696,\r\n        -102,\r\n        0\r\n   
+    },\r\n    \"zoom\": {\r\n        \"$type\": 1,\r\n        0.8695652,\r\n       
+    0.8695652,\r\n        1\r\n    },\r\n    \"nodes\": {\r\n        \"$id\": 1,\r\n       
     \"$type\": \"2|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[CZToolKit.GraphProcessor.BaseNode,
     CZToolKit.GraphProcessor]], mscorlib\",\r\n        \"comparer\": {\r\n           
     \"$id\": 2,\r\n            \"$type\": \"3|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
@@ -115,8 +115,8 @@ MonoBehaviour:
     \"$k\": \"e22f2c28-0c02-427b-97ba-31df92ed4547\",\r\n                \"$v\":
     {\r\n                    \"$id\": 20,\r\n                    \"$type\": 9,\r\n                   
     \"guid\": \"e22f2c28-0c02-427b-97ba-31df92ed4547\",\r\n                    \"position\":
-    {\r\n                        \"$type\": 5,\r\n                        -404,\r\n                       
-    711\r\n                    },\r\n                    \"text\": \"a\",\r\n                   
+    {\r\n                        \"$type\": 5,\r\n                        -456,\r\n                       
+    718\r\n                    },\r\n                    \"text\": \"a\",\r\n                   
     \"go\": {\r\n                        \"$id\": 21,\r\n                       
     \"$type\": 10,\r\n                        \"guid\": \"4c0f2a41-4a8a-46e9-bedf-e8ebeb9ff6cf\",\r\n                       
     \"value\": null\r\n                    }\r\n                }\r\n           
@@ -124,7 +124,7 @@ MonoBehaviour:
     \"$v\": {\r\n                    \"$id\": 22,\r\n                    \"$type\":
     9,\r\n                    \"guid\": \"53f9a6eb-33d0-4eb3-aeff-d562eda84927\",\r\n                   
     \"position\": {\r\n                        \"$type\": 5,\r\n                       
-    -688,\r\n                        711\r\n                    },\r\n                   
+    -582,\r\n                        710\r\n                    },\r\n                   
     \"text\": \"b\",\r\n                    \"go\": {\r\n                       
     \"$id\": 23,\r\n                        \"$type\": 10,\r\n                       
     \"guid\": \"37208494-dad8-4901-a171-bb5fc3cfeed8\",\r\n                       
@@ -139,10 +139,10 @@ MonoBehaviour:
     \"$v\": {\r\n                    \"$id\": 25,\r\n                    \"$type\":
     \"13|CZToolKit.BehaviorTree.ReflectionCondition, Assembly-CSharp\",\r\n                   
     \"guid\": \"f5b7b674-7086-4d86-8658-6c16cfe700ec\",\r\n                    \"position\":
-    {\r\n                        \"$type\": 5,\r\n                        -357,\r\n                       
-    546\r\n                    },\r\n                    \"leftValueType\": 1,\r\n                   
+    {\r\n                        \"$type\": 5,\r\n                        -360,\r\n                       
+    545\r\n                    },\r\n                    \"leftValueType\": 1,\r\n                   
     \"leftValue\": true,\r\n                    \"leftFunctionName\": \"LeftValue\",\r\n                   
-    \"rightValueType\": 1,\r\n                    \"rightValue\": true,\r\n                   
+    \"rightValueType\": 0,\r\n                    \"rightValue\": true,\r\n                   
     \"rightFunctionName\": \"RightValue\"\r\n                }\r\n            }\r\n       
     ]\r\n    },\r\n    \"connections\": {\r\n        \"$id\": 26,\r\n        \"$type\":
     \"14|System.Collections.Generic.List`1[[CZToolKit.GraphProcessor.BaseConnection,

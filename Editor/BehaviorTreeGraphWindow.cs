@@ -47,7 +47,14 @@ namespace CZToolKit.BehaviorTree.Editors
             var agent = Selection.activeGameObject.GetComponent<BehaviorTreeAgent>();
             if (agent != null && (agent != (UnityObject)GraphOwner || GraphAsset != agent.GraphAsset || Graph != agent.Graph))
             {
-                Load(agent);
+                if (agent.GraphAsset != null)
+                {
+                    Load(agent as IGraphAssetOwner);
+                }
+                else
+                {
+                    Load(agent as IGraphOwner);
+                }
             }
         }
 

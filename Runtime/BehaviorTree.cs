@@ -22,8 +22,7 @@ namespace CZToolKit.BehaviorTree
 {
     public partial class BehaviorTree : BaseGraph
     {
-        string _entryGUID;
-
+        [SerializeField] string _entryGUID;
     }
 
     public partial class BehaviorTree
@@ -61,7 +60,7 @@ namespace CZToolKit.BehaviorTree
 
         protected override void OnEnabled()
         {
-            base.OnEnabled(); 
+            base.OnEnabled();
             if (Entry == null) { }
         }
 

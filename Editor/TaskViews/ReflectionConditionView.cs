@@ -30,8 +30,11 @@ namespace CZToolKit.BehaviorTree.Editors
         {
             var view = Target as ReflectionConditionView;
             var node = view.Model as ReflectionCondition;
+            if (node == null)
+                return;
 
             EditorGUILayoutExtension.BeginVerticalBoxGroup();
+            GUILayout.Box("LeftValue", GUILayout.ExpandWidth(true));
             node.LeftValueType = (ReflectionCondition.ValueType)EditorGUILayout.EnumPopup(node.LeftValueType);
             switch (node.LeftValueType)
             {
@@ -44,6 +47,8 @@ namespace CZToolKit.BehaviorTree.Editors
             }
             EditorGUILayoutExtension.EndVerticalBoxGroup();
 
+            EditorGUILayoutExtension.BeginVerticalBoxGroup();
+            GUILayout.Box("RightValue", GUILayout.ExpandWidth(true));
             node.RightValueType = (ReflectionCondition.ValueType)EditorGUILayout.EnumPopup(node.RightValueType);
             switch (node.RightValueType)
             {
@@ -54,6 +59,7 @@ namespace CZToolKit.BehaviorTree.Editors
                     node.RightFunctionName = EditorGUILayout.TextField("RightValue", node.RightFunctionName);
                     break;
             }
+            EditorGUILayoutExtension.EndVerticalBoxGroup();
         }
     }
 }

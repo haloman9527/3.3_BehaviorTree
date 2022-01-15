@@ -90,13 +90,13 @@ namespace CZToolKit.BehaviorTree
             base.OnInitialized();
             Refresh();
 
-            this[nameof(leftValueType)].AsBindableProperty<ValueType>().RegesterValueChangedEvent(_ => { Refresh(); });
-            this[nameof(leftValue)].AsBindableProperty<bool>().RegesterValueChangedEvent(_ => { Refresh(); });
-            this[nameof(leftFunctionName)].AsBindableProperty<string>().RegesterValueChangedEvent(_ => { Refresh(); });
+            this[nameof(leftValueType)].RegisterValueChangedEvent<ValueType>(_ => { Refresh(); });
+            this[nameof(leftValue)].RegisterValueChangedEvent<bool>(_ => { Refresh(); });
+            this[nameof(leftFunctionName)].RegisterValueChangedEvent<string>(_ => { Refresh(); });
 
-            this[nameof(rightValueType)].AsBindableProperty<ValueType>().RegesterValueChangedEvent(_ => { Refresh(); });
-            this[nameof(rightValue)].AsBindableProperty<bool>().RegesterValueChangedEvent(_ => { Refresh(); });
-            this[nameof(rightFunctionName)].AsBindableProperty<string>().RegesterValueChangedEvent(_ => { Refresh(); });
+            this[nameof(rightValueType)].RegisterValueChangedEvent<ValueType>(_ => { Refresh(); });
+            this[nameof(rightValue)].RegisterValueChangedEvent<bool>(_ => { Refresh(); });
+            this[nameof(rightFunctionName)].RegisterValueChangedEvent<string>(_ => { Refresh(); });
         }
 
         protected override TaskStatus OnUpdate()
@@ -121,7 +121,7 @@ namespace CZToolKit.BehaviorTree
                     MethodInfo method = null;
                     if (!string.IsNullOrEmpty(leftFunctionName))
                         method = Agent.GetType().GetMethod(leftFunctionName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                    if (method != null)
+                    if (method != null && method.GetParameters().Length == 0)
                         leftFunction = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), Agent, method);
                     else
                         leftFunction = () => { return false; };
@@ -137,7 +137,7 @@ namespace CZToolKit.BehaviorTree
                     MethodInfo method = null;
                     if (!string.IsNullOrEmpty(rightFunctionName))
                         method = Agent.GetType().GetMethod(rightFunctionName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                    if (method != null)
+                    if (method != null && method.GetParameters().Length == 0)
                         rightFunction = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), Agent, method);
                     else
                         rightFunction = () => { return false; };
