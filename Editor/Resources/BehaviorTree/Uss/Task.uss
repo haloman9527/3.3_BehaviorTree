@@ -1,0 +1,37 @@
+﻿#state-border {
+	border-left-width:2px;
+	border-right-width:2px;
+	border-top-width:2px;
+	border-bottom-width:2px;
+	border-top-left-radius:9px;
+	border-top-right-radius:9px;
+	border-bottom-left-radius:9px;
+	border-bottom-right-radius:9px;
+}
+
+.success
+{
+	border-left-color:rgba(0, 255, 0, 1);
+	border-right-color:rgba(0, 255, 0, 1);
+	border-top-color:rgba(0, 255, 0, 1);
+	border-bottom-color:rgba(0, 255, 0, 1);
+	background-color:rgba(0, 255, 0, 1);
+}
+
+.failure
+{
+	border-left-color:rgba(255, 0, 0, 1);
+	border-right-color:rgba(255, 0, 0, 1);
+	border-top-color:rgba(255, 0, 0, 1);
+	border-bottom-color:rgba(255, 0, 0, 1);
+	background-color:rgba(255, 0, 0, 1);
+}
+
+.running 
+{
+	border-left-color:rgba(255, 255, 0, 1);
+	border-right-color:rgba(255, 255, 0, 1);
+	border-top-color:rgba(255, 255, 0, 1);
+	border-bottom-color:rgba(255, 255, 0, 1);
+	background-color:rgba(255, 255, 0, 1);
+}
