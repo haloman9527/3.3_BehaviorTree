@@ -20,7 +20,7 @@ namespace CZToolKit.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Sequence")]
     [NodeMenuItem("Compsite", "顺序执行")]
-    [NodeTooltip("依次执行，遇Failuer或Running中断，并返回该状态")]
+    [NodeTooltip("依次执行，遇Failure或Running中断，并返回该状态")]
     public class Sequence : Compsite
     {
         int index;

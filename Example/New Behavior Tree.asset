@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedGraph: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|CZToolKit.BehaviorTree.BehaviorTree,
     Assembly-CSharp\",\r\n    \"pan\": {\r\n        \"$type\": \"1|UnityEngine.Vector3,
-    UnityEngine.CoreModule\",\r\n        598,\r\n        33,\r\n        0\r\n   
-    },\r\n    \"zoom\": {\r\n        \"$type\": 1,\r\n        0.7561437,\r\n       
-    0.7561437,\r\n        1\r\n    },\r\n    \"nodes\": {\r\n        \"$id\": 1,\r\n       
+    UnityEngine.CoreModule\",\r\n        700,\r\n        77,\r\n        0\r\n   
+    },\r\n    \"zoom\": {\r\n        \"$type\": 1,\r\n        0.657516241,\r\n       
+    0.657516241,\r\n        1\r\n    },\r\n    \"nodes\": {\r\n        \"$id\": 1,\r\n       
     \"$type\": \"2|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[CZToolKit.GraphProcessor.BaseNode,
     CZToolKit.GraphProcessor]], mscorlib\",\r\n        \"comparer\": {\r\n           
     \"$id\": 2,\r\n            \"$type\": \"3|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
@@ -105,7 +105,7 @@ MonoBehaviour:
     {\r\n                    \"$id\": 18,\r\n                    \"$type\": 6,\r\n                   
     \"guid\": \"ed78c747-2d83-4133-bd50-39caadca6392\",\r\n                    \"position\":
     {\r\n                        \"$type\": 5,\r\n                        97,\r\n                       
-    723\r\n                    },\r\n                    \"interval\": 1\r\n               
+    723\r\n                    },\r\n                    \"interval\": 0.1\r\n               
     }\r\n            },\r\n            {\r\n                \"$k\": \"aaa78a1b-922e-42f8-bfe1-bf8af6486bc9\",\r\n               
     \"$v\": {\r\n                    \"$id\": 19,\r\n                    \"$type\":
     6,\r\n                    \"guid\": \"aaa78a1b-922e-42f8-bfe1-bf8af6486bc9\",\r\n                   
