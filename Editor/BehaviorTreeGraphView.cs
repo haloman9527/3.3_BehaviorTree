@@ -14,7 +14,6 @@
  */
 #endregion
 using CZToolKit.Core;
-using CZToolKit.GraphProcessor;
 using CZToolKit.GraphProcessor.Editors;
 using System;
 using System.Collections.Generic;
@@ -23,14 +22,9 @@ namespace CZToolKit.BehaviorTree.Editors
 {
     public class BehaviorTreeGraphView : BaseGraphView
     {
-        public BehaviorTreeGraphView(BaseGraph graph, BaseGraphWindow window, CommandDispatcher commandDispacter) : base(graph, window, commandDispacter)
-        {
-        }
-
         protected override void OnInitialized()
         {
-            base.OnInitialized();
-            schedule.Execute( UpdateState).Every(100);
+            schedule.Execute(UpdateState).Every(100);
         }
 
         private void UpdateState()

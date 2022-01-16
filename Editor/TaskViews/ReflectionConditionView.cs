@@ -33,33 +33,35 @@ namespace CZToolKit.BehaviorTree.Editors
             if (node == null)
                 return;
 
+            EditorGUILayoutExtension.BeginHorizontalBoxGroup();
             EditorGUILayoutExtension.BeginVerticalBoxGroup();
             GUILayout.Box("LeftValue", GUILayout.ExpandWidth(true));
             node.LeftValueType = (ReflectionCondition.ValueType)EditorGUILayout.EnumPopup(node.LeftValueType);
             switch (node.LeftValueType)
             {
                 case ReflectionCondition.ValueType.Value:
-                    node.LeftValue = EditorGUILayout.Toggle("LeftValue", node.LeftValue);
+                    node.LeftValue = EditorGUILayout.Toggle(node.LeftValue);
                     break;
                 case ReflectionCondition.ValueType.Function:
-                    node.LeftFunctionName = EditorGUILayout.TextField("LeftValue", node.LeftFunctionName);
+                    node.LeftFunctionName = EditorGUILayout.TextField(node.LeftFunctionName);
                     break;
             }
             EditorGUILayoutExtension.EndVerticalBoxGroup();
-
+            GUILayout.Label("=", EditorStyles.boldLabel, GUILayout.ExpandHeight(true), GUILayout.Width(12));
             EditorGUILayoutExtension.BeginVerticalBoxGroup();
             GUILayout.Box("RightValue", GUILayout.ExpandWidth(true));
             node.RightValueType = (ReflectionCondition.ValueType)EditorGUILayout.EnumPopup(node.RightValueType);
             switch (node.RightValueType)
             {
                 case ReflectionCondition.ValueType.Value:
-                    node.RightValue = EditorGUILayout.Toggle("RightValue", node.RightValue);
+                    node.RightValue = EditorGUILayout.Toggle(node.RightValue);
                     break;
                 case ReflectionCondition.ValueType.Function:
-                    node.RightFunctionName = EditorGUILayout.TextField("RightValue", node.RightFunctionName);
+                    node.RightFunctionName = EditorGUILayout.TextField(node.RightFunctionName);
                     break;
             }
             EditorGUILayoutExtension.EndVerticalBoxGroup();
+            EditorGUILayoutExtension.EndHorizontalBoxGroup();
         }
     }
 }

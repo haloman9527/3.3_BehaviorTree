@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedGraph: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|CZToolKit.BehaviorTree.BehaviorTree,
     Assembly-CSharp\",\r\n    \"pan\": {\r\n        \"$type\": \"1|UnityEngine.Vector3,
-    UnityEngine.CoreModule\",\r\n        704,\r\n        -14.666667,\r\n        0\r\n   
-    },\r\n    \"zoom\": {\r\n        \"$type\": 1,\r\n        0.657516241,\r\n       
-    0.657516241,\r\n        1\r\n    },\r\n    \"nodes\": {\r\n        \"$id\": 1,\r\n       
+    UnityEngine.CoreModule\",\r\n        1005.33331,\r\n        -575.3333,\r\n       
+    0\r\n    },\r\n    \"zoom\": {\r\n        \"$type\": 1,\r\n        1.3225,\r\n       
+    1.3225,\r\n        1\r\n    },\r\n    \"nodes\": {\r\n        \"$id\": 1,\r\n       
     \"$type\": \"2|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[CZToolKit.GraphProcessor.BaseNode,
     CZToolKit.GraphProcessor]], mscorlib\",\r\n        \"comparer\": {\r\n           
     \"$id\": 2,\r\n            \"$type\": \"3|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
@@ -94,8 +94,8 @@ MonoBehaviour:
     \"11|CZToolKit.BehaviorTree.RandomSequence, Assembly-CSharp\",\r\n                   
     \"guid\": \"8cdbedf0-4611-4897-9704-1ad3f0721e73\",\r\n                    \"position\":
     {\r\n                        \"$type\": 5,\r\n                        96,\r\n                       
-    551\r\n                    }\r\n                }\r\n            },\r\n           
-    {\r\n                \"$k\": \"0944e21b-b862-4562-a0c7-7b9c7e2de8c1\",\r\n               
+    551\r\n                    },\r\n                    \"randomSeed\": 0\r\n               
+    }\r\n            },\r\n            {\r\n                \"$k\": \"0944e21b-b862-4562-a0c7-7b9c7e2de8c1\",\r\n               
     \"$v\": {\r\n                    \"$id\": 17,\r\n                    \"$type\":
     6,\r\n                    \"guid\": \"0944e21b-b862-4562-a0c7-7b9c7e2de8c1\",\r\n                   
     \"position\": {\r\n                        \"$type\": 5,\r\n                       
@@ -124,7 +124,7 @@ MonoBehaviour:
     \"$v\": {\r\n                    \"$id\": 22,\r\n                    \"$type\":
     9,\r\n                    \"guid\": \"53f9a6eb-33d0-4eb3-aeff-d562eda84927\",\r\n                   
     \"position\": {\r\n                        \"$type\": 5,\r\n                       
-    -582,\r\n                        710\r\n                    },\r\n                   
+    -622,\r\n                        717\r\n                    },\r\n                   
     \"text\": \"b\",\r\n                    \"go\": {\r\n                       
     \"$id\": 23,\r\n                        \"$type\": 10,\r\n                       
     \"guid\": \"37208494-dad8-4901-a171-bb5fc3cfeed8\",\r\n                       
@@ -134,15 +134,15 @@ MonoBehaviour:
     \"12|CZToolKit.BehaviorTree.RandomSelector, Assembly-CSharp\",\r\n                   
     \"guid\": \"3e49f191-4907-45f4-aa75-384bc4172e05\",\r\n                    \"position\":
     {\r\n                        \"$type\": 5,\r\n                        -541,\r\n                       
-    547\r\n                    }\r\n                }\r\n            },\r\n           
-    {\r\n                \"$k\": \"f5b7b674-7086-4d86-8658-6c16cfe700ec\",\r\n               
+    547\r\n                    },\r\n                    \"randomSeed\": 0\r\n               
+    }\r\n            },\r\n            {\r\n                \"$k\": \"f5b7b674-7086-4d86-8658-6c16cfe700ec\",\r\n               
     \"$v\": {\r\n                    \"$id\": 25,\r\n                    \"$type\":
     \"13|CZToolKit.BehaviorTree.ReflectionCondition, Assembly-CSharp\",\r\n                   
     \"guid\": \"f5b7b674-7086-4d86-8658-6c16cfe700ec\",\r\n                    \"position\":
-    {\r\n                        \"$type\": 5,\r\n                        -360,\r\n                       
-    545\r\n                    },\r\n                    \"leftValueType\": 1,\r\n                   
+    {\r\n                        \"$type\": 5,\r\n                        -359,\r\n                       
+    554\r\n                    },\r\n                    \"leftValueType\": 1,\r\n                   
     \"leftValue\": true,\r\n                    \"leftFunctionName\": \"LeftValue\",\r\n                   
-    \"rightValueType\": 0,\r\n                    \"rightValue\": true,\r\n                   
+    \"rightValueType\": 1,\r\n                    \"rightValue\": true,\r\n                   
     \"rightFunctionName\": \"RightValue\"\r\n                }\r\n            }\r\n       
     ]\r\n    },\r\n    \"connections\": {\r\n        \"$id\": 26,\r\n        \"$type\":
     \"14|System.Collections.Generic.List`1[[CZToolKit.GraphProcessor.BaseConnection,

@@ -56,9 +56,9 @@ namespace CZToolKit.BehaviorTree.Editors
                 Load(agent as IGraphOwner);
         }
 
-        private void OnPlayModeChanged(PlayModeStateChange obj)
+        private void OnPlayModeChanged(PlayModeStateChange playMode)
         {
-            switch (obj)
+            switch (playMode)
             {
                 case PlayModeStateChange.EnteredEditMode:
                 case PlayModeStateChange.EnteredPlayMode:
@@ -69,9 +69,9 @@ namespace CZToolKit.BehaviorTree.Editors
             }
         }
 
-        protected override BaseGraphView NewGraphView(BaseGraph graph, CommandDispatcher commandDispatcher)
+        protected override BaseGraphView NewGraphView(BaseGraph graph)
         {
-            return new BehaviorTreeGraphView(graph, this, commandDispatcher);
+            return new BehaviorTreeGraphView();
         }
 
         protected override void BuildToolbar(ToolbarView toolbar)

@@ -14,7 +14,6 @@
  */
 #endregion
 using CZToolKit.GraphProcessor;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
@@ -25,6 +24,15 @@ namespace CZToolKit.BehaviorTree
     public class RandomSequence : Compsite
     {
         int index;
+
+        public int randomSeed;
+
+        protected override void OnEnabled()
+        {
+            base.OnEnabled();
+
+            this[nameof(randomSeed)] = new BindableProperty<int>(randomSeed, v => randomSeed = v);
+        }
 
         protected override void OnStart()
         {
