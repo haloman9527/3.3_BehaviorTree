@@ -31,7 +31,7 @@ namespace CZToolKit.BehaviorTree
         {
             base.OnEnabled();
 
-            this[nameof(randomSeed)] = new BindableProperty<int>(randomSeed, v => randomSeed = v);
+            this[nameof(randomSeed)] = new BindableProperty<int>(() => randomSeed, v => randomSeed = v);
         }
 
         protected override void OnStart()

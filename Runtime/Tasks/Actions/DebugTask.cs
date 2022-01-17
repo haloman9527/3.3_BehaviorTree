@@ -35,7 +35,7 @@ namespace CZToolKit.BehaviorTree
         protected override void OnEnabled()
         {
             base.OnEnabled();
-            this[nameof(Text)] = new BindableProperty<string>(text, v => { text = v; });
+            this[nameof(Text)] = new BindableProperty<string>(() => text, v => { text = v; });
         }
 
         protected override TaskStatus OnUpdate()

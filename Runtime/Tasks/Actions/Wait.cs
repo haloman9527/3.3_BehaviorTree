@@ -27,7 +27,7 @@ namespace CZToolKit.BehaviorTree
         protected override void OnEnabled()
         {
             base.OnEnabled();
-            this["Interval"] = new BindableProperty<float>(interval, v => interval = v);
+            this["Interval"] = new BindableProperty<float>(() => interval, v => interval = v);
         }
 
         protected override void OnStart()

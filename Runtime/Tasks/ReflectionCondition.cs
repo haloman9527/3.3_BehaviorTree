@@ -76,13 +76,13 @@ namespace CZToolKit.BehaviorTree
         {
             base.OnEnabled();
 
-            this[nameof(leftValueType)] = new BindableProperty<ValueType>(leftValueType, v => leftValueType = v);
-            this[nameof(leftValue)] = new BindableProperty<bool>(leftValue, v => { leftValue = v; });
-            this[nameof(leftFunctionName)] = new BindableProperty<string>(leftFunctionName, v => leftFunctionName = v);
+            this[nameof(leftValueType)] = new BindableProperty<ValueType>(() => leftValueType, v => leftValueType = v);
+            this[nameof(leftValue)] = new BindableProperty<bool>(() => leftValue, v => { leftValue = v; });
+            this[nameof(leftFunctionName)] = new BindableProperty<string>(() => leftFunctionName, v => leftFunctionName = v);
 
-            this[nameof(rightValueType)] = new BindableProperty<ValueType>(rightValueType, v => rightValueType = v);
-            this[nameof(rightValue)] = new BindableProperty<bool>(rightValue, v => { rightValue = v; });
-            this[nameof(rightFunctionName)] = new BindableProperty<string>(rightFunctionName, v => rightFunctionName = v);
+            this[nameof(rightValueType)] = new BindableProperty<ValueType>(() => rightValueType, v => rightValueType = v);
+            this[nameof(rightValue)] = new BindableProperty<bool>(() => rightValue, v => { rightValue = v; });
+            this[nameof(rightFunctionName)] = new BindableProperty<string>(() => rightFunctionName, v => rightFunctionName = v);
         }
 
         protected override void OnInitialized()
