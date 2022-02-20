@@ -42,22 +42,27 @@ namespace CZToolKit.BehaviorTree
             AddPort(new BasePort("Children", BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Multi, typeof(Task)));
         }
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            Ports["Children"].onConnected += _ => { Refresh(); };
+            Ports["Children"].onDisconnected += _ => { Refresh(); };
+            Ports["Children"].onSorted += Refresh;
+        }
+
         protected override void OnStart()
         {
             base.OnStart();
 
             if (tasks == null)
                 tasks = new List<Task>(Children);
+        }
 
-            Ports["Children"].onConnected += _ => { Refresh(); };
-            Ports["Children"].onDisconnected += _ => { Refresh(); };
-            Ports["Children"].onSorted += Refresh;
-
-            void Refresh()
-            {
-                tasks.Clear();
-                tasks.AddRange(Children);
-            }
+        void Refresh()
+        {
+            tasks.Clear();
+            tasks.AddRange(Children);
         }
     }
 }
