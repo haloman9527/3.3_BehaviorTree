@@ -41,7 +41,6 @@ namespace CZToolKit.BehaviorTree
 
         protected override TaskStatus OnUpdate()
         {
-            return TaskStatus.Success;
             Debug.Log(Text);
             return TaskStatus.Success;
         }
