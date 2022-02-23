@@ -22,7 +22,7 @@ namespace CZToolKit.BehaviorTree
     {
         public event Action<Task> onTaskExecute;
 
-        private void Awake()
+        private void Start()
         {
             T_Graph.Initialize(this);
         }
