@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedGraph: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|CZToolKit.BehaviorTree.BehaviorTree,
     Assembly-CSharp\",\r\n    \"pan\": {\r\n        \"$type\": \"1|UnityEngine.Vector3,
-    UnityEngine.CoreModule\",\r\n        546,\r\n        141,\r\n        0\r\n   
-    },\r\n    \"zoom\": {\r\n        \"$type\": 1,\r\n        0.571753263,\r\n       
-    0.571753263,\r\n        1\r\n    },\r\n    \"nodes\": {\r\n        \"$id\": 1,\r\n       
+    UnityEngine.CoreModule\",\r\n        876,\r\n        -319.333344,\r\n       
+    0\r\n    },\r\n    \"zoom\": {\r\n        \"$type\": 1,\r\n        1,\r\n       
+    1,\r\n        1\r\n    },\r\n    \"nodes\": {\r\n        \"$id\": 1,\r\n       
     \"$type\": \"2|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[CZToolKit.GraphProcessor.BaseNode,
     CZToolKit.GraphProcessor]], mscorlib\",\r\n        \"comparer\": {\r\n           
     \"$id\": 2,\r\n            \"$type\": \"3|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
@@ -55,7 +55,7 @@ MonoBehaviour:
     {\r\n                    \"$id\": 8,\r\n                    \"$type\": \"9|CZToolKit.BehaviorTree.DebugTask,
     Assembly-CSharp\",\r\n                    \"guid\": \"52ee14e9-c25d-47b5-bfdc-5b76bd40414e\",\r\n                   
     \"position\": {\r\n                        \"$type\": 5,\r\n                       
-    -720,\r\n                        540\r\n                    },\r\n                   
+    -715,\r\n                        535\r\n                    },\r\n                   
     \"text\": \"1\",\r\n                    \"go\": {\r\n                       
     \"$id\": 9,\r\n                        \"$type\": \"10|CZToolKit.Core.SharedVariable.SharedGameObject,
     CZToolKit.Core\",\r\n                        \"guid\": \"a961b4be-b618-444e-82fa-3e24135de25c\",\r\n                       
@@ -104,8 +104,8 @@ MonoBehaviour:
     \"$k\": \"e22f2c28-0c02-427b-97ba-31df92ed4547\",\r\n                \"$v\":
     {\r\n                    \"$id\": 18,\r\n                    \"$type\": 9,\r\n                   
     \"guid\": \"e22f2c28-0c02-427b-97ba-31df92ed4547\",\r\n                    \"position\":
-    {\r\n                        \"$type\": 5,\r\n                        -460,\r\n                       
-    720\r\n                    },\r\n                    \"text\": \"a\",\r\n                   
+    {\r\n                        \"$type\": 5,\r\n                        -458,\r\n                       
+    721\r\n                    },\r\n                    \"text\": \"a\",\r\n                   
     \"go\": {\r\n                        \"$id\": 19,\r\n                       
     \"$type\": 10,\r\n                        \"guid\": \"4c0f2a41-4a8a-46e9-bedf-e8ebeb9ff6cf\",\r\n                       
     \"value\": null\r\n                    }\r\n                }\r\n           
@@ -113,7 +113,7 @@ MonoBehaviour:
     \"$v\": {\r\n                    \"$id\": 20,\r\n                    \"$type\":
     9,\r\n                    \"guid\": \"53f9a6eb-33d0-4eb3-aeff-d562eda84927\",\r\n                   
     \"position\": {\r\n                        \"$type\": 5,\r\n                       
-    -620,\r\n                        720\r\n                    },\r\n                   
+    -618,\r\n                        721\r\n                    },\r\n                   
     \"text\": \"b\",\r\n                    \"go\": {\r\n                       
     \"$id\": 21,\r\n                        \"$type\": 10,\r\n                       
     \"guid\": \"37208494-dad8-4901-a171-bb5fc3cfeed8\",\r\n                       
@@ -122,8 +122,8 @@ MonoBehaviour:
     \"$v\": {\r\n                    \"$id\": 22,\r\n                    \"$type\":
     \"12|CZToolKit.BehaviorTree.RandomSelector, Assembly-CSharp\",\r\n                   
     \"guid\": \"3e49f191-4907-45f4-aa75-384bc4172e05\",\r\n                    \"position\":
-    {\r\n                        \"$type\": 5,\r\n                        -539,\r\n                       
-    541\r\n                    },\r\n                    \"randomSeed\": 0\r\n               
+    {\r\n                        \"$type\": 5,\r\n                        -537,\r\n                       
+    542\r\n                    },\r\n                    \"randomSeed\": 0\r\n               
     }\r\n            },\r\n            {\r\n                \"$k\": \"f5b7b674-7086-4d86-8658-6c16cfe700ec\",\r\n               
     \"$v\": {\r\n                    \"$id\": 23,\r\n                    \"$type\":
     \"13|CZToolKit.BehaviorTree.ReflectionCondition, Assembly-CSharp\",\r\n                   
@@ -202,6 +202,8 @@ MonoBehaviour:
     \"toPortName\": \"Parent\"\r\n            },\r\n            {\r\n               
     \"$id\": 44,\r\n                \"$type\": 15,\r\n                \"from\": \"1ae9363e-3a5d-4b2c-b47c-d3b707e87926\",\r\n               
     \"fromPortName\": \"Children\",\r\n                \"to\": \"0d9a2eff-700c-4394-b084-7df8ec824e00\",\r\n               
-    \"toPortName\": \"Parent\"\r\n            }\r\n        ]\r\n    },\r\n    \"_entryGUID\":
-    \"7b145f8d-ce75-4509-b8c3-d85689f10c54\"\r\n}"
+    \"toPortName\": \"Parent\"\r\n            }\r\n        ]\r\n    },\r\n    \"groups\":
+    {\r\n        \"$id\": 45,\r\n        \"$type\": \"16|System.Collections.Generic.List`1[[CZToolKit.GraphProcessor.Group,
+    CZToolKit.GraphProcessor]], mscorlib\",\r\n        \"$rlength\": 0,\r\n       
+    \"$rcontent\": [\r\n        ]\r\n    },\r\n    \"_entryGUID\": \"7b145f8d-ce75-4509-b8c3-d85689f10c54\"\r\n}"
   graphUnityReferences: []
