@@ -20,8 +20,8 @@ using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
-    [TaskIcon("BehaviorTree/Icons/Debug")]
     [NodeMenuItem("Action", "Debug")]
+    [TaskIcon("BehaviorTree/Icons/Debug")]
     public class DebugTask : ActionTask
     {
         public string text;

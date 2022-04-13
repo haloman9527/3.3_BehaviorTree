@@ -22,52 +22,30 @@ namespace CZToolKit.BehaviorTree
 {
     public partial class BehaviorTree : BaseGraph
     {
-        [SerializeField] string _entryGUID;
+        [SerializeField] string entryGUID;
     }
 
     public partial class BehaviorTree
     {
         [NonSerialized] private TaskStatus status = TaskStatus.Running;
-
-        public Entry Entry
-        {
-            get
-            {
-                BaseNode entry = null;
-                if (string.IsNullOrEmpty(_entryGUID))
-                {
-                    entry = Nodes.Values.FirstOrDefault(item => item is Entry);
-                    if (entry == null)
-                        entry = AddNode<Entry>(Vector2.zero);
-                    _entryGUID = entry.GUID;
-                }
-                if (entry == null)
-                {
-                    if (!Nodes.TryGetValue(_entryGUID, out entry) || !(entry is Entry))
-                    {
-                        entry = Nodes.Values.FirstOrDefault(item => item is Entry);
-                    }
-                    if (entry == null)
-                    {
-                        entry = NewNode<Entry>(Vector2.zero);
-                        AddNode(entry);
-                        _entryGUID = entry.GUID;
-                    }
-                }
-                return entry as Entry;
-            }
-        }
+        [NonSerialized] private Entry entry;
 
         protected override void OnEnabled()
         {
             base.OnEnabled();
-            if (Entry == null) { }
+            if (!string.IsNullOrEmpty(entryGUID) && !Nodes.ContainsKey(entryGUID))
+                entryGUID = string.Empty;
+            if (string.IsNullOrEmpty(entryGUID))
+                entryGUID = Nodes.Values.FirstOrDefault(node => node is Entry)?.GUID;
+            if (string.IsNullOrEmpty(entryGUID))
+                entryGUID = AddNode<Entry>(Vector2.zero).GUID;
+            entry = Nodes[entryGUID] as Entry;
         }
 
         public TaskStatus Update()
         {
-            if (Entry.Status == TaskStatus.Running)
-                status = Entry.Update();
+            if (entry.Status == TaskStatus.Running)
+                status = entry.Update();
             return status;
         }
 

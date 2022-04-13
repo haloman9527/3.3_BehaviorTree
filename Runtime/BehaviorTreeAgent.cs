@@ -20,7 +20,7 @@ namespace CZToolKit.BehaviorTree
 {
     public class BehaviorTreeAgent : GraphAssetOwner<BehaviorTreeAsset, BehaviorTree>
     {
-        public event Action<Task> onTaskExecute;
+        public event Action<Task> OnTaskExecute;
 
         private void Start()
         {

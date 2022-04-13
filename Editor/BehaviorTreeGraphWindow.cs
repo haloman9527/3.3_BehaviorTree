@@ -13,7 +13,6 @@
  *
  */
 #endregion
-using CZToolKit.Core;
 using CZToolKit.GraphProcessor;
 using CZToolKit.GraphProcessor.Editors;
 using UnityEditor;
@@ -69,7 +68,7 @@ namespace CZToolKit.BehaviorTree.Editors
             }
         }
 
-        protected override BaseGraphView NewGraphView(BaseGraph graph)
+        protected override BaseGraphView NewGraphView(IGraph graph)
         {
             return new BehaviorTreeGraphView();
         }
@@ -92,6 +91,7 @@ namespace CZToolKit.BehaviorTree.Editors
                 {
                     case KeyCode.S:
                         Save();
+                        evt.StopImmediatePropagation();
                         break;
                 }
             }

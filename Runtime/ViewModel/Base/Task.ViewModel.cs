@@ -15,7 +15,6 @@
 #endregion
 using CZToolKit.GraphProcessor;
 using System;
-using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
@@ -44,7 +43,7 @@ namespace CZToolKit.BehaviorTree
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            agent = GraphOwner as BehaviorTreeAgent;
+            agent = Owner.GraphOwner as BehaviorTreeAgent;
         }
 
         public TaskStatus Update()

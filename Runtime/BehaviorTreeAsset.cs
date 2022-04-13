@@ -14,15 +14,46 @@
  */
 #endregion
 using CZToolKit.GraphProcessor;
-using System.Collections;
+using Sirenix.Serialization;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+using UnityObject = UnityEngine.Object;
 
 namespace CZToolKit.BehaviorTree
 {
     [CreateAssetMenu]
-    public class BehaviorTreeAsset : BaseGraphAsset<BehaviorTree>
+    public class BehaviorTreeAsset : ScriptableObject, IGraphAsset, IGraphAsset<BehaviorTree>
     {
+        [HideInInspector]
+        [SerializeField]
+        byte[] serializedGraph;
+        [HideInInspector]
+        [SerializeField]
+        List<UnityObject> graphUnityReferences = new List<UnityObject>();
 
+        public Type GraphType => typeof(BehaviorTree);
+
+        public void SaveGraph(IGraph graph)
+        {
+            serializedGraph = SerializationUtility.SerializeValue(graph, DataFormat.JSON, out graphUnityReferences);
+        }
+
+        public BaseGraph DeserializeGraph()
+        {
+            return DeserializeTGraph();
+        }
+
+        public BehaviorTree DeserializeTGraph()
+        {
+            BehaviorTree graph = null;
+            if (serializedGraph != null && serializedGraph.Length > 0)
+                graph = SerializationUtility.DeserializeValue<BehaviorTree>(serializedGraph, DataFormat.JSON, graphUnityReferences);
+            if (graph == null)
+                graph = new BehaviorTree();
+            graph.Enable();
+            return graph;
+        }
     }
 }
