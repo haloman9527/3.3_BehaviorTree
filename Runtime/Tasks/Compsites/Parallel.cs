@@ -19,23 +19,32 @@ namespace CZToolKit.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Parallel")]
     [NodeMenuItem("Compsite", "并行执行")]
-    [NodeTooltip("依次执行所有，若全部Success，则返回Success，否则按照Task的状态返回(Failure > Running)")]
+    [NodeTooltip("依次执行所有，若全部Success，则返回Success，否则按照Task的状态返回(Running > Failure)")]
     public class Parallel : Compsite
     {
+        int index;
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            index = 0;
+        }
+
         protected override TaskStatus OnUpdate()
         {
             var status = TaskStatus.Success;
-            foreach (var child in GetConnections("Children"))
+            for (int i = index; i < tasks.Count; i++)
             {
-                var task = child as Task;
+                var task = tasks[i];
                 var tmpStatus = task.Update();
-                if (tmpStatus == TaskStatus.Failure)
-                {
-                    status = TaskStatus.Failure;
-                }
-                if (tmpStatus == TaskStatus.Running && status != TaskStatus.Failure)
+                if (tmpStatus == TaskStatus.Running)
                 {
                     status = TaskStatus.Running;
+                }
+                if (tmpStatus != TaskStatus.Running)
+                {
+                    status = tmpStatus;
+                    index++;
                 }
             }
             return status;

@@ -46,8 +46,6 @@ namespace CZToolKit.BehaviorTree
         {
             base.OnInitialized();
 
-            Ports["Children"].onConnected += _ => { Refresh(); };
-            Ports["Children"].onDisconnected += _ => { Refresh(); };
             Ports["Children"].onSorted += Refresh;
         }
 
@@ -61,8 +59,11 @@ namespace CZToolKit.BehaviorTree
 
         void Refresh()
         {
-            tasks.Clear();
-            tasks.AddRange(Children);
+            if (tasks != null)
+            {
+                tasks.Clear();
+                tasks.AddRange(Children);
+            }
         }
     }
 }

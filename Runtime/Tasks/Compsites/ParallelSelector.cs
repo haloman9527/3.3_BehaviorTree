@@ -30,9 +30,9 @@ namespace CZToolKit.BehaviorTree
                 var tmpStatus = task.Update();
                 if (tmpStatus == TaskStatus.Success)
                 {
-                    status = TaskStatus.Failure;
+                    status = TaskStatus.Success;
                 }
-                if (tmpStatus == TaskStatus.Running && status != TaskStatus.Success)
+                if (status != TaskStatus.Success && tmpStatus == TaskStatus.Running)
                 {
                     status = TaskStatus.Running;
                 }

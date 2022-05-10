@@ -13,9 +13,11 @@
  *
  */
 #endregion
-using CZToolKit.GraphProcessor;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-namespace CZToolKit.BehaviorTree
+public class ITask : MonoBehaviour
 {
-    public abstract partial class Task : BaseNode { }
+    
 }

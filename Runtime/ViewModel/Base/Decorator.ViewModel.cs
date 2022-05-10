@@ -38,5 +38,15 @@ namespace CZToolKit.BehaviorTree
             AddPort(new BasePort("Parent", BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(Task)));
             AddPort(new BasePort("Children", BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(Task)));
         }
+
+        protected override TaskStatus OnUpdate()
+        {
+            foreach (var connection in GetConnections("Children"))
+            {
+                if (connection is Task task)
+                    task.Update();
+            }
+            return base.OnUpdate();
+        }
     }
 }

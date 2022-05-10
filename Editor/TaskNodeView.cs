@@ -54,19 +54,19 @@ namespace CZToolKit.BehaviorTree.Editors
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            if (Util_Attribute.TryGetTypeAttribute(Model.GetType(), out TaskIconAttribute iconAttr))
+            if (Util_Attribute.TryGetTypeAttribute(T_Model.GetType(), out TaskIconAttribute iconAttr))
             {
                 icon.style.backgroundImage = Resources.Load<Texture2D>(iconAttr.path);
             }
-            if (Model.Ports.ContainsKey("Children"))
+            if (T_Model.Ports.ContainsKey("Children"))
             {
                 badge = IconBadge.CreateError("需要子节点");
                 RefreshBadge();
-                Model.Ports["Children"].onConnected += _ =>
+                T_Model.Ports["Children"].onConnected += _ =>
                 {
                     RefreshBadge();
                 };
-                Model.Ports["Children"].onDisconnected += _ =>
+                T_Model.Ports["Children"].onDisconnected += _ =>
                 {
                     RefreshBadge();
                 };
@@ -77,7 +77,7 @@ namespace CZToolKit.BehaviorTree.Editors
 
         void RefreshBadge()
         {
-            if (Model.Ports["Children"].Connections.Count != 0)
+            if (T_Model.Ports["Children"].Connections.Count != 0)
                 RemoveBadge(_ => _ == badge);
             else
                 AddBadge(badge);
@@ -97,10 +97,9 @@ namespace CZToolKit.BehaviorTree.Editors
         {
             if (!Application.isPlaying || Owner.GraphWindow.GraphOwner == null)
                 return;
-            if (Model.Ports.ContainsKey("Parent") && Model.Ports["Parent"].Connections.Count == 0)
+            if (T_Model.Ports.ContainsKey("Parent") && T_Model.Ports["Parent"].Connections.Count == 0)
                 return;
             anim = 1;
-
             stateBorder.RemoveFromClassList("success");
             stateBorder.RemoveFromClassList("failure");
             stateBorder.RemoveFromClassList("running");

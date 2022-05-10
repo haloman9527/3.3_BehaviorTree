@@ -40,29 +40,48 @@ namespace CZToolKit.BehaviorTree
             status = TaskStatus.Running;
         }
 
+        public void Initialize()
+        {
+            OnInitialized();
+        }
+
         protected override void OnInitialized()
         {
-            base.OnInitialized();
-            agent = Owner.GraphOwner as BehaviorTreeAgent;
+            agent = (Owner as BehaviorTree).GraphOwner as BehaviorTreeAgent;
+        }
+
+        private void Start()
+        {
+            started = true;
+            OnStart();
         }
 
         public TaskStatus Update()
         {
             if (!Started)
-            {
-                started = true;
-                OnStart();
-            }
+                Start();
 
             status = OnUpdate();
 
             if (Status == TaskStatus.Failure || Status == TaskStatus.Success)
-            {
-                OnStop();
-                started = false;
-            }
+                End();
+
             onUpdate?.Invoke();
             return Status;
+        }
+
+        private void End()
+        {
+            if (Ports.ContainsKey("Children"))
+            {
+                foreach (var connection in GetConnections("Children"))
+                {
+                    if (connection is Task task && task.started)
+                        task.End();
+                }
+            }
+            OnEnd();
+            started = false;
         }
 
         protected virtual void OnStart() { }
@@ -72,7 +91,7 @@ namespace CZToolKit.BehaviorTree
             return TaskStatus.Success;
         }
 
-        protected virtual void OnStop() { }
+        protected virtual void OnEnd() { }
 
         public virtual void OnDrawGizmos() { }
     }

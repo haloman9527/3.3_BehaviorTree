@@ -13,9 +13,16 @@
  *
  */
 #endregion
-using CZToolKit.GraphProcessor;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
-    public abstract partial class Task : BaseNode { }
+    public enum TaskStatus
+    {
+        Success,
+        Failure,
+        Running,
+    }
 }

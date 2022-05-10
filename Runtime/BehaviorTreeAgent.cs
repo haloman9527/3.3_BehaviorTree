@@ -15,6 +15,7 @@
 #endregion
 using CZToolKit.GraphProcessor;
 using System;
+using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
@@ -37,5 +38,13 @@ namespace CZToolKit.BehaviorTree
             if (T_Graph != null)
                 T_Graph.OnDrawGizmos();
         }
+
+#if UNITY_EDITOR
+        [ContextMenu("Edit")]
+        public void Edit()
+        {
+            UnityEditor.AssetDatabase.OpenAsset(this);
+        }
+#endif
     }
 }

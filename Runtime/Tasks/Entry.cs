@@ -21,9 +21,9 @@ namespace CZToolKit.BehaviorTree
 
     [TaskIcon("BehaviorTree/Icons/Entry")]
     [NodeTitleColor(0, 0.7f, 0)]
-    [NodeMenuItem("入口", showInList = false)]
+    [NodeMenuItem("Root", showInList = false)]
     [NodeTooltip("入口节点，不可移动，不可删除，自动生成")]
-    public partial class Entry : Task
+    public partial class Entry
     {
         protected override void OnEnabled()
         {

@@ -14,7 +14,6 @@
  */
 #endregion
 using CZToolKit.Core.ViewModel;
-using CZToolKit.Core.SharedVariable;
 using CZToolKit.GraphProcessor;
 using UnityEngine;
 
@@ -25,7 +24,6 @@ namespace CZToolKit.BehaviorTree
     public class DebugTask : ActionTask
     {
         public string text;
-        public SharedGameObject go;
 
         public string Text
         {

@@ -35,7 +35,7 @@ namespace CZToolKit.BehaviorTree
         {
             for (int i = index; i < tasks.Count; i++)
             {
-                var task = tasks[i] as Task;
+                var task = tasks[i];
                 var tmpStatus = task.Update();
                 if (tmpStatus == TaskStatus.Failure)
                 {

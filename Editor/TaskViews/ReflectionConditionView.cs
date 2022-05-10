@@ -29,7 +29,7 @@ namespace CZToolKit.BehaviorTree.Editors
         public override void OnInspectorGUI()
         {
             var view = Target as ReflectionConditionView;
-            var node = view.Model as ReflectionCondition;
+            var node = view.T_Model as ReflectionCondition;
             if (node == null)
                 return;
 

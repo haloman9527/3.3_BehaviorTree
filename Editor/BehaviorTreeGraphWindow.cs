@@ -31,41 +31,21 @@ namespace CZToolKit.BehaviorTree.Editors
         {
             base.OnEnable();
             titleContent = new GUIContent("Behavior Tree");
-            EditorApplication.playModeStateChanged += OnPlayModeChanged;
-        }
-
-        private void OnDisable()
-        {
-            EditorApplication.playModeStateChanged -= OnPlayModeChanged;
         }
 
         private void OnSelectionChange()
         {
-            if (Selection.activeGameObject == null)
+            if (Selection.activeTransform == null)
                 return;
-            var agent = Selection.activeGameObject.GetComponent<BehaviorTreeAgent>();
+            var agent = Selection.activeTransform.GetComponent<IGraphAssetOwner>();
             if (agent == null)
                 return;
-            if (agent == (UnityObject)GraphOwner && agent.Graph == GraphOwner.Graph)
+            if ((UnityObject)agent == (UnityObject)GraphOwner && agent.Graph == GraphOwner.Graph)
                 return;
-
             if (agent.GraphAsset != null)
-                Load(agent as IGraphAssetOwner);
+                Load(agent);
             else
                 Load(agent as IGraphOwner);
-        }
-
-        private void OnPlayModeChanged(PlayModeStateChange playMode)
-        {
-            switch (playMode)
-            {
-                case PlayModeStateChange.EnteredEditMode:
-                case PlayModeStateChange.EnteredPlayMode:
-                    Reload();
-                    break;
-                default:
-                    break;
-            }
         }
 
         protected override BaseGraphView NewGraphView(IGraph graph)
@@ -99,10 +79,10 @@ namespace CZToolKit.BehaviorTree.Editors
 
         void Save()
         {
-            if (GraphAsset is IGraphAsset graphAsset)
-                graphAsset.SaveGraph(Graph);
-            if (GraphOwner is IGraphOwner graphOwner)
-                graphOwner.SaveVariables();
+            if (GraphAsset is IGraphSerialization graphSerialization)
+                graphSerialization.SaveGraph(Graph);
+            if (GraphOwner is IVariableSerialization variableSerialization)
+                variableSerialization.SaveVariables();
             GraphView.SetDirty();
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
