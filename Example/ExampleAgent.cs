@@ -14,6 +14,7 @@
  */
 #endregion
 using CZToolKit.BehaviorTree;
+using System.Diagnostics;
 
 public class ExampleAgent : BehaviorTreeAgent
 {

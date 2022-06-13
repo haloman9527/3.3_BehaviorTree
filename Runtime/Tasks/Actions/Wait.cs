@@ -13,6 +13,7 @@
  *
  */
 #endregion
+using CZToolKit.Core.SharedVariable;
 using CZToolKit.Core.ViewModel;
 using CZToolKit.GraphProcessor;
 using UnityEngine;
@@ -23,12 +24,13 @@ namespace CZToolKit.BehaviorTree
     public class Wait : ActionTask
     {
         public float interval;
+
         float startTime;
 
         protected override void OnEnabled()
         {
             base.OnEnabled();
-            this["Interval"] = new BindableProperty<float>(() => interval, v => interval = v);
+            this[nameof(interval)] = new BindableProperty<float>(() => interval, v => interval = v);
         }
 
         protected override void OnStart()

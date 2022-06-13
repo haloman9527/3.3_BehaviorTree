@@ -77,14 +77,17 @@ namespace CZToolKit.BehaviorTree
                     monoNode.Initialize();
             }
 
-            variables = new List<SharedVariable>();
-            foreach (var node in Nodes.Values)
+            if (GraphOwner is IVariableOwner variableOwner)
             {
-                variables.AddRange(SharedVariableUtility.CollectionObjectSharedVariables(node));
-            }
-            foreach (var variable in variables)
-            {
-                variable.InitializePropertyMapping(VarialbeOwner);
+                variables = new List<SharedVariable>();
+                foreach (var node in Nodes.Values)
+                {
+                    variables.AddRange(SharedVariableUtility.CollectionObjectSharedVariables(node));
+                }
+                foreach (var variable in variables)
+                {
+                    variable.InitializePropertyMapping(variableOwner);
+                }
             }
 
             OnInitialized();
@@ -101,11 +104,11 @@ namespace CZToolKit.BehaviorTree
 
             IEnumerable<SharedVariable> nodeVariables = SharedVariableUtility.CollectionObjectSharedVariables(node);
             variables.AddRange(nodeVariables);
-            if (VarialbeOwner != null)
+            if (GraphOwner is IVariableOwner variableOwner)
             {
                 foreach (var variable in nodeVariables)
                 {
-                    variable.InitializePropertyMapping(VarialbeOwner);
+                    variable.InitializePropertyMapping(variableOwner);
                 }
             }
         }

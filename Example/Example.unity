@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedVariables: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|System.Collections.Generic.List`1[[CZToolKit.Core.SharedVariable.SharedVariable,
-    CZToolKit.Core]], mscorlib\",\r\n    \"$rlength\": 5,\r\n    \"$rcontent\": [\r\n       
+    CZToolKit.Core]], mscorlib\",\r\n    \"$rlength\": 6,\r\n    \"$rcontent\": [\r\n       
     {\r\n            \"$id\": 1,\r\n            \"$type\": \"1|CZToolKit.Core.SharedVariable.SharedGameObject,
     CZToolKit.Core\",\r\n            \"guid\": \"a961b4be-b618-444e-82fa-3e24135de25c\",\r\n           
     \"value\": null\r\n        },\r\n        {\r\n            \"$id\": 2,\r\n           
@@ -163,8 +163,11 @@ MonoBehaviour:
     \"$type\": 1,\r\n            \"guid\": \"4c0f2a41-4a8a-46e9-bedf-e8ebeb9ff6cf\",\r\n           
     \"value\": null\r\n        },\r\n        {\r\n            \"$id\": 5,\r\n           
     \"$type\": 1,\r\n            \"guid\": \"37208494-dad8-4901-a171-bb5fc3cfeed8\",\r\n           
-    \"value\": null\r\n        }\r\n    ]\r\n}"
-  variablesUnityReference: []
+    \"value\": null\r\n        },\r\n        {\r\n            \"$id\": 6,\r\n           
+    \"$type\": 1,\r\n            \"guid\": \"1641026c-664f-4f79-8eda-0a0d40fbcf28\",\r\n           
+    \"value\": $eref:0\r\n        }\r\n    ]\r\n}"
+  variablesUnityReference:
+  - {fileID: 776691972}
   graphAsset: {fileID: 11400000, guid: 06781fa420ba6154ea2eed6495e73645, type: 2}
   serializedGraph: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|CZToolKit.BehaviorTree.BehaviorTree,
     Assembly-CSharp\",\r\n    \"pan\": {\r\n        \"$type\": \"1|UnityEngine.Vector3,
