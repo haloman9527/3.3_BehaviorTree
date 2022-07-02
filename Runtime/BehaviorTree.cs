@@ -60,7 +60,7 @@ namespace CZToolKit.BehaviorTree
             if (string.IsNullOrEmpty(entryGUID))
                 entryGUID = Nodes.Values.FirstOrDefault(node => node is Entry)?.GUID;
             if (string.IsNullOrEmpty(entryGUID))
-                entryGUID = AddNode<Entry>(Vector2.zero).GUID;
+                entryGUID = AddNode<Entry>(InternalVector2.zero).GUID;
             entry = Nodes[entryGUID] as Entry;
 
             OnNodeAdded += NodeAdded;
