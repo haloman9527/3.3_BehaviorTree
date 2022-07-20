@@ -17,5 +17,6 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    public abstract partial class Task : BaseNode { }
+    [TaskIcon("BehaviorTree/Icons/Default")]
+    public abstract class Task : BaseNode { }
 }

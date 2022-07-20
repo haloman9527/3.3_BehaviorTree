@@ -14,16 +14,20 @@
  */
 #endregion
 using CZToolKit.GraphProcessor;
-using System.Collections.Generic;
 
 namespace CZToolKit.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Selector")]
     [NodeMenuItem("Compsite", "选择执行")]
     [NodeTooltip("依次执行，直到Success或Running，并返回该状态")]
-    public class Selector : Compsite
+    public class Selector : Compsite { }
+
+    [ViewModel(typeof(RandomSelector))]
+    public class SelectorVM : CompsiteVM
     {
         int index;
+
+        public SelectorVM(BaseNode model) : base(model) { }
 
         protected override void OnStart()
         {
@@ -35,7 +39,7 @@ namespace CZToolKit.BehaviorTree
         {
             for (int i = index; i < tasks.Count; i++)
             {
-                var task = tasks[i] as Task;
+                var task = tasks[i];
                 var tmpStatus = task.Update();
                 if (tmpStatus == TaskStatus.Success)
                 {

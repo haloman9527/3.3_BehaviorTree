@@ -24,7 +24,7 @@ using UnityObject = UnityEngine.Object;
 
 namespace CZToolKit.BehaviorTree.Editors
 {
-    [CustomGraphWindow(typeof(BehaviorTree))]
+    [CustomView(typeof(BehaviorTree))]
     public class BehaviorTreeGraphWindow : BaseGraphWindow
     {
         protected override void OnEnable()
@@ -48,7 +48,7 @@ namespace CZToolKit.BehaviorTree.Editors
                 Load(agent as IGraphOwner);
         }
 
-        protected override BaseGraphView NewGraphView(IGraph graph)
+        protected override BaseGraphView NewGraphView(BaseGraphVM graph)
         {
             return new BehaviorTreeGraphView();
         }
@@ -80,9 +80,7 @@ namespace CZToolKit.BehaviorTree.Editors
         void Save()
         {
             if (GraphAsset is IGraphSerialization graphSerialization)
-                graphSerialization.SaveGraph(Graph);
-            if (GraphOwner is IVariableSerialization variableSerialization)
-                variableSerialization.SaveVariables();
+                graphSerialization.SaveGraph(Graph.Model);
             GraphView.SetDirty();
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();

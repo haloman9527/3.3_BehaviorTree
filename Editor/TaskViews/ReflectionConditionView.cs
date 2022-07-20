@@ -20,7 +20,7 @@ using UnityEngine;
 
 namespace CZToolKit.BehaviorTree.Editors
 {
-    [CustomNodeView(typeof(ReflectionCondition))]
+    [CustomView(typeof(ReflectionCondition))]
     public class ReflectionConditionView : TaskNodeView { }
 
     [CustomObjectEditor(typeof(ReflectionConditionView))]
@@ -29,7 +29,7 @@ namespace CZToolKit.BehaviorTree.Editors
         public override void OnInspectorGUI()
         {
             var view = Target as ReflectionConditionView;
-            var node = view.T_Model as ReflectionCondition;
+            var node = view.T_ViewModel as ReflectionConditionVM;
             if (node == null)
                 return;
 

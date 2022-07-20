@@ -17,7 +17,7 @@ using CZToolKit.GraphProcessor.Editors;
 
 namespace CZToolKit.BehaviorTree.Editors
 {
-    [CustomNodeView(typeof(Entry))]
+    [CustomView(typeof(Entry))]
     public class EntryNodeView : TaskNodeView
     {
         protected override void OnInitialized()

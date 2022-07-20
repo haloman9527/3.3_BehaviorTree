@@ -23,15 +23,18 @@ namespace CZToolKit.BehaviorTree
     [NodeTooltip("以随机顺序执行行为，直到返回Success或Running")]
     public class RandomSelector : Compsite
     {
+        public int randomSeed;
+    }
+
+    [ViewModel(typeof(RandomSelector))]
+    public class RandomSelectorVM : CompsiteVM
+    {
         int index;
 
-        public int randomSeed;
-
-        protected override void OnEnabled()
+        public RandomSelectorVM(BaseNode model) : base(model)
         {
-            base.OnEnabled();
-
-            this[nameof(randomSeed)] = new BindableProperty<int>(() => randomSeed, v => randomSeed = v);
+            var t_model = Model as RandomSelector;
+            this[nameof(RandomSelector.randomSeed)] = new BindableProperty<int>(() => t_model.randomSeed, v => t_model.randomSeed = v);
         }
 
         protected override void OnStart()

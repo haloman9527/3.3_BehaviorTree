@@ -18,8 +18,7 @@ using System;
 
 namespace CZToolKit.BehaviorTree
 {
-    [TaskIcon("BehaviorTree/Icons/Default")]
-    public abstract partial class Task : BaseNode
+    public abstract class TaskVM : BaseNodeVM
     {
         #region Fields
         [NonSerialized] private BehaviorTreeAgent agent;
@@ -34,6 +33,8 @@ namespace CZToolKit.BehaviorTree
         public TaskStatus Status { get { return status; } }
         #endregion
 
+        protected TaskVM(BaseNode model) : base(model) { }
+
         protected override void OnEnabled()
         {
             base.OnEnabled();
@@ -42,13 +43,10 @@ namespace CZToolKit.BehaviorTree
 
         public void Initialize()
         {
+            agent = (Owner as BehaviorTreeVM).GraphOwner as BehaviorTreeAgent;
             OnInitialized();
         }
 
-        protected override void OnInitialized()
-        {
-            agent = (Owner as BehaviorTree).GraphOwner as BehaviorTreeAgent;
-        }
 
         private void Start()
         {
@@ -76,13 +74,15 @@ namespace CZToolKit.BehaviorTree
             {
                 foreach (var connection in GetConnections("Children"))
                 {
-                    if (connection is Task task && task.started)
+                    if (connection is TaskVM task && task.started)
                         task.End();
                 }
             }
             OnEnd();
             started = false;
         }
+
+        protected virtual void OnInitialized() { }
 
         protected virtual void OnStart() { }
 

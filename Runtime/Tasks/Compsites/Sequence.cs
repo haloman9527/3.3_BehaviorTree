@@ -14,16 +14,20 @@
  */
 #endregion
 using CZToolKit.GraphProcessor;
-using System.Collections.Generic;
 
 namespace CZToolKit.BehaviorTree
 {
-    [TaskIcon("BehaviorTree/Icons/Sequence")]
     [NodeMenuItem("Compsite", "顺序执行")]
+    [TaskIcon("BehaviorTree/Icons/Sequence")]
     [NodeTooltip("依次执行，遇Failure或Running中断，并返回该状态")]
-    public class Sequence : Compsite
+    public class Sequence : Compsite { }
+
+    [ViewModel(typeof(Sequence))]
+    public class SequenceVM : CompsiteVM
     {
         int index;
+
+        public SequenceVM(BaseNode model) : base(model) { }
 
         protected override void OnStart()
         {

@@ -22,24 +22,21 @@ using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
-    public partial class BehaviorTree : BaseGraph
+    public class BehaviorTree : BaseGraph
     {
-        [SerializeField] internal string entryGUID;
+        [SerializeField] [HideInInspector] public string entryGUID;
     }
 
-    public partial class BehaviorTree : IGraphForMono
+    [ViewModel(typeof(BehaviorTree))]
+    public class BehaviorTreeVM : BaseGraphVM
     {
-        [NonSerialized] internal Entry entry;
+        [NonSerialized] internal EntryVM entry;
         [NonSerialized] internal List<SharedVariable> variables;
 
         public IGraphOwner GraphOwner
         {
             get;
             private set;
-        }
-        public IVariableOwner VarialbeOwner
-        {
-            get { return Agent; }
         }
         public IReadOnlyList<SharedVariable> Variables
         {
@@ -51,17 +48,17 @@ namespace CZToolKit.BehaviorTree
             private set;
         }
 
-        protected override void OnEnabled()
+        public BehaviorTreeVM(BaseGraph model) : base(model)
         {
-            base.OnEnabled();
-
-            if (!string.IsNullOrEmpty(entryGUID) && !Nodes.ContainsKey(entryGUID))
-                entryGUID = string.Empty;
-            if (string.IsNullOrEmpty(entryGUID))
-                entryGUID = Nodes.Values.FirstOrDefault(node => node is Entry)?.GUID;
-            if (string.IsNullOrEmpty(entryGUID))
-                entryGUID = AddNode<Entry>(InternalVector2.zero).GUID;
-            entry = Nodes[entryGUID] as Entry;
+            variables = new List<SharedVariable>();
+            var t_model = Model as BehaviorTree;
+            if (!string.IsNullOrEmpty(t_model.entryGUID) && !Nodes.ContainsKey(t_model.entryGUID))
+                t_model.entryGUID = string.Empty;
+            if (string.IsNullOrEmpty(t_model.entryGUID))
+                t_model.entryGUID = Nodes.Values.FirstOrDefault(node => node is Entry)?.GUID;
+            if (string.IsNullOrEmpty(t_model.entryGUID))
+                t_model.entryGUID = AddNode<Entry>(InternalVector2.zero).GUID;
+            entry = Nodes[t_model.entryGUID] as EntryVM;
 
             OnNodeAdded += NodeAdded;
         }
@@ -73,13 +70,12 @@ namespace CZToolKit.BehaviorTree
 
             foreach (var node in Nodes.Values)
             {
-                if (node is INodeForMono monoNode)
-                    monoNode.Initialize();
+                if (node is TaskVM task)
+                    task.Initialize();
             }
 
             if (GraphOwner is IVariableOwner variableOwner)
             {
-                variables = new List<SharedVariable>();
                 foreach (var node in Nodes.Values)
                 {
                     variables.AddRange(SharedVariableUtility.CollectionObjectSharedVariables(node));
@@ -95,12 +91,12 @@ namespace CZToolKit.BehaviorTree
 
         protected virtual void OnInitialized() { }
 
-        public void NodeAdded(BaseNode node)
+        public void NodeAdded(BaseNodeVM node)
         {
-            if (!(node is INodeForMono monoNode))
+            if (!(node is TaskVM task))
                 return;
             if (GraphOwner != null)
-                monoNode.Initialize();
+                task.Initialize();
 
             IEnumerable<SharedVariable> nodeVariables = SharedVariableUtility.CollectionObjectSharedVariables(node);
             variables.AddRange(nodeVariables);
@@ -122,7 +118,7 @@ namespace CZToolKit.BehaviorTree
         {
             foreach (var node in Nodes.Values)
             {
-                if (node is Task task)
+                if (node is TaskVM task)
                     task.OnDrawGizmos();
             }
         }

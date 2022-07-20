@@ -13,7 +13,6 @@
  *
  */
 #endregion
-using CZToolKit.Core.SharedVariable;
 using CZToolKit.Core.ViewModel;
 using CZToolKit.GraphProcessor;
 using UnityEngine;
@@ -24,13 +23,18 @@ namespace CZToolKit.BehaviorTree
     public class Wait : ActionTask
     {
         public float interval;
+    }
+
+    [ViewModel(typeof(Wait))]
+    public class WaitVM : ActionTaskVM
+    {
 
         float startTime;
 
-        protected override void OnEnabled()
+        public WaitVM(BaseNode model) : base(model)
         {
-            base.OnEnabled();
-            this[nameof(interval)] = new BindableProperty<float>(() => interval, v => interval = v);
+            var t_model = Model as Wait;
+            this[nameof(Wait.interval)] = new BindableProperty<float>(() => t_model.interval, v => t_model.interval = v);
         }
 
         protected override void OnStart()
@@ -41,7 +45,8 @@ namespace CZToolKit.BehaviorTree
 
         protected override TaskStatus OnUpdate()
         {
-            if (Time.time - startTime < interval)
+            var t_model = Model as Wait;
+            if (Time.time - startTime < t_model.interval)
             {
                 return TaskStatus.Running;
             }

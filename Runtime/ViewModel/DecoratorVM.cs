@@ -18,32 +18,31 @@ using System.Collections.Generic;
 
 namespace CZToolKit.BehaviorTree
 {
-    public abstract partial class Decorator : Task
+    public abstract partial class DecoratorVM : TaskVM
     {
-        public IEnumerable<Task> Children
+        protected DecoratorVM(BaseNode model) : base(model)
+        {
+            AddPort(new BasePortVM("Parent", BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(Task)));
+            AddPort(new BasePortVM("Children", BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(Task)));
+        }
+
+        public IEnumerable<TaskVM> Children
         {
             get
             {
                 foreach (var node in GetConnections("Children"))
                 {
-                    if (node is Task task)
+                    if (node is TaskVM task)
                         yield return task;
                 }
             }
-        }
-
-        protected override void OnEnabled()
-        {
-            base.OnEnabled();
-            AddPort(new BasePort("Parent", BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(Task)));
-            AddPort(new BasePort("Children", BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(Task)));
         }
 
         protected override TaskStatus OnUpdate()
         {
             foreach (var connection in GetConnections("Children"))
             {
-                if (connection is Task task)
+                if (connection is TaskVM task)
                     task.Update();
             }
             return base.OnUpdate();

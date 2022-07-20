@@ -18,11 +18,16 @@ using CZToolKit.GraphProcessor;
 namespace CZToolKit.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Parallel")]
-    [NodeMenuItem("Compsite", "并行执行")]
     [NodeTooltip("依次执行所有，若全部Success，则返回Success，否则按照Task的状态返回(Running > Failure)")]
-    public class Parallel : Compsite
+    [NodeMenuItem("Compsite", "并行执行")]
+    public class Parallel : Compsite { }
+
+    [ViewModel(typeof(Parallel))]
+    public class ParallelVM : CompsiteVM
     {
         int index;
+
+        public ParallelVM(BaseNode model) : base(model) { }
 
         protected override void OnStart()
         {

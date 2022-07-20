@@ -42,8 +42,9 @@ namespace CZToolKit.BehaviorTree.Editors
         {
             foreach (var type in Util_Reflection.GetChildTypes<Task>())
             {
-                if (!type.IsAbstract)
-                    yield return type;
+                if (type.IsAbstract)
+                    continue;
+                yield return type;
             }
         }
     }

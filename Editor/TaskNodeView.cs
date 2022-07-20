@@ -21,8 +21,8 @@ using UnityEngine.UIElements;
 
 namespace CZToolKit.BehaviorTree.Editors
 {
-    [CustomNodeView(typeof(Task))]
-    public class TaskNodeView : BaseSimpleNodeView<Task>
+    [CustomView(typeof(Task))]
+    public class TaskNodeView : BaseSimpleNodeView<TaskVM>
     {
         Image icon;
         IconBadge badge;
@@ -54,30 +54,30 @@ namespace CZToolKit.BehaviorTree.Editors
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            if (Util_Attribute.TryGetTypeAttribute(T_Model.GetType(), out TaskIconAttribute iconAttr))
+            if (Util_Attribute.TryGetTypeAttribute(ViewModel.Model.GetType(), out TaskIconAttribute iconAttr))
             {
                 icon.style.backgroundImage = Resources.Load<Texture2D>(iconAttr.path);
             }
-            if (T_Model.Ports.ContainsKey("Children"))
+            if (ViewModel.Ports.ContainsKey("Children"))
             {
                 badge = IconBadge.CreateError("需要子节点");
                 RefreshBadge();
-                T_Model.Ports["Children"].onConnected += _ =>
+                ViewModel.Ports["Children"].onConnected += _ =>
                 {
                     RefreshBadge();
                 };
-                T_Model.Ports["Children"].onDisconnected += _ =>
+                ViewModel.Ports["Children"].onDisconnected += _ =>
                 {
                     RefreshBadge();
                 };
             }
 
-            T_Model.onUpdate += OnUpdate;
+            T_ViewModel.onUpdate += OnUpdate;
         }
 
         void RefreshBadge()
         {
-            if (T_Model.Ports["Children"].Connections.Count != 0)
+            if (T_ViewModel.Ports["Children"].Connections.Count != 0)
                 RemoveBadge(_ => _ == badge);
             else
                 AddBadge(badge);
@@ -88,7 +88,7 @@ namespace CZToolKit.BehaviorTree.Editors
             if (!Application.isPlaying || Owner.GraphWindow.GraphOwner == null)
                 return;
             anim = Mathf.Clamp01(anim - 0.2f);
-            if (T_Model.Started)
+            if (T_ViewModel.Started)
                 anim = 1;
             stateBorder.style.opacity = anim;
         }
@@ -97,14 +97,14 @@ namespace CZToolKit.BehaviorTree.Editors
         {
             if (!Application.isPlaying || Owner.GraphWindow.GraphOwner == null)
                 return;
-            if (T_Model.Ports.ContainsKey("Parent") && T_Model.Ports["Parent"].Connections.Count == 0)
+            if (T_ViewModel.Ports.ContainsKey("Parent") && T_ViewModel.Ports["Parent"].Connections.Count == 0)
                 return;
             anim = 1;
             stateBorder.RemoveFromClassList("success");
             stateBorder.RemoveFromClassList("failure");
             stateBorder.RemoveFromClassList("running");
 
-            switch (T_Model.Status)
+            switch (T_ViewModel.Status)
             {
                 case TaskStatus.Success:
                     stateBorder.AddToClassList("success");

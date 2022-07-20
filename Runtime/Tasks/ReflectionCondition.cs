@@ -31,59 +31,60 @@ namespace CZToolKit.BehaviorTree
             Value, Function
         }
 
-        [SerializeField] ValueType leftValueType;
-        [SerializeField] bool leftValue;
-        [SerializeField] string leftFunctionName;
-        [NonSerialized] Func<bool> leftFunction;
+        public ValueType leftValueType;
+        public bool leftValue;
+        public string leftFunctionName;
 
-        [SerializeField] ValueType rightValueType;
-        [SerializeField] bool rightValue;
-        [SerializeField] string rightFunctionName;
-        [NonSerialized] Func<bool> rightFunction;
+        public ValueType rightValueType;
+        public bool rightValue;
+        public string rightFunctionName;
+    }
 
-        public ValueType LeftValueType
+    public class ReflectionConditionVM : ActionTaskVM
+    {
+        Func<bool> leftFunction;
+        Func<bool> rightFunction;
+
+        public ReflectionCondition.ValueType LeftValueType
         {
-            get { return GetPropertyValue<ValueType>(nameof(leftValueType)); }
-            set { SetPropertyValue(nameof(leftValueType), value); }
+            get { return GetPropertyValue<ReflectionCondition.ValueType>(nameof(ReflectionCondition.leftValueType)); }
+            set { SetPropertyValue(nameof(ReflectionCondition.leftValueType), value); }
         }
         public bool LeftValue
         {
-            get { return leftValue; }
-            set { leftValue = value; }
+            get { return (Model as ReflectionCondition).leftValue; }
+            set { (Model as ReflectionCondition).leftValue = value; }
         }
         public string LeftFunctionName
         {
-            get { return GetPropertyValue<string>(nameof(leftFunctionName)); }
-            set { SetPropertyValue(nameof(leftFunctionName), value); }
+            get { return GetPropertyValue<string>(nameof(ReflectionCondition.leftFunctionName)); }
+            set { SetPropertyValue(nameof(ReflectionCondition.leftFunctionName), value); }
         }
-
-        public ValueType RightValueType
+        public ReflectionCondition.ValueType RightValueType
         {
-            get { return GetPropertyValue<ValueType>(nameof(rightValueType)); }
-            set { SetPropertyValue(nameof(rightValueType), value); }
+            get { return GetPropertyValue<ReflectionCondition.ValueType>(nameof(ReflectionCondition.rightValueType)); }
+            set { SetPropertyValue(nameof(ReflectionCondition.rightValueType), value); }
         }
         public bool RightValue
         {
-            get { return rightValue; }
-            set { rightValue = value; }
+            get { return (Model as ReflectionCondition).rightValue; }
+            set { (Model as ReflectionCondition).rightValue = value; }
         }
         public string RightFunctionName
         {
-            get { return GetPropertyValue<string>(nameof(rightFunctionName)); }
-            set { SetPropertyValue(nameof(rightFunctionName), value); }
+            get { return GetPropertyValue<string>(nameof(ReflectionCondition.rightFunctionName)); }
+            set { SetPropertyValue(nameof(ReflectionCondition.rightFunctionName), value); }
         }
 
-        protected override void OnEnabled()
+        public ReflectionConditionVM(BaseNode model) : base(model)
         {
-            base.OnEnabled();
-
-            this[nameof(leftValueType)] = new BindableProperty<ValueType>(() => leftValueType, v => leftValueType = v);
-            this[nameof(leftValue)] = new BindableProperty<bool>(() => leftValue, v => { leftValue = v; });
-            this[nameof(leftFunctionName)] = new BindableProperty<string>(() => leftFunctionName, v => leftFunctionName = v);
-
-            this[nameof(rightValueType)] = new BindableProperty<ValueType>(() => rightValueType, v => rightValueType = v);
-            this[nameof(rightValue)] = new BindableProperty<bool>(() => rightValue, v => { rightValue = v; });
-            this[nameof(rightFunctionName)] = new BindableProperty<string>(() => rightFunctionName, v => rightFunctionName = v);
+            var t_model = Model as ReflectionCondition;
+            this[nameof(ReflectionCondition.leftValueType)] = new BindableProperty<ReflectionCondition.ValueType>(() => t_model.leftValueType, v => t_model.leftValueType = v);
+            this[nameof(ReflectionCondition.leftValue)] = new BindableProperty<bool>(() => t_model.leftValue, v => { t_model.leftValue = v; });
+            this[nameof(ReflectionCondition.leftFunctionName)] = new BindableProperty<string>(() => t_model.leftFunctionName, v => t_model.leftFunctionName = v);
+            this[nameof(ReflectionCondition.rightValueType)] = new BindableProperty<ReflectionCondition.ValueType>(() => t_model.rightValueType, v => t_model.rightValueType = v);
+            this[nameof(ReflectionCondition.rightValue)] = new BindableProperty<bool>(() => t_model.rightValue, v => { t_model.rightValue = v; });
+            this[nameof(ReflectionCondition.rightFunctionName)] = new BindableProperty<string>(() => t_model.rightFunctionName, v => t_model.rightFunctionName = v);
         }
 
         protected override void OnInitialized()
@@ -91,13 +92,12 @@ namespace CZToolKit.BehaviorTree
             base.OnInitialized();
             Refresh();
 
-            this[nameof(leftValueType)].RegisterValueChangedEvent<ValueType>(_ => { Refresh(); });
-            this[nameof(leftValue)].RegisterValueChangedEvent<bool>(_ => { Refresh(); });
-            this[nameof(leftFunctionName)].RegisterValueChangedEvent<string>(_ => { Refresh(); });
-
-            this[nameof(rightValueType)].RegisterValueChangedEvent<ValueType>(_ => { Refresh(); });
-            this[nameof(rightValue)].RegisterValueChangedEvent<bool>(_ => { Refresh(); });
-            this[nameof(rightFunctionName)].RegisterValueChangedEvent<string>(_ => { Refresh(); });
+            this[nameof(ReflectionCondition.leftValueType)].RegisterValueChangedEvent<ReflectionCondition.ValueType>(_ => { Refresh(); });
+            this[nameof(ReflectionCondition.leftValue)].RegisterValueChangedEvent<bool>(_ => { Refresh(); });
+            this[nameof(ReflectionCondition.leftFunctionName)].RegisterValueChangedEvent<string>(_ => { Refresh(); });
+            this[nameof(ReflectionCondition.rightValueType)].RegisterValueChangedEvent<ReflectionCondition.ValueType>(_ => { Refresh(); });
+            this[nameof(ReflectionCondition.rightValue)].RegisterValueChangedEvent<bool>(_ => { Refresh(); });
+            this[nameof(ReflectionCondition.rightFunctionName)].RegisterValueChangedEvent<string>(_ => { Refresh(); });
         }
 
         protected override TaskStatus OnUpdate()
@@ -113,15 +113,15 @@ namespace CZToolKit.BehaviorTree
 
         void Refresh()
         {
-            switch (leftValueType)
+            switch (LeftValueType)
             {
-                case ValueType.Value:
-                    leftFunction = () => { return leftValue; };
+                case ReflectionCondition.ValueType.Value:
+                    leftFunction = () => { return LeftValue; };
                     break;
-                case ValueType.Function:
+                case ReflectionCondition.ValueType.Function:
                     MethodInfo method = null;
-                    if (!string.IsNullOrEmpty(leftFunctionName))
-                        method = Agent.GetType().GetMethod(leftFunctionName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (!string.IsNullOrEmpty(LeftFunctionName))
+                        method = Agent.GetType().GetMethod(LeftFunctionName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                     if (method != null && method.GetParameters().Length == 0)
                         leftFunction = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), Agent, method);
                     else
@@ -129,15 +129,15 @@ namespace CZToolKit.BehaviorTree
                     break;
             }
 
-            switch (rightValueType)
+            switch (RightValueType)
             {
-                case ValueType.Value:
-                    rightFunction = () => { return rightValue; };
+                case ReflectionCondition.ValueType.Value:
+                    rightFunction = () => { return RightValue; };
                     break;
-                case ValueType.Function:
+                case ReflectionCondition.ValueType.Function:
                     MethodInfo method = null;
-                    if (!string.IsNullOrEmpty(rightFunctionName))
-                        method = Agent.GetType().GetMethod(rightFunctionName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (!string.IsNullOrEmpty(RightFunctionName))
+                        method = Agent.GetType().GetMethod(RightFunctionName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                     if (method != null && method.GetParameters().Length == 0)
                         rightFunction = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), Agent, method);
                     else

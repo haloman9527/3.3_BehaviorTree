@@ -35,7 +35,7 @@ namespace CZToolKit.BehaviorTree
 
         public Type GraphType => typeof(BehaviorTree);
 
-        public void SaveGraph(IGraph graph)
+        public void SaveGraph(BaseGraph graph)
         {
             serializedGraph = SerializationUtility.SerializeValue(graph, DataFormat.JSON, out graphUnityReferences);
         }
@@ -52,7 +52,6 @@ namespace CZToolKit.BehaviorTree
                 graph = SerializationUtility.DeserializeValue<BehaviorTree>(serializedGraph, DataFormat.JSON, graphUnityReferences);
             if (graph == null)
                 graph = new BehaviorTree();
-            graph.Enable();
             return graph;
         }
     }

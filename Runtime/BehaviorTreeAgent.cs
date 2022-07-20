@@ -19,7 +19,7 @@ using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
-    public class BehaviorTreeAgent : GraphAssetOwner<BehaviorTreeAsset, BehaviorTree>
+    public class BehaviorTreeAgent : GraphAssetOwner<BehaviorTreeAsset, BehaviorTreeVM>
     {
         public event Action<Task> OnTaskExecute;
 
@@ -44,6 +44,20 @@ namespace CZToolKit.BehaviorTree
         public void Edit()
         {
             UnityEditor.AssetDatabase.OpenAsset(this);
+        }
+
+        public override void SaveGraph(BaseGraph graph)
+        {
+            if (T_GraphAsset == null)
+                return;
+            T_GraphAsset.SaveGraph(graph);
+        }
+
+        public override BaseGraph DeserializeGraph()
+        {
+            if (T_GraphAsset == null)
+                return null;
+            return T_GraphAsset.DeserializeGraph();
         }
 #endif
     }

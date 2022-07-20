@@ -14,32 +14,31 @@
  */
 #endregion
 using CZToolKit.GraphProcessor;
-using System;
 using System.Collections.Generic;
 
 namespace CZToolKit.BehaviorTree
 {
-    public abstract partial class Compsite : Task
+    public abstract class CompsiteVM : TaskVM
     {
-        public IEnumerable<Task> Children
+        protected List<TaskVM> tasks;
+
+        public IEnumerable<TaskVM> Children
         {
             get
             {
                 foreach (var node in GetConnections("Children"))
                 {
-                    if (node is Task task)
+                    if (node is TaskVM task)
                         yield return task;
                 }
             }
         }
 
-        [NonSerialized] protected List<Task> tasks;
-
-        protected override void OnEnabled()
+        protected CompsiteVM(BaseNode model) : base(model)
         {
             base.OnEnabled();
-            AddPort(new BasePort("Parent", BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(Task)));
-            AddPort(new BasePort("Children", BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Multi, typeof(Task)));
+            AddPort(new BasePortVM("Parent", BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(Task)));
+            AddPort(new BasePortVM("Children", BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Multi, typeof(Task)));
         }
 
         protected override void OnInitialized()
@@ -54,7 +53,7 @@ namespace CZToolKit.BehaviorTree
             base.OnStart();
 
             if (tasks == null)
-                tasks = new List<Task>(Children);
+                tasks = new List<TaskVM>(Children);
         }
 
         void Refresh()

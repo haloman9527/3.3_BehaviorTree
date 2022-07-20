@@ -19,20 +19,23 @@ using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
-    [TaskIcon("BehaviorTree/Icons/RandomSequence")]
     [NodeMenuItem("Compsite", "随机顺序执行")]
+    [TaskIcon("BehaviorTree/Icons/RandomSequence")]
     [NodeTooltip("以随机顺序执行行为，遇Failuer或Running中断，并返回该状态")]
     public class RandomSequence : Compsite
     {
+        public int randomSeed;
+    }
+
+    [ViewModel(typeof(RandomSequence))]
+    public class RandomSequenceVM : CompsiteVM
+    {
         int index;
 
-        public int randomSeed;
-
-        protected override void OnEnabled()
+        public RandomSequenceVM(BaseNode model) : base(model)
         {
-            base.OnEnabled();
-
-            this[nameof(randomSeed)] = new BindableProperty<int>(() => randomSeed, v => randomSeed = v);
+            var t_model = Model as RandomSequence;
+            this[nameof(RandomSequence.randomSeed)] = new BindableProperty<int>(() => t_model.randomSeed, v => t_model.randomSeed = v);
         }
 
         protected override void OnStart()
@@ -51,7 +54,7 @@ namespace CZToolKit.BehaviorTree
         {
             for (int i = index; i < tasks.Count; i++)
             {
-                var task = tasks[i] as Task;
+                var task = tasks[i];
                 var tmpStatus = task.Update();
                 if (tmpStatus == TaskStatus.Failure)
                 {

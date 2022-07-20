@@ -13,14 +13,18 @@
  *
  */
 #endregion
-
 using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
     [NodeMenuItem("Decorator", "Success")]
-    public class Success : Decorator
+    public class Success : Decorator { }
+
+    [ViewModel(typeof(Success))]
+    public class SuccessVM : DecoratorVM
     {
+        public SuccessVM(BaseNode model) : base(model) { }
+
         protected override TaskStatus OnUpdate()
         {
             foreach (var task in Children)

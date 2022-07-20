@@ -17,25 +17,25 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    public partial class Entry : Task { }
-
+    [NodeMenuItem("Root", showInList = false)]
     [TaskIcon("BehaviorTree/Icons/Entry")]
     [NodeTitleColor(0, 0.7f, 0)]
-    [NodeMenuItem("Root", showInList = false)]
     [NodeTooltip("入口节点，不可移动，不可删除，自动生成")]
-    public partial class Entry
+    public class Entry : Task { }
+
+    [ViewModel(typeof(Entry))]
+    public class EntryVM : TaskVM
     {
-        protected override void OnEnabled()
+        public EntryVM(BaseNode model) : base(model)
         {
-            base.OnEnabled();
-            AddPort(new BasePort("Children", BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(Task)));
+            AddPort(new BasePortVM("Children", BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(Task)));
         }
 
         protected override TaskStatus OnUpdate()
         {
             foreach (var node in GetConnections("Children"))
             {
-                return (node as Task).Update();
+                return (node as TaskVM).Update();
             }
             return TaskStatus.Success;
         }

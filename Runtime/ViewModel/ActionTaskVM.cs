@@ -13,17 +13,15 @@
  *
  */
 #endregion
-
 using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    public abstract partial class ActionTask : Task
+    public abstract partial class ActionTaskVM : TaskVM
     {
-        protected override void OnEnabled()
+        protected ActionTaskVM(BaseNode model) : base(model)
         {
-            base.OnEnabled();
-            AddPort(new BasePort("Parent", BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(Task)));
+            AddPort(new BasePortVM("Parent", BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(Task)));
         }
     }
 }
