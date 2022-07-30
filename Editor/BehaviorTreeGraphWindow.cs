@@ -43,9 +43,9 @@ namespace CZToolKit.BehaviorTree.Editors
             if ((UnityObject)agent == (UnityObject)GraphOwner && agent.Graph == GraphOwner.Graph)
                 return;
             if (agent.GraphAsset != null)
-                Load(agent);
+                ForceLoad(agent);
             else
-                Load(agent as IGraphOwner);
+                ForceLoad(agent as IGraphOwner);
         }
 
         protected override BaseGraphView NewGraphView(BaseGraphVM graph)
@@ -53,18 +53,22 @@ namespace CZToolKit.BehaviorTree.Editors
             return new BehaviorTreeGraphView();
         }
 
-        protected override void BuildToolbar(ToolbarView toolbar)
+        protected override void OnGraphLoaded()
         {
-            base.BuildToolbar(toolbar);
+            base.OnGraphLoaded();
+
             ToolbarButton btnSave = new ToolbarButton();
             btnSave.text = "Save";
             btnSave.clicked += Save;
-            toolbar.AddButtonToRight(btnSave);
+            btnSave.style.width = 80;
+            btnSave.style.unityTextAlign = TextAnchor.MiddleCenter;
+            ToolbarRight.Add(btnSave);
+
+            GraphView.RegisterCallback<KeyDownEvent>(KeyDownCallback);
         }
 
-        protected override void KeyDownCallback(KeyDownEvent evt)
+        void KeyDownCallback(KeyDownEvent evt)
         {
-            base.KeyDownCallback(evt);
             if (evt.commandKey || evt.ctrlKey)
             {
                 switch (evt.keyCode)
