@@ -1,4 +1,25 @@
-﻿#state-border {
+﻿.node{
+	height: 100px;
+}
+
+#title{
+	height: 20px;
+	min-height: 20px;
+}
+
+#icon {
+	height: 60px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.node-controls {
+	height: 70px;
+}
+
+#state-border {
 	border-left-width:2px;
 	border-right-width:2px;
 	border-top-width:2px;

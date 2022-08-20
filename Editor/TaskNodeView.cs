@@ -32,16 +32,9 @@ namespace CZToolKit.BehaviorTree.Editors
         {
             styleSheets.Add(Resources.Load<StyleSheet>("BehaviorTree/Uss/Task"));
 
-            this.style.width = 100;
             icon = new Image() { name = "icon" };
-            icon.style.height = 60;
-            icon.style.marginBottom = 10;
-            icon.style.marginLeft = 10;
-            icon.style.marginRight = 10;
-            icon.style.marginTop = 10;
             icon.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
             icon.style.unityBackgroundImageTintColor = new Color(1, 1, 1, 0.7f);
-            base.controlsContainer.style.height = 60;
             base.controlsContainer.Add(icon);
 
             stateBorder = new VisualElement();
