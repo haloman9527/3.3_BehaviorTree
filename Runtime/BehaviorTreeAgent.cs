@@ -21,8 +21,6 @@ namespace CZToolKit.BehaviorTree
 {
     public class BehaviorTreeAgent : GraphAssetOwner<BehaviorTreeAsset, BehaviorTreeVM>
     {
-        public event Action<Task> OnTaskExecute;
-
         private void Start()
         {
             T_Graph.Initialize(this);

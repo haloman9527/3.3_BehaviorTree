@@ -24,7 +24,7 @@ namespace CZToolKit.BehaviorTree
 {
     public class BehaviorTree : BaseGraph
     {
-        [SerializeField] [HideInInspector] public string entryGUID;
+        [SerializeField][HideInInspector] public string entryGUID;
     }
 
     [ViewModel(typeof(BehaviorTree))]
@@ -55,7 +55,7 @@ namespace CZToolKit.BehaviorTree
             if (!string.IsNullOrEmpty(t_model.entryGUID) && !Nodes.ContainsKey(t_model.entryGUID))
                 t_model.entryGUID = string.Empty;
             if (string.IsNullOrEmpty(t_model.entryGUID))
-                t_model.entryGUID = Nodes.Values.FirstOrDefault(node => node is Entry)?.GUID;
+                t_model.entryGUID = model.nodes.FirstOrDefault(pair => pair.Value is Entry).Key;
             if (string.IsNullOrEmpty(t_model.entryGUID))
                 t_model.entryGUID = AddNode<Entry>(InternalVector2.zero).GUID;
             entry = Nodes[t_model.entryGUID] as EntryVM;
