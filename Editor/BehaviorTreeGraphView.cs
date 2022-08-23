@@ -17,6 +17,7 @@ using CZToolKit.Core;
 using CZToolKit.GraphProcessor.Editors;
 using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 
 namespace CZToolKit.BehaviorTree.Editors
 {
@@ -46,6 +47,15 @@ namespace CZToolKit.BehaviorTree.Editors
                     continue;
                 yield return type;
             }
+        }
+
+        protected override bool IsCompatible(BasePortView fromPortView, BasePortView toPortView, NodeAdapter nodeAdapter)
+        {
+            if (fromPortView.node == toPortView.node)
+                return false;
+            if (fromPortView.ViewModel.Owner == toPortView.ViewModel.Owner)
+                return false;
+            return base.IsCompatible(fromPortView, toPortView, nodeAdapter);
         }
     }
 }
