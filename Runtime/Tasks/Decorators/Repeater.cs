@@ -13,7 +13,7 @@
  *
  */
 #endregion
-
+using CZToolKit.Core.ViewModel;
 using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
