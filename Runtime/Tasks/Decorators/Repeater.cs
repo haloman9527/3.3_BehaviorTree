@@ -28,9 +28,13 @@ namespace CZToolKit.BehaviorTree
     [ViewModel(typeof(Repeater))]
     public class RepeaterVM : DecoratorVM
     {
+        private Repeater tModel;
         private int counter;
 
-        public RepeaterVM(BaseNode model) : base(model) { }
+        public RepeaterVM(Repeater model) : base(model)
+        {
+            this.tModel = model;
+        }
 
         protected override void OnStart()
         {
@@ -40,7 +44,7 @@ namespace CZToolKit.BehaviorTree
 
         protected override TaskStatus OnUpdate()
         {
-            if (counter >= ((Repeater)Model).count)
+            if (tModel.count != -1 && counter >= tModel.count)
                 return TaskStatus.Success;
             counter++;
             foreach (var task in Children)

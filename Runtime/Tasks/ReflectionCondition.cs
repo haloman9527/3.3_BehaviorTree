@@ -40,6 +40,7 @@ namespace CZToolKit.BehaviorTree
         public string rightFunctionName;
     }
 
+    [ViewModel(typeof(ReflectionCondition))]
     public class ReflectionConditionVM : ActionTaskVM
     {
         Func<bool> leftFunction;
