@@ -25,7 +25,7 @@ namespace CZToolKit.BehaviorTree
 {
     public class BehaviorTree : BaseGraph
     {
-        [SerializeField][HideInInspector] public string entryGUID;
+        [SerializeField][HideInInspector] public int entryID;
     }
 
     [ViewModel(typeof(BehaviorTree))]
@@ -53,13 +53,13 @@ namespace CZToolKit.BehaviorTree
         {
             variables = new List<SharedVariable>();
             var t_model = Model as BehaviorTree;
-            if (!string.IsNullOrEmpty(t_model.entryGUID) && !Nodes.ContainsKey(t_model.entryGUID))
-                t_model.entryGUID = string.Empty;
-            if (string.IsNullOrEmpty(t_model.entryGUID))
-                t_model.entryGUID = model.nodes.FirstOrDefault(pair => pair.Value is Entry).Key;
-            if (string.IsNullOrEmpty(t_model.entryGUID))
-                t_model.entryGUID = AddNode<Entry>(InternalVector2.zero).GUID;
-            entry = Nodes[t_model.entryGUID] as EntryVM;
+            if (t_model.entryID != 0 && !Nodes.ContainsKey(t_model.entryID))
+                t_model.entryID = 0;
+            if (t_model.entryID == 0)
+                t_model.entryID = model.nodes.FirstOrDefault(pair => pair.Value is Entry).Key;
+            if (t_model.entryID == 0)
+                t_model.entryID = AddNode<Entry>(InternalVector2.zero).ID;
+            entry = Nodes[t_model.entryID] as EntryVM;
 
             OnNodeAdded += NodeAdded;
         }

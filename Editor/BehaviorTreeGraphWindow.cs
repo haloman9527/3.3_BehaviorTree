@@ -93,7 +93,7 @@ namespace CZToolKit.BehaviorTree.Editors
             if (GraphView == null)
                 return;
             // 收集所有节点，连线
-            Dictionary<string, BaseNode> nodes = new Dictionary<string, BaseNode>();
+            Dictionary<int, BaseNode> nodes = new Dictionary<int, BaseNode>();
             List<BaseConnection> connections = new List<BaseConnection>();
             List<BaseGroup> groups = new List<BaseGroup>();
             foreach (var item in GraphView.selection)
@@ -101,7 +101,7 @@ namespace CZToolKit.BehaviorTree.Editors
                 switch (item)
                 {
                     case BaseNodeView nodeView:
-                        nodes.Add(nodeView.ViewModel.GUID, nodeView.ViewModel.Model);
+                        nodes.Add(nodeView.ViewModel.ID, nodeView.ViewModel.Model);
                         break;
                     case BaseConnectionView connectionView:
                         connections.Add(connectionView.ViewModel.Model);
@@ -112,18 +112,18 @@ namespace CZToolKit.BehaviorTree.Editors
                 }
             }
 
-            GraphView.CommandDispacter.BeginGroup();
+            GraphView.CommandDispatcher.BeginGroup();
 
             var nodesStr = SerializationUtility.SerializeValue(nodes, DataFormat.Binary);
             var connectionsStr = SerializationUtility.SerializeValue(connections, DataFormat.Binary);
             var groupsStr = SerializationUtility.SerializeValue(groups, DataFormat.Binary);
 
-            nodes = SerializationUtility.DeserializeValue<Dictionary<string, BaseNode>>(nodesStr, DataFormat.Binary);
+            nodes = SerializationUtility.DeserializeValue<Dictionary<int, BaseNode>>(nodesStr, DataFormat.Binary);
             connections = SerializationUtility.DeserializeValue<List<BaseConnection>>(connectionsStr, DataFormat.Binary);
             groups = SerializationUtility.DeserializeValue<List<BaseGroup>>(groupsStr, DataFormat.Binary);
 
             var graph = GraphView.ViewModel;
-            var nodeMaps = new Dictionary<string, BaseNodeVM>();
+            var nodeMaps = new Dictionary<int, BaseNodeVM>();
 
             GraphView.ClearSelection();
 
@@ -131,21 +131,21 @@ namespace CZToolKit.BehaviorTree.Editors
             {
                 pair.Value.position += new InternalVector2(50, 50);
                 var vm = ViewModelFactory.CreateViewModel(pair.Value) as BaseNodeVM;
-                GraphView.CommandDispacter.Do(new AddNodeCommand(graph, vm));
+                GraphView.CommandDispatcher.Do(new AddNodeCommand(graph, vm));
                 nodeMaps[pair.Key] = vm;
-                GraphView.AddToSelection(GraphView.NodeViews[vm.GUID]);
+                GraphView.AddToSelection(GraphView.NodeViews[vm.ID]);
             }
 
             foreach (var connection in connections)
             {
                 if (nodeMaps.TryGetValue(connection.fromNode, out var from))
-                    connection.fromNode = from.GUID;
+                    connection.fromNode = from.ID;
 
                 if (nodeMaps.TryGetValue(connection.toNode, out var to))
-                    connection.toNode = to.GUID;
+                    connection.toNode = to.ID;
 
                 var vm = ViewModelFactory.CreateViewModel(connection) as BaseConnectionVM;
-                GraphView.CommandDispacter.Do(new ConnectCommand(graph, vm));
+                GraphView.CommandDispatcher.Do(new ConnectCommand(graph, vm));
                 GraphView.AddToSelection(GraphView.ConnectionViews[vm]);
             }
 
@@ -154,16 +154,16 @@ namespace CZToolKit.BehaviorTree.Editors
                 for (int i = group.nodes.Count - 1; i >= 0; i--)
                 {
                     if (nodeMaps.TryGetValue(group.nodes[i], out var node))
-                        group.nodes[i] = node.GUID;
+                        group.nodes[i] = node.ID;
                     else
                         group.nodes.RemoveAt(i);
                 }
                 var vm = ViewModelFactory.CreateViewModel(group) as BaseGroupVM;
-                GraphView.CommandDispacter.Do(new AddGroupCommand(graph, vm));
+                GraphView.CommandDispatcher.Do(new AddGroupCommand(graph, vm));
                 GraphView.AddToSelection(GraphView.GroupViews[vm]);
             }
 
-            GraphView.CommandDispacter.EndGroup();
+            GraphView.CommandDispatcher.EndGroup();
         }
 
 
