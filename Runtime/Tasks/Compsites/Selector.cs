@@ -23,7 +23,7 @@ namespace CZToolKit.BehaviorTree
     [NodeTooltip("依次执行，直到Success或Running，并返回该状态")]
     public class Selector : Compsite { }
 
-    [ViewModel(typeof(RandomSelector))]
+    [ViewModel(typeof(Selector))]
     public class SelectorVM : CompsiteVM
     {
         int index;
