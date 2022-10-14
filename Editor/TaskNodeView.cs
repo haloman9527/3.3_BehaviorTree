@@ -55,11 +55,11 @@ namespace CZToolKit.BehaviorTree.Editors
             {
                 badge = IconBadge.CreateError("需要子节点");
                 RefreshBadge();
-                ViewModel.Ports["Children"].onConnected += _ =>
+                ViewModel.Ports["Children"].onAfterConnected += _ =>
                 {
                     RefreshBadge();
                 };
-                ViewModel.Ports["Children"].onDisconnected += _ =>
+                ViewModel.Ports["Children"].onAfterDisconnected += _ =>
                 {
                     RefreshBadge();
                 };
