@@ -34,7 +34,6 @@ namespace CZToolKit.BehaviorTree.Editors
 
             icon = new Image() { name = "icon" };
             base.controlsContainer.Add(icon);
-            icon.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
             icon.style.unityBackgroundImageTintColor = new Color(1, 1, 1, 0.7f);
 
             stateBorder = new VisualElement();

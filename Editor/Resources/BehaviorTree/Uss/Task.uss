@@ -1,5 +1,5 @@
 ﻿.node{
-	height: 100px;
+	/*max-height: 115px;*/
 }
 
 #title{
@@ -8,11 +8,13 @@
 }
 
 #icon {
-	height: 60px;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	margin-left: 10px;
-	margin-right: 10px;
+	max-height: 40px;
+	height: 40px;
+	-unity-background-scale-mode: scale-to-fit;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 #state-border {
@@ -28,27 +30,18 @@
 
 .success
 {
-	border-left-color:rgba(0, 255, 0, 1);
-	border-right-color:rgba(0, 255, 0, 1);
-	border-top-color:rgba(0, 255, 0, 1);
-	border-bottom-color:rgba(0, 255, 0, 1);
+	border-color:rgba(0, 255, 0, 1);
 	background-color:rgba(0, 255, 0, 1);
 }
 
 .failure
 {
-	border-left-color:rgba(255, 0, 0, 1);
-	border-right-color:rgba(255, 0, 0, 1);
-	border-top-color:rgba(255, 0, 0, 1);
-	border-bottom-color:rgba(255, 0, 0, 1);
+	border-color:rgba(255, 0, 0, 1);
 	background-color:rgba(255, 0, 0, 1);
 }
 
 .running 
 {
-	border-left-color:rgba(255, 255, 0, 1);
-	border-right-color:rgba(255, 255, 0, 1);
-	border-top-color:rgba(255, 255, 0, 1);
-	border-bottom-color:rgba(255, 255, 0, 1);
+	border-color:rgba(255, 255, 0, 1);
 	background-color:rgba(255, 255, 0, 1);
 }
