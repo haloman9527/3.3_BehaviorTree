@@ -15,38 +15,26 @@
 #endregion
 using CZToolKit.Core.ViewModel;
 using CZToolKit.GraphProcessor;
-using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
-    [NodeMenuItem("Compsite", "随机选择执行")]
-    [NodeTooltip("以随机顺序执行行为，直到返回Success或Running")]
-    public class RandomSelector : Compsite
-    {
-        public int randomSeed;
-    }
+    [TaskIcon("BehaviorTree/Icons/Selector")]
+    [NodeTitle("选择执行")]
+    [NodeTooltip("依次执行，直到Success或Running，并返回该状态")]
+    [NodeMenu("Composite", "Selector")]
+    public class Selector : Compsite { }
 
-    [ViewModel(typeof(RandomSelector))]
-    public class RandomSelectorVM : CompsiteVM
+    [ViewModel(typeof(Selector))]
+    public class SelectorVM : CompsiteVM
     {
         int index;
 
-        public RandomSelectorVM(BaseNode model) : base(model)
-        {
-            var t_model = Model as RandomSelector;
-            this[nameof(RandomSelector.randomSeed)] = new BindableProperty<int>(() => t_model.randomSeed, v => t_model.randomSeed = v);
-        }
+        public SelectorVM(BaseNode model) : base(model) { }
 
         protected override void OnStart()
         {
             base.OnStart();
             index = 0;
-            for (int i = tasks.Count; i > 0; i--)
-            {
-                var index = Random.Range(0, i);
-                tasks.Add(tasks[index]);
-                tasks.RemoveAt(index);
-            }
         }
 
         protected override TaskStatus OnUpdate()

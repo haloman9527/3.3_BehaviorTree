@@ -18,17 +18,18 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    [NodeMenuItem("Compsite", "顺序执行")]
-    [TaskIcon("BehaviorTree/Icons/Sequence")]
-    [NodeTooltip("依次执行，遇Failure或Running中断，并返回该状态")]
-    public class Sequence : Compsite { }
+    [TaskIcon("BehaviorTree/Icons/Parallel")]
+    [NodeTitle("并行执行")]
+    [NodeTooltip("依次执行所有，若全部Success，则返回Success，否则按照Task的状态返回(Running > Failure)")]
+    [NodeMenu("Composite", "Parallel")]
+    public class Parallel : Compsite { }
 
-    [ViewModel(typeof(Sequence))]
-    public class SequenceVM : CompsiteVM
+    [ViewModel(typeof(Parallel))]
+    public class ParallelVM : CompsiteVM
     {
         int index;
 
-        public SequenceVM(BaseNode model) : base(model) { }
+        public ParallelVM(BaseNode model) : base(model) { }
 
         protected override void OnStart()
         {
@@ -38,21 +39,22 @@ namespace CZToolKit.BehaviorTree
 
         protected override TaskStatus OnUpdate()
         {
+            var status = TaskStatus.Success;
             for (int i = index; i < tasks.Count; i++)
             {
                 var task = tasks[i];
                 var tmpStatus = task.Update();
-                if (tmpStatus == TaskStatus.Failure)
-                {
-                    return TaskStatus.Failure;
-                }
                 if (tmpStatus == TaskStatus.Running)
                 {
-                    return TaskStatus.Running;
+                    status = TaskStatus.Running;
                 }
-                index++;
+                if (tmpStatus != TaskStatus.Running)
+                {
+                    status = tmpStatus;
+                    index++;
+                }
             }
-            return TaskStatus.Success;
+            return status;
         }
     }
 }

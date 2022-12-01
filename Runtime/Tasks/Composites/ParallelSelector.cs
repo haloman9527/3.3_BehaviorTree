@@ -18,8 +18,9 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    [NodeMenuItem("Compsite", "并行选择")]
+    [NodeTitle("并行选择")]
     [NodeTooltip("依次执行所有，若有Success或Running，则返回该状态")]
+    [NodeMenu("Composite", "Parallel Selector")]
     public class ParallelSelector : Compsite { }
 
     [ViewModel(typeof(ParallelSelector))]

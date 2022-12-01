@@ -18,17 +18,18 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    [TaskIcon("BehaviorTree/Icons/Selector")]
-    [NodeMenuItem("Compsite", "选择执行")]
-    [NodeTooltip("依次执行，直到Success或Running，并返回该状态")]
-    public class Selector : Compsite { }
+    [TaskIcon("BehaviorTree/Icons/Sequence")]
+    [NodeTitle("顺序执行")]
+    [NodeTooltip("依次执行，遇Failure或Running中断，并返回该状态")]
+    [NodeMenu("Composite", "Sequence")]
+    public class Sequence : Compsite { }
 
-    [ViewModel(typeof(Selector))]
-    public class SelectorVM : CompsiteVM
+    [ViewModel(typeof(Sequence))]
+    public class SequenceVM : CompsiteVM
     {
         int index;
 
-        public SelectorVM(BaseNode model) : base(model) { }
+        public SequenceVM(BaseNode model) : base(model) { }
 
         protected override void OnStart()
         {
@@ -42,9 +43,9 @@ namespace CZToolKit.BehaviorTree
             {
                 var task = tasks[i];
                 var tmpStatus = task.Update();
-                if (tmpStatus == TaskStatus.Success)
+                if (tmpStatus == TaskStatus.Failure)
                 {
-                    return TaskStatus.Success;
+                    return TaskStatus.Failure;
                 }
                 if (tmpStatus == TaskStatus.Running)
                 {
@@ -52,7 +53,7 @@ namespace CZToolKit.BehaviorTree
                 }
                 index++;
             }
-            return TaskStatus.Failure;
+            return TaskStatus.Success;
         }
     }
 }

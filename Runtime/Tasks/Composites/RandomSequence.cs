@@ -19,9 +19,10 @@ using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
-    [NodeMenuItem("Compsite", "随机顺序执行")]
     [TaskIcon("BehaviorTree/Icons/RandomSequence")]
-    [NodeTooltip("以随机顺序执行行为，遇Failuer或Running中断，并返回该状态")]
+    [NodeTitle("随机顺序")]
+    [NodeTooltip("以随机顺序执行行为，遇Failure或Running中断，并返回该状态")]
+    [NodeMenu("Composite", "Random Sequence")]
     public class RandomSequence : Compsite
     {
         public int randomSeed;

@@ -18,7 +18,7 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    [NodeMenuItem("Decorator", "Success")]
+    [NodeMenu("Decorator", "Success")]
     public class Success : Decorator { }
 
     [ViewModel(typeof(Success))]
