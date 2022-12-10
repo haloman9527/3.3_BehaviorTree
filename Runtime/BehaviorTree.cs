@@ -58,7 +58,7 @@ namespace CZToolKit.BehaviorTree
             if (t_model.entryID == 0)
                 t_model.entryID = model.nodes.FirstOrDefault(pair => pair.Value is Entry).Key;
             if (t_model.entryID == 0)
-                t_model.entryID = AddNode<Entry>(InternalVector2.zero).ID;
+                t_model.entryID = AddNode<Entry>(InternalVector2Int.zero).ID;
             entry = Nodes[t_model.entryID] as EntryVM;
 
             OnNodeAdded += NodeAdded;
