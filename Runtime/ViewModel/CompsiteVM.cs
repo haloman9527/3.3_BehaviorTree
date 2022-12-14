@@ -18,50 +18,45 @@ using System.Collections.Generic;
 
 namespace CZToolKit.BehaviorTree
 {
-    public abstract class CompsiteVM : TaskVM
+    public abstract class CompositeVM : TaskVM
     {
         protected List<TaskVM> tasks;
 
-        public IEnumerable<TaskVM> Children
-        {
-            get
-            {
-                foreach (var node in GetConnections("Children"))
-                {
-                    if (node is TaskVM task)
-                        yield return task;
-                }
-            }
-        }
-
-        protected CompsiteVM(BaseNode model) : base(model)
+        protected CompositeVM(Composite model) : base(model)
         {
             base.OnEnabled();
-            AddPort(new BasePortVM("Parent", BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(Task)));
-            AddPort(new BasePortVM("Children", BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Multi, typeof(Task)));
+            AddPort(new BasePortVM(TaskVM.ParentPortName, BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(Task)));
+            AddPort(new BasePortVM(TaskVM.ChildrenPortName, BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Multi, typeof(Task)));
         }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-
             Ports["Children"].onSorted += Refresh;
         }
 
         protected override void OnStart()
         {
             base.OnStart();
-
             if (tasks == null)
-                tasks = new List<TaskVM>(Children);
+                tasks = new List<TaskVM>(GetChildren());
         }
 
-        void Refresh()
+        private  IEnumerable<TaskVM> GetChildren()
+        {
+            foreach (var node in GetConnections(TaskVM.ChildrenPortName))
+            {
+                if (node is TaskVM task)
+                    yield return task;
+            }
+        }
+
+        private void Refresh()
         {
             if (tasks != null)
             {
                 tasks.Clear();
-                tasks.AddRange(Children);
+                tasks.AddRange(GetChildren());
             }
         }
     }

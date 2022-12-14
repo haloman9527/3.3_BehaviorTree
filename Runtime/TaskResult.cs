@@ -19,7 +19,7 @@ using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
-    public enum TaskStatus
+    public enum TaskResult
     {
         Success,
         Failure,

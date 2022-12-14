@@ -16,5 +16,5 @@
 
 namespace CZToolKit.BehaviorTree
 {
-    public abstract class Compsite : Task { }
+    public abstract class Composite : Task { }
 }

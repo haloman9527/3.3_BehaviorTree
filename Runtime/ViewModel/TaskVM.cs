@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,7 +13,9 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
+
 using CZToolKit.GraphProcessor;
 using System;
 
@@ -20,25 +23,60 @@ namespace CZToolKit.BehaviorTree
 {
     public abstract class TaskVM : BaseNodeVM
     {
+        #region Define
+
+        public enum State
+        {
+            InActive,
+            Active,
+        }
+
+        #endregion
+        
+        #region Keyword
+        
+        public const string ParentPortName = "Parent";
+        public const string ChildrenPortName = "Children";
+        
+        #endregion
+
         #region Fields
+
         [NonSerialized] private BehaviorTreeAgent agent;
-        [NonSerialized] private bool started;
-        [NonSerialized] private TaskStatus status = TaskStatus.Running;
+        [NonSerialized] private State currentState;
+        [NonSerialized] private TaskResult status = TaskResult.Running;
         public event Action onUpdate;
+
         #endregion
 
         #region Properties
-        protected BehaviorTreeAgent Agent { get { return agent; } }
-        public bool Started { get { return started; } }
-        public TaskStatus Status { get { return status; } }
+
+        protected BehaviorTreeAgent Agent
+        {
+            get { return agent; }
+        }
+
+        public State CurrentState
+        {
+            get { return currentState; }
+        }
+
+        public TaskResult Status
+        {
+            get { return status; }
+        }
+
         #endregion
 
-        protected TaskVM(BaseNode model) : base(model) { }
+        protected TaskVM(Task model) : base(model)
+        {
+        }
 
         protected override void OnEnabled()
         {
             base.OnEnabled();
-            status = TaskStatus.Running;
+            currentState = State.InActive;
+            status = TaskResult.Running;
         }
 
         public void Initialize()
@@ -50,18 +88,18 @@ namespace CZToolKit.BehaviorTree
 
         private void Start()
         {
-            started = true;
+            currentState = State.Active;
             OnStart();
         }
 
-        public TaskStatus Update()
+        public TaskResult Update()
         {
-            if (!Started)
+            if (currentState == State.InActive)
                 Start();
 
             status = OnUpdate();
 
-            if (Status == TaskStatus.Failure || Status == TaskStatus.Success)
+            if (Status == TaskResult.Failure || Status == TaskResult.Success)
                 End();
 
             onUpdate?.Invoke();
@@ -70,29 +108,40 @@ namespace CZToolKit.BehaviorTree
 
         private void End()
         {
+            if (currentState != State.Active)
+                return;
             if (Ports.ContainsKey("Children"))
             {
                 foreach (var connection in GetConnections("Children"))
                 {
-                    if (connection is TaskVM task && task.started)
+                    if (connection is TaskVM task)
                         task.End();
                 }
             }
+
             OnEnd();
-            started = false;
+            currentState = State.InActive;
         }
 
-        protected virtual void OnInitialized() { }
-
-        protected virtual void OnStart() { }
-
-        protected virtual TaskStatus OnUpdate()
+        protected virtual void OnInitialized()
         {
-            return TaskStatus.Success;
         }
 
-        protected virtual void OnEnd() { }
+        protected virtual void OnStart()
+        {
+        }
 
-        public virtual void OnDrawGizmos() { }
+        protected virtual TaskResult OnUpdate()
+        {
+            return TaskResult.Success;
+        }
+
+        protected virtual void OnEnd()
+        {
+        }
+
+        public virtual void OnDrawGizmos()
+        {
+        }
     }
 }

@@ -35,16 +35,15 @@ namespace CZToolKit.BehaviorTree
             get { return GetPropertyValue<string>(nameof(Text)); }
             set { SetPropertyValue(nameof(Text), value); }
         }
-        public DebugTaskVM(BaseNode model) : base(model)
+        public DebugTaskVM(DebugTask model) : base(model)
         {
-            var t_model = Model as DebugTask;
-            this[nameof(Text)] = new BindableProperty<string>(() => t_model.text, v => { t_model.text = v; });
+            this[nameof(Text)] = new BindableProperty<string>(() => model.text, v => { model.text = v; });
         }
 
-        protected override TaskStatus OnUpdate()
+        protected override TaskResult OnUpdate()
         {
             Debug.Log(Text);
-            return TaskStatus.Success;
+            return TaskResult.Success;
         }
     }
 }

@@ -31,9 +31,9 @@ namespace CZToolKit.BehaviorTree
 
         float startTime;
 
-        public WaitVM(BaseNode model) : base(model)
+        public WaitVM(Wait model) : base(model)
         {
-            var t_model = Model as Wait;
+            var t_model = model as Wait;
             this[nameof(Wait.interval)] = new BindableProperty<float>(() => t_model.interval, v => t_model.interval = v);
         }
 
@@ -43,14 +43,14 @@ namespace CZToolKit.BehaviorTree
             startTime = Time.time;
         }
 
-        protected override TaskStatus OnUpdate()
+        protected override TaskResult OnUpdate()
         {
             var t_model = Model as Wait;
             if (Time.time - startTime < t_model.interval)
             {
-                return TaskStatus.Running;
+                return TaskResult.Running;
             }
-            return TaskStatus.Success;
+            return TaskResult.Success;
         }
     }
 }

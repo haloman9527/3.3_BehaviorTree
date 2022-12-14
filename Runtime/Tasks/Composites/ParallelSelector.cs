@@ -21,27 +21,27 @@ namespace CZToolKit.BehaviorTree
     [NodeTitle("并行选择")]
     [NodeTooltip("依次执行所有，若有Success或Running，则返回该状态")]
     [NodeMenu("Composite", "Parallel Selector")]
-    public class ParallelSelector : Compsite { }
+    public class ParallelSelector : Composite { }
 
     [ViewModel(typeof(ParallelSelector))]
-    public class ParallelSelectorVM : CompsiteVM
+    public class ParallelSelectorVM : CompositeVM
     {
-        public ParallelSelectorVM(BaseNode model) : base(model) { }
+        public ParallelSelectorVM(ParallelSelector model) : base(model) { }
 
-        protected override TaskStatus OnUpdate()
+        protected override TaskResult OnUpdate()
         {
-            var status = TaskStatus.Failure;
+            var status = TaskResult.Failure;
             foreach (var child in GetConnections("Children"))
             {
                 var task = child as TaskVM;
                 var tmpStatus = task.Update();
-                if (tmpStatus == TaskStatus.Success)
+                if (tmpStatus == TaskResult.Success)
                 {
-                    status = TaskStatus.Success;
+                    status = TaskResult.Success;
                 }
-                if (status != TaskStatus.Success && tmpStatus == TaskStatus.Running)
+                if (status != TaskResult.Success && tmpStatus == TaskResult.Running)
                 {
-                    status = TaskStatus.Running;
+                    status = TaskResult.Running;
                 }
             }
             return status;

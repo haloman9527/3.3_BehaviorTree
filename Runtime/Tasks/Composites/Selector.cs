@@ -22,14 +22,14 @@ namespace CZToolKit.BehaviorTree
     [NodeTitle("选择执行")]
     [NodeTooltip("依次执行，直到Success或Running，并返回该状态")]
     [NodeMenu("Composite", "Selector")]
-    public class Selector : Compsite { }
+    public class Selector : Composite { }
 
     [ViewModel(typeof(Selector))]
-    public class SelectorVM : CompsiteVM
+    public class SelectorVM : CompositeVM
     {
         int index;
 
-        public SelectorVM(BaseNode model) : base(model) { }
+        public SelectorVM(Selector model) : base(model) { }
 
         protected override void OnStart()
         {
@@ -37,23 +37,23 @@ namespace CZToolKit.BehaviorTree
             index = 0;
         }
 
-        protected override TaskStatus OnUpdate()
+        protected override TaskResult OnUpdate()
         {
             for (int i = index; i < tasks.Count; i++)
             {
                 var task = tasks[i];
                 var tmpStatus = task.Update();
-                if (tmpStatus == TaskStatus.Success)
+                if (tmpStatus == TaskResult.Success)
                 {
-                    return TaskStatus.Success;
+                    return TaskResult.Success;
                 }
-                if (tmpStatus == TaskStatus.Running)
+                if (tmpStatus == TaskResult.Running)
                 {
-                    return TaskStatus.Running;
+                    return TaskResult.Running;
                 }
                 index++;
             }
-            return TaskStatus.Failure;
+            return TaskResult.Failure;
         }
     }
 }

@@ -78,15 +78,14 @@ namespace CZToolKit.BehaviorTree
             set { SetPropertyValue(nameof(ReflectionCondition.rightFunctionName), value); }
         }
 
-        public ReflectionConditionVM(BaseNode model) : base(model)
+        public ReflectionConditionVM(ReflectionCondition model) : base(model)
         {
-            var t_model = Model as ReflectionCondition;
-            this[nameof(ReflectionCondition.leftValueType)] = new BindableProperty<ReflectionCondition.ValueType>(() => t_model.leftValueType, v => t_model.leftValueType = v);
-            this[nameof(ReflectionCondition.leftValue)] = new BindableProperty<bool>(() => t_model.leftValue, v => { t_model.leftValue = v; });
-            this[nameof(ReflectionCondition.leftFunctionName)] = new BindableProperty<string>(() => t_model.leftFunctionName, v => t_model.leftFunctionName = v);
-            this[nameof(ReflectionCondition.rightValueType)] = new BindableProperty<ReflectionCondition.ValueType>(() => t_model.rightValueType, v => t_model.rightValueType = v);
-            this[nameof(ReflectionCondition.rightValue)] = new BindableProperty<bool>(() => t_model.rightValue, v => { t_model.rightValue = v; });
-            this[nameof(ReflectionCondition.rightFunctionName)] = new BindableProperty<string>(() => t_model.rightFunctionName, v => t_model.rightFunctionName = v);
+            this[nameof(ReflectionCondition.leftValueType)] = new BindableProperty<ReflectionCondition.ValueType>(() => model.leftValueType, v => model.leftValueType = v);
+            this[nameof(ReflectionCondition.leftValue)] = new BindableProperty<bool>(() => model.leftValue, v => { model.leftValue = v; });
+            this[nameof(ReflectionCondition.leftFunctionName)] = new BindableProperty<string>(() => model.leftFunctionName, v => model.leftFunctionName = v);
+            this[nameof(ReflectionCondition.rightValueType)] = new BindableProperty<ReflectionCondition.ValueType>(() => model.rightValueType, v => model.rightValueType = v);
+            this[nameof(ReflectionCondition.rightValue)] = new BindableProperty<bool>(() => model.rightValue, v => { model.rightValue = v; });
+            this[nameof(ReflectionCondition.rightFunctionName)] = new BindableProperty<string>(() => model.rightFunctionName, v => model.rightFunctionName = v);
         }
 
         protected override void OnInitialized()
@@ -102,14 +101,14 @@ namespace CZToolKit.BehaviorTree
             this[nameof(ReflectionCondition.rightFunctionName)].RegisterValueChangedEvent<string>(_ => { Refresh(); });
         }
 
-        protected override TaskStatus OnUpdate()
+        protected override TaskResult OnUpdate()
         {
             bool left = leftFunction();
             bool right = rightFunction();
             if (left == right)
-                return TaskStatus.Success;
+                return TaskResult.Success;
             else
-                return TaskStatus.Failure;
+                return TaskResult.Failure;
         }
 
 

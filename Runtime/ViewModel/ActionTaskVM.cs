@@ -19,9 +19,9 @@ namespace CZToolKit.BehaviorTree
 {
     public abstract partial class ActionTaskVM : TaskVM
     {
-        protected ActionTaskVM(BaseNode model) : base(model)
+        protected ActionTaskVM(ActionTask model) : base(model)
         {
-            AddPort(new BasePortVM("Parent", BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(Task)));
+            AddPort(new BasePortVM(TaskVM.ParentPortName, BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(Task)));
         }
     }
 }

@@ -110,7 +110,7 @@ namespace CZToolKit.BehaviorTree
             }
         }
 
-        public TaskStatus Update()
+        public TaskResult Update()
         {
             return entry.Update();
         }

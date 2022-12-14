@@ -22,14 +22,14 @@ namespace CZToolKit.BehaviorTree
     [NodeTitle("并行执行")]
     [NodeTooltip("依次执行所有，若全部Success，则返回Success，否则按照Task的状态返回(Running > Failure)")]
     [NodeMenu("Composite", "Parallel")]
-    public class Parallel : Compsite { }
+    public class Parallel : Composite { }
 
     [ViewModel(typeof(Parallel))]
-    public class ParallelVM : CompsiteVM
+    public class ParallelVM : CompositeVM
     {
         int index;
 
-        public ParallelVM(BaseNode model) : base(model) { }
+        public ParallelVM(Parallel model) : base(model) { }
 
         protected override void OnStart()
         {
@@ -37,18 +37,18 @@ namespace CZToolKit.BehaviorTree
             index = 0;
         }
 
-        protected override TaskStatus OnUpdate()
+        protected override TaskResult OnUpdate()
         {
-            var status = TaskStatus.Success;
+            var status = TaskResult.Success;
             for (int i = index; i < tasks.Count; i++)
             {
                 var task = tasks[i];
                 var tmpStatus = task.Update();
-                if (tmpStatus == TaskStatus.Running)
+                if (tmpStatus == TaskResult.Running)
                 {
-                    status = TaskStatus.Running;
+                    status = TaskResult.Running;
                 }
-                if (tmpStatus != TaskStatus.Running)
+                if (tmpStatus != TaskResult.Running)
                 {
                     status = tmpStatus;
                     index++;

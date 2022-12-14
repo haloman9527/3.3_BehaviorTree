@@ -22,20 +22,19 @@ namespace CZToolKit.BehaviorTree
     [NodeTitle("随机选择")]
     [NodeTooltip("以随机顺序执行行为，直到返回Success或Running")]
     [NodeMenu("Composite", "Random Selector")]
-    public class RandomSelector : Compsite
+    public class RandomSelector : Composite
     {
         public int randomSeed;
     }
 
     [ViewModel(typeof(RandomSelector))]
-    public class RandomSelectorVM : CompsiteVM
+    public class RandomSelectorVM : CompositeVM
     {
         int index;
 
-        public RandomSelectorVM(BaseNode model) : base(model)
+        public RandomSelectorVM(RandomSelector model) : base(model)
         {
-            var t_model = Model as RandomSelector;
-            this[nameof(RandomSelector.randomSeed)] = new BindableProperty<int>(() => t_model.randomSeed, v => t_model.randomSeed = v);
+            this[nameof(RandomSelector.randomSeed)] = new BindableProperty<int>(() => model.randomSeed, v => model.randomSeed = v);
         }
 
         protected override void OnStart()
@@ -50,23 +49,23 @@ namespace CZToolKit.BehaviorTree
             }
         }
 
-        protected override TaskStatus OnUpdate()
+        protected override TaskResult OnUpdate()
         {
             for (int i = index; i < tasks.Count; i++)
             {
                 var task = tasks[i];
                 var tmpStatus = task.Update();
-                if (tmpStatus == TaskStatus.Success)
+                if (tmpStatus == TaskResult.Success)
                 {
-                    return TaskStatus.Success;
+                    return TaskResult.Success;
                 }
-                if (tmpStatus == TaskStatus.Running)
+                if (tmpStatus == TaskResult.Running)
                 {
-                    return TaskStatus.Running;
+                    return TaskResult.Running;
                 }
                 index++;
             }
-            return TaskStatus.Failure;
+            return TaskResult.Failure;
         }
     }
 }

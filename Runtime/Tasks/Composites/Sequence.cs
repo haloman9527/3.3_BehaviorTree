@@ -22,14 +22,14 @@ namespace CZToolKit.BehaviorTree
     [NodeTitle("顺序执行")]
     [NodeTooltip("依次执行，遇Failure或Running中断，并返回该状态")]
     [NodeMenu("Composite", "Sequence")]
-    public class Sequence : Compsite { }
+    public class Sequence : Composite { }
 
     [ViewModel(typeof(Sequence))]
-    public class SequenceVM : CompsiteVM
+    public class SequenceVM : CompositeVM
     {
         int index;
 
-        public SequenceVM(BaseNode model) : base(model) { }
+        public SequenceVM(Sequence model) : base(model) { }
 
         protected override void OnStart()
         {
@@ -37,23 +37,23 @@ namespace CZToolKit.BehaviorTree
             index = 0;
         }
 
-        protected override TaskStatus OnUpdate()
+        protected override TaskResult OnUpdate()
         {
             for (int i = index; i < tasks.Count; i++)
             {
                 var task = tasks[i];
-                var tmpStatus = task.Update();
-                if (tmpStatus == TaskStatus.Failure)
+                var result = task.Update();
+                if (result == TaskResult.Failure)
                 {
-                    return TaskStatus.Failure;
+                    return TaskResult.Failure;
                 }
-                if (tmpStatus == TaskStatus.Running)
+                if (result == TaskResult.Running)
                 {
-                    return TaskStatus.Running;
+                    return TaskResult.Running;
                 }
                 index++;
             }
-            return TaskStatus.Success;
+            return TaskResult.Success;
         }
     }
 }

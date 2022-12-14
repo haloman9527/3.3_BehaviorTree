@@ -42,16 +42,13 @@ namespace CZToolKit.BehaviorTree
             counter = 0;
         }
 
-        protected override TaskStatus OnUpdate()
+        protected override TaskResult OnUpdate()
         {
             if (tModel.count != -1 && counter >= tModel.count)
-                return TaskStatus.Success;
+                return TaskResult.Success;
             counter++;
-            foreach (var task in Children)
-            {
-                task.Update();
-            }
-            return TaskStatus.Running;
+            Children.Update();
+            return TaskResult.Running;
         }
     }
 }
