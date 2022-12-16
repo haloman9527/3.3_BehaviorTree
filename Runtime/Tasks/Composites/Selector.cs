@@ -21,7 +21,7 @@ namespace CZToolKit.BehaviorTree
     [TaskIcon("BehaviorTree/Icons/Selector")]
     [NodeTitle("选择执行")]
     [NodeTooltip("依次执行，直到Success或Running，并返回该状态")]
-    [NodeMenu("Composite", "Selector")]
+    [NodeMenu("Composite/Selector")]
     public class Selector : Composite { }
 
     [ViewModel(typeof(Selector))]

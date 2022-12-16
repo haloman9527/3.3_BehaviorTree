@@ -19,7 +19,7 @@ using CZToolKit.GraphProcessor;
 namespace CZToolKit.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Repeater")]
-    [NodeMenu("Decorator", "Repeater")]
+    [NodeMenu("Decorator/Repeater")]
     public class Repeater : Decorator
     {
         public int count;

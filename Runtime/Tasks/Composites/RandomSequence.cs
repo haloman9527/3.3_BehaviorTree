@@ -22,7 +22,7 @@ namespace CZToolKit.BehaviorTree
     [TaskIcon("BehaviorTree/Icons/RandomSequence")]
     [NodeTitle("随机顺序")]
     [NodeTooltip("以随机顺序执行行为，遇Failure或Running中断，并返回该状态")]
-    [NodeMenu("Composite", "Random Sequence")]
+    [NodeMenu("Composite/Random Sequence")]
     public class RandomSequence : Composite
     {
         public int randomSeed;

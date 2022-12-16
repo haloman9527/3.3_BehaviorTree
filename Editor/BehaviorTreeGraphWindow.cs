@@ -174,7 +174,7 @@ namespace CZToolKit.BehaviorTree.Editors
             GraphView.SetDirty();
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            GraphView.SetUndirty();
+            GraphView.SetUnDirty();
         }
     }
 }

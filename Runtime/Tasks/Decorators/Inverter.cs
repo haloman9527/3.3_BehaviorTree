@@ -18,7 +18,7 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    [NodeMenu("Decorator", "Inverter")]
+    [NodeMenu("Decorator/Inverter")]
     public class Inverter : Decorator { }
 
     [ViewModel(typeof(Inverter))]

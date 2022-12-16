@@ -18,7 +18,7 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    [NodeMenu("Root", showInList = false)]
+    [NodeMenu("Root", hidden = true)]
     [TaskIcon("BehaviorTree/Icons/Entry")]
     [NodeTitleColor(0, 0.7f, 0)]
     [NodeTooltip("入口节点，不可移动，不可删除，自动生成")]

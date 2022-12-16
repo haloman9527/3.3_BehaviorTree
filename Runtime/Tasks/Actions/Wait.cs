@@ -19,7 +19,7 @@ using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
-    [NodeMenu("Action", "Wait")]
+    [NodeMenu("Action/Wait")]
     public class Wait : ActionTask
     {
         public float interval;

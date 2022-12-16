@@ -20,7 +20,7 @@ namespace CZToolKit.BehaviorTree
 {
     [NodeTitle("并行选择")]
     [NodeTooltip("依次执行所有，若有Success或Running，则返回该状态")]
-    [NodeMenu("Composite", "Parallel Selector")]
+    [NodeMenu("Composite/Parallel Selector")]
     public class ParallelSelector : Composite { }
 
     [ViewModel(typeof(ParallelSelector))]

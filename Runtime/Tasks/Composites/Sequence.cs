@@ -21,7 +21,7 @@ namespace CZToolKit.BehaviorTree
     [TaskIcon("BehaviorTree/Icons/Sequence")]
     [NodeTitle("顺序执行")]
     [NodeTooltip("依次执行，遇Failure或Running中断，并返回该状态")]
-    [NodeMenu("Composite", "Sequence")]
+    [NodeMenu("Composite/Sequence")]
     public class Sequence : Composite { }
 
     [ViewModel(typeof(Sequence))]

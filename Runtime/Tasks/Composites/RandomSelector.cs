@@ -21,7 +21,7 @@ namespace CZToolKit.BehaviorTree
 {
     [NodeTitle("随机选择")]
     [NodeTooltip("以随机顺序执行行为，直到返回Success或Running")]
-    [NodeMenu("Composite", "Random Selector")]
+    [NodeMenu("Composite/Random Selector")]
     public class RandomSelector : Composite
     {
         public int randomSeed;

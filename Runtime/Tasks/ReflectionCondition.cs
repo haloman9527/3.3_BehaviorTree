@@ -24,7 +24,7 @@ namespace CZToolKit.BehaviorTree
     [Serializable]
     [NodeTitle("条件方法")]
     [NodeTooltip("从Agent中查找条件方法，做成委托")]
-    [NodeMenu("Condition", "Reflection")]
+    [NodeMenu("Condition/Reflection")]
     public class ReflectionCondition : ActionTask
     {
         public enum ValueType
