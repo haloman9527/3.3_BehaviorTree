@@ -23,7 +23,7 @@ namespace CZToolKit.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Parallel")]
     [NodeTitle("并行执行")]
-    [NodeTooltip("依次执行所有，若全部Success，则返回Success，否则按照Task的状态返回(Running > Failure)")]
+    [NodeTooltip("依次执行所有行为，直到所有行为完成，若全都是Success，则返回Success，否则返回Failure")]
     [NodeMenu("Composite/Parallel")]
     public class Parallel : Task
     {

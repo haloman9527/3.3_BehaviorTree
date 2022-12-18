@@ -43,6 +43,11 @@ namespace CZToolKit.BehaviorTree
             startTime = Time.time;
         }
 
+        protected override void DoStop()
+        {
+            Stopped(false);
+        }
+
         public void Update()
         {
             var t_model = Model as Wait;

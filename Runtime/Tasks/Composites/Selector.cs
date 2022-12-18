@@ -20,7 +20,7 @@ namespace CZToolKit.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Selector")]
     [NodeTitle("选择执行")]
-    [NodeTooltip("依次执行，直到Success或Running，并返回该状态")]
+    [NodeTooltip("依次执行，遇Success停止，并返回Success，否则返回Failure")]
     [NodeMenu("Composite/Selector")]
     public class Selector : Task { }
 

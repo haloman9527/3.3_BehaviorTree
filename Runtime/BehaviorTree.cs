@@ -49,7 +49,6 @@ namespace CZToolKit.BehaviorTree
                 t_model.entryID = AddNode<Entry>(InternalVector2Int.zero).ID;
             entry = Nodes[t_model.entryID] as EntryVM;
 
-            OnNodeAdded += NodeAdded;
         }
 
         public void Initialize(IGraphOwner graphOwner)
@@ -61,6 +60,7 @@ namespace CZToolKit.BehaviorTree
                 if (node is TaskVM task)
                     task.Initialize();
             }
+            OnNodeAdded += NodeAdded;
         }
 
         public void Start()

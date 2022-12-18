@@ -43,6 +43,12 @@ namespace CZToolKit.BehaviorTree.Editors
             Insert(0, stateBorder);
         }
 
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
+        {
+            base.BuildContextualMenu(evt);
+            evt.menu.AppendAction($"Execute", _ => { T_ViewModel.Start(); });
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -65,6 +71,22 @@ namespace CZToolKit.BehaviorTree.Editors
             }
         }
 
+        protected override void OnBindingProperties()
+        {
+            base.OnBindingProperties();
+            if (T_ViewModel.CurrentState == TaskState.Active)
+                OnStart();
+            T_ViewModel.OnStart += OnStart;
+            T_ViewModel.OnStop += OnStop;
+        }
+
+        protected override void OnUnBindingProperties()
+        {
+            base.OnUnBindingProperties();
+            T_ViewModel.OnStart -= OnStart;
+            T_ViewModel.OnStop -= OnStop;
+        }
+
         void RefreshBadge()
         {
             if (T_ViewModel.Ports["Children"].Connections.Count != 0)
@@ -83,31 +105,31 @@ namespace CZToolKit.BehaviorTree.Editors
             stateBorder.style.opacity = anim;
         }
 
-        private void OnUpdate()
+        private void OnStart()
         {
             if (!Application.isPlaying || Owner.GraphWindow.GraphOwner == null)
                 return;
-            if (T_ViewModel.Ports.ContainsKey("Parent") && T_ViewModel.Ports["Parent"].Connections.Count == 0)
+            anim = 1;
+            stateBorder.RemoveFromClassList("success");
+            stateBorder.RemoveFromClassList("failure");
+            stateBorder.RemoveFromClassList("running");
+            
+            stateBorder.AddToClassList("running");
+        }
+
+        private void OnStop(bool result)
+        {
+            if (!Application.isPlaying || Owner.GraphWindow.GraphOwner == null)
                 return;
             anim = 1;
             stateBorder.RemoveFromClassList("success");
             stateBorder.RemoveFromClassList("failure");
             stateBorder.RemoveFromClassList("running");
 
-            // switch (T_ViewModel.Status)
-            // {
-            //     case TaskResult.Success:
-            //         stateBorder.AddToClassList("success");
-            //         break;
-            //     case TaskResult.Failure:
-            //         stateBorder.AddToClassList("failure");
-            //         break;
-            //     case TaskResult.Running:
-            //         stateBorder.AddToClassList("running");
-            //         break;
-            //     default:
-            //         break;
-            // }
+            if (result)
+                stateBorder.AddToClassList("success");
+            else
+                stateBorder.AddToClassList("failure");
         }
     }
 }

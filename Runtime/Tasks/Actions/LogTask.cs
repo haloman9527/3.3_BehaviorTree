@@ -46,5 +46,10 @@ namespace CZToolKit.BehaviorTree
             Debug.Log(Text);
             Stopped(true);
         }
+
+        protected override void DoStop()
+        {
+            Stopped(false);
+        }
     }
 }

@@ -16,19 +16,70 @@
 
 #endregion
 
+using System.Collections.Generic;
+
 namespace CZToolKit.BehaviorTree
 {
     public abstract class ContainerTaskVM : TaskVM
     {
+        private List<TaskVM> children;
+
+        protected List<TaskVM> Children
+        {
+            get { return children; }
+        }
+
         protected ContainerTaskVM(Task model) : base(model)
         {
         }
-        
+
+        protected override void OnEnabled()
+        {
+            base.OnEnabled();
+            RefreshChildren();
+            Ports[TaskVM.ChildrenPortName].onSorted += RefreshChildren;
+        }
+
+        protected override void OnDisabled()
+        {
+            base.OnDisabled();
+            Ports[TaskVM.ChildrenPortName].onSorted -= RefreshChildren;
+        }
+
+        protected override void DoInitialized()
+        {
+            base.DoInitialized();
+        }
+
         public void ChildStopped(TaskVM child, bool result)
         {
+            if (CurrentState != TaskState.Active)
+            {
+                Stopped(result);
+                return;
+            }
             this.OnChildStopped(child, result);
         }
-        
+
         protected abstract void OnChildStopped(TaskVM child, bool result);
+        
+        private void RefreshChildren()
+        {
+            if (children == null)
+                children = new List<TaskVM>(GetChildren());
+            else
+            {
+                children.Clear();
+                children.AddRange(GetChildren());
+            }
+
+            IEnumerable<TaskVM> GetChildren()
+            {
+                foreach (var node in GetConnections(TaskVM.ChildrenPortName))
+                {
+                    yield return (TaskVM)node;
+                }
+            }
+        }
     }
 }

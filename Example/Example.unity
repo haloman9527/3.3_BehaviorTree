@@ -148,12 +148,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 776691972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c4642a2dc53d428f7e23e9ee4c0c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f053706b08664445866432b47b427d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   graphAsset: {fileID: 11400000, guid: 5f416819ef607934e976348616bf0f34, type: 2}
-  leftValue: 1
-  rightValue: 0
 --- !u!108 &776691974
 Light:
   m_ObjectHideFlags: 0

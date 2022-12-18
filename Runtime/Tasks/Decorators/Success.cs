@@ -18,6 +18,7 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
+    [NodeTooltip("始终返回Success")]
     [NodeMenu("Decorator/Success")]
     public class Success : Task { }
 
@@ -28,13 +29,11 @@ namespace CZToolKit.BehaviorTree
 
         protected override void DoStart()
         {
-            base.DoStart();
             Child.Start();
         }
 
         protected override void DoStop()
         {
-            base.DoStop();
             Child.Stop();
         }
 

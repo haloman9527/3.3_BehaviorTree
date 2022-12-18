@@ -39,6 +39,9 @@ namespace CZToolKit.BehaviorTree
 
         #region Properties
 
+        public event Action OnStart;
+        public event Action<bool> OnStop;
+
         public TaskState CurrentState
         {
             get { return currentState; }
@@ -58,19 +61,35 @@ namespace CZToolKit.BehaviorTree
         protected override void OnEnabled()
         {
             base.OnEnabled();
-            currentState = TaskState.InActive;
+            if (Ports.TryGetValue(ParentPortName, out var parentPort))
+            {
+                RefreshParent();
+                parentPort.onAfterConnected += OnParentConnectionChanged;
+                parentPort.onAfterDisconnected += OnParentConnectionChanged;
+            }
         }
+
+        protected override void OnDisabled()
+        {
+            base.OnDisabled();
+            if (Ports.TryGetValue(ParentPortName, out var parentPort))
+            {
+                parent = null;
+                parentPort.onAfterConnected -= OnParentConnectionChanged;
+                parentPort.onAfterDisconnected -= OnParentConnectionChanged;
+            }
+        }
+
 
         public void Initialize()
         {
-            if (Ports.TryGetValue(ParentPortName, out var parentPort) && parentPort.Connections.Count > 0)
-                parent = parentPort.Connections[0].FromNode as ContainerTaskVM;
             DoInitialized();
         }
 
         public void Start()
         {
             currentState = TaskState.Active;
+            OnStart?.Invoke();
             DoStart();
             if (CurrentState == TaskState.Active && this is IUpdateTask updateTask)
                 (Owner as BehaviorTreeVM).RegisterUpdateTask(updateTask);
@@ -88,7 +107,7 @@ namespace CZToolKit.BehaviorTree
         protected void Stopped(bool success)
         {
             currentState = TaskState.InActive;
-            OnStopped();
+            OnStop?.Invoke(success);
             if (this.Parent != null)
                 this.Parent.ChildStopped(this, success);
         }
@@ -105,8 +124,15 @@ namespace CZToolKit.BehaviorTree
         {
         }
 
-        protected virtual void OnStopped()
+        private void OnParentConnectionChanged(BaseConnectionVM obj)
         {
+            RefreshParent();
+        }
+
+        private void RefreshParent()
+        {
+            if (Ports.TryGetValue(ParentPortName, out var parentPort) && parentPort.Connections.Count > 0)
+                parent = parentPort.Connections[0].FromNode as ContainerTaskVM;
         }
     }
 }

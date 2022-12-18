@@ -18,7 +18,8 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    [NodeMenu("Decorator/Success")]
+    [NodeTooltip("始终返回Failure")]
+    [NodeMenu("Decorator/Failure")]
     public class Failure : Task { }
 
     [ViewModel(typeof(Failure))]
@@ -28,13 +29,11 @@ namespace CZToolKit.BehaviorTree
 
         protected override void DoStart()
         {
-            base.DoStart();
             Child.Start();
         }
 
         protected override void DoStop()
         {
-            base.DoStop();
             Child.Stop();
         }
 

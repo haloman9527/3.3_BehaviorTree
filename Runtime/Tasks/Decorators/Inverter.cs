@@ -18,23 +18,22 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
+    [NodeTooltip("始终返回相反的结果")]
     [NodeMenu("Decorator/Inverter")]
     public class Inverter : Task { }
 
     [ViewModel(typeof(Inverter))]
     public class InverterVM : DecoratorTaskVM
     {
-        public InverterVM(Success model) : base(model) { }
+        public InverterVM(Inverter model) : base(model) { }
 
         protected override void DoStart()
         {
-            base.DoStart();
             Child.Start();
         }
 
         protected override void DoStop()
         {
-            base.DoStop();
             Child.Stop();
         }
 

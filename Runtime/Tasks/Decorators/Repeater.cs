@@ -35,7 +35,6 @@ namespace CZToolKit.BehaviorTree
         private int counter;
         private bool running;
         private bool childRunning;
-        private bool result;
 
         public RepeaterVM(Repeater model) : base(model)
         {
@@ -51,16 +50,15 @@ namespace CZToolKit.BehaviorTree
         protected override void DoStop()
         {
             Child.Stop();
-            Stopped(false);
+            if (Child.CurrentState != TaskState.Active)
+                Stopped(false);
         }
 
         public void Update()
         {
             if (childRunning)
                 return;
-            if (running && !result)
-                Stopped(false);
-            
+
             if (tModel.loopCount < 0 || counter < tModel.loopCount)
             {
                 childRunning = true;
@@ -73,8 +71,9 @@ namespace CZToolKit.BehaviorTree
 
         protected override void OnChildStopped(TaskVM child, bool result)
         {
+            if (!result)
+                Stopped(false);
             this.childRunning = false;
-            this.result = result;
             counter++;
         }
     }

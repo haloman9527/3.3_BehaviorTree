@@ -18,14 +18,14 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    [NodeMenu("Root", hidden = true)]
+    [NodeMenu("Entry", hidden = true)]
     [TaskIcon("BehaviorTree/Icons/Entry")]
     [NodeTitleColor(0, 0.7f, 0)]
     [NodeTooltip("入口节点，不可移动，不可删除，自动生成")]
     public class Entry : Task { }
 
     [ViewModel(typeof(Entry))]
-    public class EntryVM : TaskVM
+    public class EntryVM : ContainerTaskVM
     {
         public EntryVM(Entry model) : base(model)
         {
@@ -45,6 +45,11 @@ namespace CZToolKit.BehaviorTree
         protected override void DoStop()
         {
             Child.Stop();
+        }
+
+        protected override void OnChildStopped(TaskVM child, bool result)
+        {
+            Stopped(result);
         }
     }
 }

@@ -22,15 +22,15 @@ namespace CZToolKit.BehaviorTree
 {
     public abstract class DecoratorTaskVM : ContainerTaskVM
     {
+        protected TaskVM Child
+        {
+            get { return Children.Count == 0 ? null : Children[0]; }
+        }
+
         protected DecoratorTaskVM(Task model) : base(model)
         {
             AddPort(new BasePortVM(TaskVM.ParentPortName, BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(ContainerTaskVM)));
             AddPort(new BasePortVM(TaskVM.ChildrenPortName, BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(TaskVM)));
-        }
-
-        public TaskVM Child
-        {
-            get { return Ports[TaskVM.ChildrenPortName].Connections[0].ToNode as TaskVM; }
         }
     }
 }
