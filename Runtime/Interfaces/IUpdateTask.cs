@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,12 +13,13 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
 
 namespace CZToolKit.BehaviorTree
 {
-    public interface ITask
+    public interface IUpdateTask : ITask
     {
-        TaskState CurrentState { get; }
+        void Update();
     }
 }

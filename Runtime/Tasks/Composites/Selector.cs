@@ -22,38 +22,44 @@ namespace CZToolKit.BehaviorTree
     [NodeTitle("选择执行")]
     [NodeTooltip("依次执行，直到Success或Running，并返回该状态")]
     [NodeMenu("Composite/Selector")]
-    public class Selector : Composite { }
+    public class Selector : Task { }
 
     [ViewModel(typeof(Selector))]
-    public class SelectorVM : CompositeVM
+    public class SelectorVM : CompositeTaskVM
     {
-        int index;
+        private int currentIndex;
 
         public SelectorVM(Selector model) : base(model) { }
 
-        protected override void OnStart()
+        protected override void DoStart()
         {
-            base.OnStart();
-            index = 0;
+            if (Children.Count == 0)
+            {
+                Stopped(true);
+                return;
+            }
+            currentIndex = 0;
+            Children[currentIndex].Start();
         }
 
-        protected override TaskResult OnUpdate()
+        protected override void DoStop()
         {
-            for (int i = index; i < tasks.Count; i++)
-            {
-                var task = tasks[i];
-                var tmpStatus = task.Update();
-                if (tmpStatus == TaskResult.Success)
-                {
-                    return TaskResult.Success;
-                }
-                if (tmpStatus == TaskResult.Running)
-                {
-                    return TaskResult.Running;
-                }
-                index++;
-            }
-            return TaskResult.Failure;
+            Children[currentIndex].Stop();
+        }
+
+        protected override void OnChildStopped(TaskVM child, bool result)
+        {
+            if (result)
+                Stopped(true);
+            else if (++currentIndex < Children.Count)
+                Restart();
+            else
+                Stopped(false);
+        }
+
+        private void Restart()
+        {
+            Children[currentIndex].Start();
         }
     }
 }

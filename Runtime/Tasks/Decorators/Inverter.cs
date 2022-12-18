@@ -19,24 +19,28 @@ using CZToolKit.GraphProcessor;
 namespace CZToolKit.BehaviorTree
 {
     [NodeMenu("Decorator/Inverter")]
-    public class Inverter : Decorator { }
+    public class Inverter : Task { }
 
     [ViewModel(typeof(Inverter))]
-    public class InverterVM : DecoratorVM
+    public class InverterVM : DecoratorTaskVM
     {
         public InverterVM(Success model) : base(model) { }
 
-        protected override TaskResult OnUpdate()
+        protected override void DoStart()
         {
-            switch (Children.Update())
-            {
-                case TaskResult.Failure:
-                    return TaskResult.Success;
-                case TaskResult.Success:
-                    return TaskResult.Failure;
-                default:
-                    return TaskResult.Running;
-            }
+            base.DoStart();
+            Child.Start();
+        }
+
+        protected override void DoStop()
+        {
+            base.DoStop();
+            Child.Stop();
+        }
+
+        protected override void OnChildStopped(TaskVM child, bool succeeded)
+        {
+            Stopped(!succeeded);
         }
     }
 }

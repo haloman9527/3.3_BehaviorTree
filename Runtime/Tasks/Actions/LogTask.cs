@@ -21,7 +21,7 @@ namespace CZToolKit.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Debug")]
     [NodeMenu("Action/Log")]
-    public class LogTask : ActionTask
+    public class LogTask : Task
     {
         public string text;
     }
@@ -35,15 +35,16 @@ namespace CZToolKit.BehaviorTree
             get { return GetPropertyValue<string>(nameof(Text)); }
             set { SetPropertyValue(nameof(Text), value); }
         }
+        
         public LogTaskVM(LogTask model) : base(model)
         {
             this[nameof(Text)] = new BindableProperty<string>(() => model.text, v => { model.text = v; });
         }
 
-        protected override TaskResult OnUpdate()
+        protected override void DoStart()
         {
             Debug.Log(Text);
-            return TaskResult.Success;
+            Stopped(true);
         }
     }
 }

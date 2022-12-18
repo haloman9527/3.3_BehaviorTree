@@ -29,16 +29,22 @@ namespace CZToolKit.BehaviorTree
     {
         public EntryVM(Entry model) : base(model)
         {
-            AddPort(new BasePortVM(TaskVM.ChildrenPortName, BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(Task)));
+            AddPort(new BasePortVM(TaskVM.ChildrenPortName, BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(TaskVM)));
         }
 
-        protected override TaskResult OnUpdate()
+        private TaskVM Child
         {
-            foreach (var node in GetConnections(TaskVM.ChildrenPortName))
-            {
-                return (node as TaskVM).Update();
-            }
-            return TaskResult.Success;
+            get { return Ports[TaskVM.ChildrenPortName].Connections[0].ToNode as TaskVM; }
+        }
+
+        protected override void DoStart()
+        {
+            Child.Start();
+        }
+
+        protected override void DoStop()
+        {
+            Child.Stop();
         }
     }
 }

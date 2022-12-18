@@ -23,47 +23,30 @@ namespace CZToolKit.BehaviorTree
 {
     public abstract class TaskVM : BaseNodeVM
     {
-        #region Define
-
-        public enum State
-        {
-            InActive,
-            Active,
-        }
-
-        #endregion
-        
         #region Keyword
-        
+
         public const string ParentPortName = "Parent";
         public const string ChildrenPortName = "Children";
-        
+
         #endregion
 
         #region Fields
 
-        [NonSerialized] private BehaviorTreeAgent agent;
-        [NonSerialized] private State currentState;
-        [NonSerialized] private TaskResult status = TaskResult.Running;
-        public event Action onUpdate;
+        private ContainerTaskVM parent;
+        private TaskState currentState;
 
         #endregion
 
         #region Properties
 
-        protected BehaviorTreeAgent Agent
-        {
-            get { return agent; }
-        }
-
-        public State CurrentState
+        public TaskState CurrentState
         {
             get { return currentState; }
         }
 
-        public TaskResult Status
+        public ContainerTaskVM Parent
         {
-            get { return status; }
+            get { return parent; }
         }
 
         #endregion
@@ -75,72 +58,54 @@ namespace CZToolKit.BehaviorTree
         protected override void OnEnabled()
         {
             base.OnEnabled();
-            currentState = State.InActive;
-            status = TaskResult.Running;
+            currentState = TaskState.InActive;
         }
 
         public void Initialize()
         {
-            agent = (Owner as BehaviorTreeVM).GraphOwner as BehaviorTreeAgent;
-            OnInitialized();
+            if (Ports.TryGetValue(ParentPortName, out var parentPort) && parentPort.Connections.Count > 0)
+                parent = parentPort.Connections[0].FromNode as ContainerTaskVM;
+            DoInitialized();
         }
 
-
-        private void Start()
+        public void Start()
         {
-            currentState = State.Active;
-            OnStart();
+            currentState = TaskState.Active;
+            DoStart();
+            if (CurrentState == TaskState.Active && this is IUpdateTask updateTask)
+                (Owner as BehaviorTreeVM).RegisterUpdateTask(updateTask);
         }
 
-        public TaskResult Update()
+        public void Stop()
         {
-            if (currentState == State.InActive)
-                Start();
-
-            status = OnUpdate();
-
-            if (Status == TaskResult.Failure || Status == TaskResult.Success)
-                End();
-
-            onUpdate?.Invoke();
-            return Status;
-        }
-
-        private void End()
-        {
-            if (currentState != State.Active)
-                return;
-            if (Ports.ContainsKey("Children"))
+            if (currentState == TaskState.Active)
             {
-                foreach (var connection in GetConnections("Children"))
-                {
-                    if (connection is TaskVM task)
-                        task.End();
-                }
+                currentState = TaskState.StopRequested;
+                DoStop();
             }
-
-            OnEnd();
-            currentState = State.InActive;
         }
 
-        protected virtual void OnInitialized()
+        protected void Stopped(bool success)
+        {
+            currentState = TaskState.InActive;
+            OnStopped();
+            if (this.Parent != null)
+                this.Parent.ChildStopped(this, success);
+        }
+
+        protected virtual void DoInitialized()
         {
         }
 
-        protected virtual void OnStart()
+        protected virtual void DoStart()
         {
         }
 
-        protected virtual TaskResult OnUpdate()
-        {
-            return TaskResult.Success;
-        }
-
-        protected virtual void OnEnd()
+        protected virtual void DoStop()
         {
         }
 
-        public virtual void OnDrawGizmos()
+        protected virtual void OnStopped()
         {
         }
     }

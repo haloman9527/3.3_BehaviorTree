@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,7 +13,9 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
+
 using CZToolKit.Core.ViewModel;
 using CZToolKit.GraphProcessor;
 
@@ -20,35 +23,59 @@ namespace CZToolKit.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Repeater")]
     [NodeMenu("Decorator/Repeater")]
-    public class Repeater : Decorator
+    public class Repeater : Task
     {
-        public int count;
+        public int loopCount;
     }
 
     [ViewModel(typeof(Repeater))]
-    public class RepeaterVM : DecoratorVM
+    public class RepeaterVM : DecoratorTaskVM, IUpdateTask
     {
         private Repeater tModel;
         private int counter;
+        private bool running;
+        private bool childRunning;
+        private bool result;
 
         public RepeaterVM(Repeater model) : base(model)
         {
             this.tModel = model;
         }
 
-        protected override void OnStart()
+        protected override void DoStart()
         {
-            base.OnStart();
             counter = 0;
+            childRunning = false;
         }
 
-        protected override TaskResult OnUpdate()
+        protected override void DoStop()
         {
-            if (tModel.count != -1 && counter >= tModel.count)
-                return TaskResult.Success;
+            Child.Stop();
+            Stopped(false);
+        }
+
+        public void Update()
+        {
+            if (childRunning)
+                return;
+            if (running && !result)
+                Stopped(false);
+            
+            if (tModel.loopCount < 0 || counter < tModel.loopCount)
+            {
+                childRunning = true;
+                running = true;
+                Child.Start();
+            }
+            else
+                Stopped(true);
+        }
+
+        protected override void OnChildStopped(TaskVM child, bool result)
+        {
+            this.childRunning = false;
+            this.result = result;
             counter++;
-            Children.Update();
-            return TaskResult.Running;
         }
     }
 }

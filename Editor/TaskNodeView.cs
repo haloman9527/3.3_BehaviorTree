@@ -63,8 +63,6 @@ namespace CZToolKit.BehaviorTree.Editors
                     RefreshBadge();
                 };
             }
-
-            T_ViewModel.onUpdate += OnUpdate;
         }
 
         void RefreshBadge()
@@ -80,7 +78,7 @@ namespace CZToolKit.BehaviorTree.Editors
             if (!Application.isPlaying || Owner.GraphWindow.GraphOwner == null)
                 return;
             anim = Mathf.Clamp01(anim - 0.2f);
-            if (T_ViewModel.CurrentState == TaskVM.State.Active)
+            if (T_ViewModel.CurrentState == TaskState.Active)
                 anim = 1;
             stateBorder.style.opacity = anim;
         }
@@ -96,20 +94,20 @@ namespace CZToolKit.BehaviorTree.Editors
             stateBorder.RemoveFromClassList("failure");
             stateBorder.RemoveFromClassList("running");
 
-            switch (T_ViewModel.Status)
-            {
-                case TaskResult.Success:
-                    stateBorder.AddToClassList("success");
-                    break;
-                case TaskResult.Failure:
-                    stateBorder.AddToClassList("failure");
-                    break;
-                case TaskResult.Running:
-                    stateBorder.AddToClassList("running");
-                    break;
-                default:
-                    break;
-            }
+            // switch (T_ViewModel.Status)
+            // {
+            //     case TaskResult.Success:
+            //         stateBorder.AddToClassList("success");
+            //         break;
+            //     case TaskResult.Failure:
+            //         stateBorder.AddToClassList("failure");
+            //         break;
+            //     case TaskResult.Running:
+            //         stateBorder.AddToClassList("running");
+            //         break;
+            //     default:
+            //         break;
+            // }
         }
     }
 }

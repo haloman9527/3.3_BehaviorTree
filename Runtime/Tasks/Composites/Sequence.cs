@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,7 +13,9 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
+
 using CZToolKit.Core.ViewModel;
 using CZToolKit.GraphProcessor;
 
@@ -22,38 +25,49 @@ namespace CZToolKit.BehaviorTree
     [NodeTitle("顺序执行")]
     [NodeTooltip("依次执行，遇Failure或Running中断，并返回该状态")]
     [NodeMenu("Composite/Sequence")]
-    public class Sequence : Composite { }
+    public class Sequence : Task
+    {
+    }
 
     [ViewModel(typeof(Sequence))]
-    public class SequenceVM : CompositeVM
+    public class SequenceVM : CompositeTaskVM
     {
-        int index;
+        private int currentIndex;
 
-        public SequenceVM(Sequence model) : base(model) { }
-
-        protected override void OnStart()
+        public SequenceVM(Sequence model) : base(model)
         {
-            base.OnStart();
-            index = 0;
         }
 
-        protected override TaskResult OnUpdate()
+        protected override void DoStart()
         {
-            for (int i = index; i < tasks.Count; i++)
+            if (Children.Count == 0)
             {
-                var task = tasks[i];
-                var result = task.Update();
-                if (result == TaskResult.Failure)
-                {
-                    return TaskResult.Failure;
-                }
-                if (result == TaskResult.Running)
-                {
-                    return TaskResult.Running;
-                }
-                index++;
+                Stopped(true);
+                return;
             }
-            return TaskResult.Success;
+
+            currentIndex = 0;
+            Children[currentIndex].Start();
+        }
+
+        protected override void DoStop()
+        {
+            Children[currentIndex].Stop();
+        }
+
+        protected override void OnChildStopped(TaskVM child, bool result)
+        {
+            if (!result)
+                Stopped(false);
+            else if (++currentIndex < Children.Count)
+                Restart();
+            else
+                Stopped(true);
+        }
+
+        private void Restart()
+        {
+            Children[currentIndex].Start();
         }
     }
 }

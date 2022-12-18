@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,12 +13,18 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
+
+using CZToolKit.GraphProcessor;
+using System;
 
 namespace CZToolKit.BehaviorTree
 {
-    public interface ITask
+    public enum TaskState
     {
-        TaskState CurrentState { get; }
+        InActive,
+        Active,
+        StopRequested,
     }
 }

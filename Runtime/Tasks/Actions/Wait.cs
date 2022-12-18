@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,7 +13,9 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
+
 using CZToolKit.Core.ViewModel;
 using CZToolKit.GraphProcessor;
 using UnityEngine;
@@ -20,37 +23,31 @@ using UnityEngine;
 namespace CZToolKit.BehaviorTree
 {
     [NodeMenu("Action/Wait")]
-    public class Wait : ActionTask
+    public class Wait : Task
     {
         public float interval;
     }
 
     [ViewModel(typeof(Wait))]
-    public class WaitVM : ActionTaskVM
+    public class WaitVM : ActionTaskVM, IUpdateTask
     {
-
         float startTime;
 
         public WaitVM(Wait model) : base(model)
         {
-            var t_model = model as Wait;
-            this[nameof(Wait.interval)] = new BindableProperty<float>(() => t_model.interval, v => t_model.interval = v);
+            this[nameof(Wait.interval)] = new BindableProperty<float>(() => model.interval, v => model.interval = v);
         }
 
-        protected override void OnStart()
+        protected override void DoStart()
         {
-            base.OnStart();
             startTime = Time.time;
         }
 
-        protected override TaskResult OnUpdate()
+        public void Update()
         {
             var t_model = Model as Wait;
-            if (Time.time - startTime < t_model.interval)
-            {
-                return TaskResult.Running;
-            }
-            return TaskResult.Success;
+            if (Time.time - startTime > t_model.interval)
+                Stopped(true);
         }
     }
 }

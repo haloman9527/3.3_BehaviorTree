@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,7 +13,9 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
+
 using CZToolKit.Core.ViewModel;
 using CZToolKit.GraphProcessor;
 using UnityEngine;
@@ -22,50 +25,58 @@ namespace CZToolKit.BehaviorTree
     [NodeTitle("随机选择")]
     [NodeTooltip("以随机顺序执行行为，直到返回Success或Running")]
     [NodeMenu("Composite/Random Selector")]
-    public class RandomSelector : Composite
+    public class RandomSelector : Task
     {
         public int randomSeed;
     }
 
     [ViewModel(typeof(RandomSelector))]
-    public class RandomSelectorVM : CompositeVM
+    public class RandomSelectorVM : CompositeTaskVM
     {
-        int index;
+        private int currentIndex;
 
         public RandomSelectorVM(RandomSelector model) : base(model)
         {
             this[nameof(RandomSelector.randomSeed)] = new BindableProperty<int>(() => model.randomSeed, v => model.randomSeed = v);
         }
 
-        protected override void OnStart()
+        protected override void DoStart()
         {
-            base.OnStart();
-            index = 0;
-            for (int i = tasks.Count; i > 0; i--)
+            if (Children.Count == 0)
+            {
+                Stopped(true);
+                return;
+            }
+
+            for (int i = Children.Count; i > 0; i--)
             {
                 var index = Random.Range(0, i);
-                tasks.Add(tasks[index]);
-                tasks.RemoveAt(index);
+                Children.Add(Children[index]);
+                Children.RemoveAt(index);
             }
+
+            currentIndex = 0;
+            Children[currentIndex].Start();
         }
 
-        protected override TaskResult OnUpdate()
+        protected override void DoStop()
         {
-            for (int i = index; i < tasks.Count; i++)
-            {
-                var task = tasks[i];
-                var tmpStatus = task.Update();
-                if (tmpStatus == TaskResult.Success)
-                {
-                    return TaskResult.Success;
-                }
-                if (tmpStatus == TaskResult.Running)
-                {
-                    return TaskResult.Running;
-                }
-                index++;
-            }
-            return TaskResult.Failure;
+            Children[currentIndex].Stop();
+        }
+
+        protected override void OnChildStopped(TaskVM child, bool result)
+        {
+            if (result)
+                Stopped(true);
+            else if (++currentIndex < Children.Count)
+                Restart();
+            else
+                Stopped(false);
+        }
+
+        private void Restart()
+        {
+            Children[currentIndex].Start();
         }
     }
 }

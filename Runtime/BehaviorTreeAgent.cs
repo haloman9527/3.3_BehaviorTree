@@ -24,17 +24,12 @@ namespace CZToolKit.BehaviorTree
         private void Start()
         {
             T_Graph.Initialize(this);
+            T_Graph.Start();
         }
 
         private void Update()
         {
             T_Graph.Update();
-        }
-
-        private void OnDrawGizmos()
-        {
-            if (T_Graph != null)
-                T_Graph.OnDrawGizmos();
         }
 
 #if UNITY_EDITOR

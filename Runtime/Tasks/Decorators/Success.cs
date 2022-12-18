@@ -19,17 +19,28 @@ using CZToolKit.GraphProcessor;
 namespace CZToolKit.BehaviorTree
 {
     [NodeMenu("Decorator/Success")]
-    public class Success : Decorator { }
+    public class Success : Task { }
 
     [ViewModel(typeof(Success))]
-    public class SuccessVM : DecoratorVM
+    public class SuccessVM : DecoratorTaskVM
     {
         public SuccessVM(Success model) : base(model) { }
 
-        protected override TaskResult OnUpdate()
+        protected override void DoStart()
         {
-            Children.Update();
-            return TaskResult.Success;
+            base.DoStart();
+            Child.Start();
+        }
+
+        protected override void DoStop()
+        {
+            base.DoStop();
+            Child.Stop();
+        }
+
+        protected override void OnChildStopped(TaskVM child, bool succeeded)
+        {
+            Stopped(true);
         }
     }
 }

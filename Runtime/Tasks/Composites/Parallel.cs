@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,7 +13,9 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
+
 using CZToolKit.Core.ViewModel;
 using CZToolKit.GraphProcessor;
 
@@ -22,39 +25,62 @@ namespace CZToolKit.BehaviorTree
     [NodeTitle("并行执行")]
     [NodeTooltip("依次执行所有，若全部Success，则返回Success，否则按照Task的状态返回(Running > Failure)")]
     [NodeMenu("Composite/Parallel")]
-    public class Parallel : Composite { }
+    public class Parallel : Task
+    {
+    }
 
     [ViewModel(typeof(Parallel))]
-    public class ParallelVM : CompositeVM
+    public class ParallelVM : CompositeTaskVM
     {
-        int index;
+        private int index;
+        private int childrenCount = 0;
+        private int succeededCount = 0;
+        private int failedCount = 0;
+        private bool successState;
 
-        public ParallelVM(Parallel model) : base(model) { }
-
-        protected override void OnStart()
+        public ParallelVM(Parallel model) : base(model)
         {
-            base.OnStart();
-            index = 0;
         }
 
-        protected override TaskResult OnUpdate()
+        protected override void DoStart()
         {
-            var status = TaskResult.Success;
-            for (int i = index; i < tasks.Count; i++)
+            succeededCount = 0;
+            failedCount = 0;
+            childrenCount = Children.Count;
+            if (childrenCount == 0)
             {
-                var task = tasks[i];
-                var tmpStatus = task.Update();
-                if (tmpStatus == TaskResult.Running)
-                {
-                    status = TaskResult.Running;
-                }
-                if (tmpStatus != TaskResult.Running)
-                {
-                    status = tmpStatus;
-                    index++;
-                }
+                Stopped(true);
+                return;
             }
-            return status;
+
+            foreach (var child in Children)
+            {
+                child.Start();
+            }
+        }
+
+        protected override void DoStop()
+        {
+            foreach (var child in Children)
+            {
+                child.Stop();
+            }
+        }
+
+        protected override void OnChildStopped(TaskVM child, bool result)
+        {
+            if (result)
+                succeededCount++;
+            else
+                failedCount++;
+            successState = failedCount == 0;
+            if (succeededCount + failedCount == childrenCount)
+            {
+                if (successState)
+                    Stopped(true);
+                else
+                    Stopped(false);
+            }
         }
     }
 }
