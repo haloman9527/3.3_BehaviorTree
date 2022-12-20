@@ -21,16 +21,15 @@ using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
 {
-    [TaskIcon("BehaviorTree/Icons/Parallel")]
-    [NodeTitle("并行执行")]
-    [NodeTooltip("依次执行所有行为，直到所有行为完成，若全都是Success，则返回Success，否则返回Failure")]
-    [NodeMenu("Composite/Parallel")]
-    public class Parallel : Task
+    [NodeTitle("并行顺序")]
+    [NodeTooltip("同时执行所有行为，直到所有行为完成，若全部成功，则返回成功，否则返回失败")]
+    [NodeMenu("Composite/Parallel Sequence")]
+    public class ParallelSequence : Task
     {
     }
 
-    [ViewModel(typeof(Parallel))]
-    public class ParallelVM : CompositeTaskVM
+    [ViewModel(typeof(ParallelSequence))]
+    public class ParallelSequenceVM : CompositeTaskVM
     {
         private int index;
         private int childrenCount = 0;
@@ -38,7 +37,7 @@ namespace CZToolKit.BehaviorTree
         private int failedCount = 0;
         private bool successState;
 
-        public ParallelVM(Parallel model) : base(model)
+        public ParallelSequenceVM(ParallelSequence model) : base(model)
         {
         }
 
@@ -61,10 +60,15 @@ namespace CZToolKit.BehaviorTree
 
         protected override void DoStop()
         {
-            foreach (var child in Children)
+            if (childrenCount != 0)
             {
-                child.Stop();
+                foreach (var child in Children)
+                {
+                    child.Stop();
+                }
             }
+            else
+                Stopped(false);
         }
 
         protected override void OnChildStopped(TaskVM child, bool result)
@@ -73,14 +77,8 @@ namespace CZToolKit.BehaviorTree
                 succeededCount++;
             else
                 failedCount++;
-            successState = failedCount == 0;
             if (succeededCount + failedCount == childrenCount)
-            {
-                if (successState)
-                    Stopped(true);
-                else
-                    Stopped(false);
-            }
+                Stopped(failedCount == 0);
         }
     }
 }

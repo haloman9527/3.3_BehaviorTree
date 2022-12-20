@@ -23,7 +23,7 @@ namespace CZToolKit.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Sequence")]
     [NodeTitle("顺序执行")]
-    [NodeTooltip("顺序执行，遇Failure停止，并返回Failure，否则返回Success")]
+    [NodeTooltip("依次执行，直到某一行为失败，则返回失败，若所有行为都成功，则返回成功")]
     [NodeMenu("Composite/Sequence")]
     public class Sequence : Task
     {

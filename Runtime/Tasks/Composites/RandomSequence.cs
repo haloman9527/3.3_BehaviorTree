@@ -21,7 +21,7 @@ namespace CZToolKit.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/RandomSequence")]
     [NodeTitle("随机顺序")]
-    [NodeTooltip("以随机顺序执行行为，遇Failure停止，并返回Failure，否则返回Success")]
+    [NodeTooltip("随机顺序执行，直到某一行为失败，则返回失败，若所有行为都成功，则返回成功")]
     [NodeMenu("Composite/Random Sequence")]
     public class RandomSequence : Task
     {

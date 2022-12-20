@@ -23,7 +23,7 @@ using UnityEngine;
 namespace CZToolKit.BehaviorTree
 {
     [NodeTitle("随机选择")]
-    [NodeTooltip("以随机顺序执行行为，遇Success停止，并返回Success，否则返回Failure")]
+    [NodeTooltip("随机顺序执行，直到某一行为成功，则返回成功，若所有行为都失败，则返回失败")]
     [NodeMenu("Composite/Random Selector")]
     public class RandomSelector : Task
     {
