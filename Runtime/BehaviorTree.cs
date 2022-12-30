@@ -33,7 +33,7 @@ namespace CZToolKit.BehaviorTree
     public class BehaviorTreeVM : BaseGraphVM
     {
         private EntryVM entry;
-        private List<IUpdateTask> updateTasks = new List<IUpdateTask>();
+        private LinkedList<IUpdateTask> updateTasks = new LinkedList<IUpdateTask>();
 
         public IGraphOwner GraphOwner { get; private set; }
 
@@ -70,13 +70,19 @@ namespace CZToolKit.BehaviorTree
 
         public void Update()
         {
-            updateTasks.RemoveAll(item=>item.CurrentState != TaskState.Active);
-            for (int i = 0; i < updateTasks.Count; i++)
+            var t = updateTasks.First;
+            while (t != null)
             {
-                var updateTask = updateTasks[i];
-                if (updateTask.CurrentState != TaskState.Active)
-                    continue;
-                updateTask.Update();
+                if (t.Value.CurrentState != TaskState.Active)
+                {
+                    updateTasks.Remove(t);
+                }
+                else
+                {
+                    t.Value.Update();
+                }
+                
+                t = t.Next;
             }
         }
 
@@ -87,7 +93,7 @@ namespace CZToolKit.BehaviorTree
 
         public void RegisterUpdateTask(IUpdateTask updateTask)
         {
-            updateTasks.Add(updateTask);
+            updateTasks.AddLast(updateTask);
         }
 
         private void NodeAdded(BaseNodeVM node)
