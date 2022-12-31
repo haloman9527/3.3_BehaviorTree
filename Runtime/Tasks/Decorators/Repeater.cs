@@ -33,7 +33,6 @@ namespace CZToolKit.BehaviorTree
     {
         private Repeater tModel;
         private int counter;
-        private bool running;
         private bool childRunning;
 
         public RepeaterVM(Repeater model) : base(model)
@@ -62,7 +61,6 @@ namespace CZToolKit.BehaviorTree
             if (tModel.loopCount < 0 || counter < tModel.loopCount)
             {
                 childRunning = true;
-                running = true;
                 Child.Start();
             }
             else

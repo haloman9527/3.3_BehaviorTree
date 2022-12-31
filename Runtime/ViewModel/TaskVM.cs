@@ -64,8 +64,7 @@ namespace CZToolKit.BehaviorTree
             if (Ports.TryGetValue(ParentPortName, out var parentPort))
             {
                 RefreshParent();
-                parentPort.onAfterConnected += OnParentConnectionChanged;
-                parentPort.onAfterDisconnected += OnParentConnectionChanged;
+                parentPort.onConnectionChanged += RefreshParent;
             }
         }
 
@@ -75,15 +74,8 @@ namespace CZToolKit.BehaviorTree
             if (Ports.TryGetValue(ParentPortName, out var parentPort))
             {
                 parent = null;
-                parentPort.onAfterConnected -= OnParentConnectionChanged;
-                parentPort.onAfterDisconnected -= OnParentConnectionChanged;
+                parentPort.onConnectionChanged -= RefreshParent;
             }
-        }
-
-
-        public void Initialize()
-        {
-            DoInitialized();
         }
 
         public void Start()
@@ -97,11 +89,8 @@ namespace CZToolKit.BehaviorTree
 
         public void Stop()
         {
-            if (currentState == TaskState.Active)
-            {
-                currentState = TaskState.StopRequested;
-                DoStop();
-            }
+            currentState = TaskState.StopRequested;
+            DoStop();
         }
 
         protected void Stopped(bool success)
@@ -112,10 +101,6 @@ namespace CZToolKit.BehaviorTree
                 this.Parent.ChildStopped(this, success);
         }
 
-        protected virtual void DoInitialized()
-        {
-        }
-
         protected virtual void DoStart()
         {
         }
@@ -124,15 +109,12 @@ namespace CZToolKit.BehaviorTree
         {
         }
 
-        private void OnParentConnectionChanged(BaseConnectionVM obj)
-        {
-            RefreshParent();
-        }
-
         private void RefreshParent()
         {
             if (Ports.TryGetValue(ParentPortName, out var parentPort) && parentPort.Connections.Count > 0)
                 parent = parentPort.Connections[0].FromNode as ContainerTaskVM;
+            else
+                parent = null;
         }
     }
 }

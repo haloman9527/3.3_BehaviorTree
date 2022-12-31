@@ -59,15 +59,15 @@ namespace CZToolKit.BehaviorTree
         {
             if (!result)
                 Stopped(false);
-            else if (++currentIndex < Children.Count)
-                Restart();
+            else if (currentIndex + 1 < Children.Count)
+                Continue();
             else
                 Stopped(true);
         }
 
-        private void Restart()
+        private void Continue()
         {
-            Children[currentIndex].Start();
+            Children[++currentIndex].Start();
         }
     }
 }

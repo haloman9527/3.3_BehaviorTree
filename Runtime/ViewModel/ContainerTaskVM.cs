@@ -37,18 +37,13 @@ namespace CZToolKit.BehaviorTree
         {
             base.OnEnabled();
             RefreshChildren();
-            Ports[TaskVM.ChildrenPortName].onSorted += RefreshChildren;
+            Ports[TaskVM.ChildrenPortName].onConnectionChanged += RefreshChildren;
         }
 
         protected override void OnDisabled()
         {
             base.OnDisabled();
-            Ports[TaskVM.ChildrenPortName].onSorted -= RefreshChildren;
-        }
-
-        protected override void DoInitialized()
-        {
-            base.DoInitialized();
+            Ports[TaskVM.ChildrenPortName].onConnectionChanged -= RefreshChildren;
         }
 
         public void ChildStopped(TaskVM child, bool result)
@@ -63,7 +58,7 @@ namespace CZToolKit.BehaviorTree
 
         protected abstract void OnChildStopped(TaskVM child, bool result);
         
-        private void RefreshChildren()
+        protected virtual void RefreshChildren()
         {
             if (children == null)
                 children = new List<TaskVM>(GetChildren());

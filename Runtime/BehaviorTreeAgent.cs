@@ -14,7 +14,6 @@
  */
 #endregion
 using CZToolKit.GraphProcessor;
-using System;
 using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
@@ -23,13 +22,17 @@ namespace CZToolKit.BehaviorTree
     {
         private void Start()
         {
-            T_Graph.Initialize(this);
             T_Graph.Start();
         }
 
         private void Update()
         {
             T_Graph.Update();
+        }
+
+        private void OnDestroy()
+        {
+            T_Graph.Stop();
         }
 
 #if UNITY_EDITOR

@@ -35,9 +35,6 @@ namespace CZToolKit.BehaviorTree
         private EntryVM entry;
         private LinkedList<IUpdateTask> updateTasks = new LinkedList<IUpdateTask>();
 
-        public IGraphOwner GraphOwner { get; private set; }
-
-
         public BehaviorTreeVM(BaseGraph model) : base(model)
         {
             var t_model = Model as BehaviorTree;
@@ -49,18 +46,6 @@ namespace CZToolKit.BehaviorTree
                 t_model.entryID = AddNode<Entry>(InternalVector2Int.zero).ID;
             entry = Nodes[t_model.entryID] as EntryVM;
 
-        }
-
-        public void Initialize(IGraphOwner graphOwner)
-        {
-            GraphOwner = graphOwner;
-
-            foreach (var node in Nodes.Values)
-            {
-                if (node is TaskVM task)
-                    task.Initialize();
-            }
-            OnNodeAdded += NodeAdded;
         }
 
         public void Start()
@@ -94,14 +79,6 @@ namespace CZToolKit.BehaviorTree
         public void RegisterUpdateTask(IUpdateTask updateTask)
         {
             updateTasks.AddLast(updateTask);
-        }
-
-        private void NodeAdded(BaseNodeVM node)
-        {
-            if (!(node is TaskVM task))
-                return;
-            if (GraphOwner != null)
-                task.Initialize();
         }
     }
 }

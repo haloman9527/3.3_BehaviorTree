@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,7 +13,9 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
+
 using CZToolKit.Core.ViewModel;
 using CZToolKit.GraphProcessor;
 using UnityEngine;
@@ -46,12 +49,14 @@ namespace CZToolKit.BehaviorTree
                 return;
             }
 
-            for (int i = Children.Count; i > 0; i--)
+            for (int i = Children.Count - 1; i >= 0; i--)
             {
-                var index = Random.Range(0, i);
-                Children.Add(Children[index]);
-                Children.RemoveAt(index);
+                var index = Random.Range(0, i + 1);
+                var temp = Children[i];
+                Children[i] = Children[index];
+                Children[index] = temp;
             }
+
             currentIndex = 0;
             Children[currentIndex].Start();
         }
@@ -65,15 +70,15 @@ namespace CZToolKit.BehaviorTree
         {
             if (!result)
                 Stopped(false);
-            else if (++currentIndex < Children.Count)
-                Restart();
+            else if (currentIndex + 1 < Children.Count)
+                Continue();
             else
                 Stopped(true);
         }
 
-        private void Restart()
+        private void Continue()
         {
-            Children[currentIndex].Start();
+            Children[++currentIndex].Start();
         }
     }
 }
