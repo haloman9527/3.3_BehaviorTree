@@ -52,6 +52,11 @@ namespace CZToolKit.BehaviorTree
             get { return parent; }
         }
 
+        public BehaviorTreeVM Tree
+        {
+            get { return (BehaviorTreeVM)Owner; }
+        }
+
         #endregion
 
         protected TaskVM(Task model) : base(model)
@@ -97,8 +102,7 @@ namespace CZToolKit.BehaviorTree
         {
             currentState = TaskState.InActive;
             OnStop?.Invoke(success);
-            if (this.Parent != null)
-                this.Parent.ChildStopped(this, success);
+            Parent?.ChildStopped(this, success);
         }
 
         protected virtual void DoStart()

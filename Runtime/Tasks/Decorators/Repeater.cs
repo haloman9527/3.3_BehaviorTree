@@ -43,7 +43,8 @@ namespace CZToolKit.BehaviorTree
         protected override void DoStart()
         {
             counter = 0;
-            childRunning = false;
+            childRunning = true;
+            Child.Start();
         }
 
         protected override void DoStop()
@@ -58,21 +59,22 @@ namespace CZToolKit.BehaviorTree
             if (childRunning)
                 return;
 
-            if (tModel.loopCount < 0 || counter < tModel.loopCount)
-            {
-                childRunning = true;
-                Child.Start();
-            }
-            else
-                Stopped(true);
+            childRunning = true;
+            Child.Start();
         }
 
         protected override void OnChildStopped(TaskVM child, bool result)
         {
-            if (!result)
-                Stopped(false);
             this.childRunning = false;
-            counter++;
+            if (result)
+            {
+                if (tModel.loopCount > 0 && ++counter >= tModel.loopCount)
+                    Stopped(true);
+            }
+            else
+            {
+                Stopped(false);
+            }
         }
     }
 }

@@ -34,18 +34,22 @@ namespace CZToolKit.BehaviorTree
     {
         private EntryVM entry;
         private LinkedList<IUpdateTask> updateTasks = new LinkedList<IUpdateTask>();
+        private Blackboard blackboard = new Blackboard();
 
-        public BehaviorTreeVM(BaseGraph model) : base(model)
+        public Blackboard Blackboard
         {
-            var t_model = Model as BehaviorTree;
-            if (t_model.entryID != 0 && !Nodes.ContainsKey(t_model.entryID))
-                t_model.entryID = 0;
-            if (t_model.entryID == 0)
-                t_model.entryID = model.nodes.FirstOrDefault(pair => pair.Value is Entry).Key;
-            if (t_model.entryID == 0)
-                t_model.entryID = AddNode<Entry>(InternalVector2Int.zero).ID;
-            entry = Nodes[t_model.entryID] as EntryVM;
+            get { return blackboard; }
+        }
 
+        public BehaviorTreeVM(BehaviorTree model) : base(model)
+        {
+            if (model.entryID != 0 && !Nodes.ContainsKey(model.entryID))
+                model.entryID = 0;
+            if (model.entryID == 0)
+                model.entryID = model.nodes.FirstOrDefault(pair => pair.Value is Entry).Key;
+            if (model.entryID == 0)
+                model.entryID = AddNode<Entry>(InternalVector2Int.zero).ID;
+            entry = Nodes[model.entryID] as EntryVM;
         }
 
         public void Start()
@@ -76,7 +80,7 @@ namespace CZToolKit.BehaviorTree
             entry.Stop();
         }
 
-        public void RegisterUpdateTask(IUpdateTask updateTask)
+        internal void RegisterUpdateTask(IUpdateTask updateTask)
         {
             updateTasks.AddLast(updateTask);
         }
