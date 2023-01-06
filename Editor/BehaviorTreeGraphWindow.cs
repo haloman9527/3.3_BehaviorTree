@@ -40,15 +40,19 @@ namespace CZToolKit.BehaviorTree.Editors
         {
             if (Selection.activeTransform == null)
                 return;
-            var agent = Selection.activeTransform.GetComponent<IGraphAssetOwner>();
+            var agent = Selection.activeTransform.GetComponent<IGraphOwner>();
             if (agent == null)
                 return;
-            if ((UnityObject)agent == (UnityObject)GraphOwner && agent.Graph == GraphOwner.Graph)
+            if (agent == GraphOwner)
                 return;
-            if (agent.GraphAsset != null)
-                ForceLoad(agent);
-            else
-                ForceLoad(agent as IGraphOwner);
+            if (agent.Graph == null)
+                return;
+            if (agent.Graph == GraphOwner?.Graph)
+                return;
+            if (agent is IGraphAssetOwner graphAssetOwner && graphAssetOwner.GraphAsset != null)
+                ForceLoad(graphAssetOwner);
+            else if(agent is IGraphOwner graphOwner)
+                ForceLoad(graphOwner);
         }
 
         protected override BaseGraphView NewGraphView(BaseGraphVM graph)
