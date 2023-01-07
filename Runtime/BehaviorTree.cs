@@ -34,12 +34,6 @@ namespace CZToolKit.BehaviorTree
     {
         private EntryVM entry;
         private LinkedList<IUpdateTask> updateTasks = new LinkedList<IUpdateTask>();
-        private Blackboard blackboard = new Blackboard();
-
-        public Blackboard Blackboard
-        {
-            get { return blackboard; }
-        }
 
         public BehaviorTreeVM(BehaviorTree model) : base(model)
         {

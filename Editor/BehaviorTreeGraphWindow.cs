@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,7 +13,9 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
+
 using CZToolKit.Core.ViewModel;
 using CZToolKit.GraphProcessor;
 using CZToolKit.GraphProcessor.Editors;
@@ -22,7 +25,6 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-
 using UnityObject = UnityEngine.Object;
 
 namespace CZToolKit.BehaviorTree.Editors
@@ -43,16 +45,18 @@ namespace CZToolKit.BehaviorTree.Editors
             var agent = Selection.activeTransform.GetComponent<IGraphOwner>();
             if (agent == null)
                 return;
-            if (agent == GraphOwner)
-                return;
             if (agent.Graph == null)
                 return;
-            if (agent.Graph == GraphOwner?.Graph)
-                return;
-            if (agent is IGraphAssetOwner graphAssetOwner && graphAssetOwner.GraphAsset != null)
-                ForceLoad(graphAssetOwner);
-            else if(agent is IGraphOwner graphOwner)
-                ForceLoad(graphOwner);
+            if (agent is IGraphAssetOwner graphAssetOwner)
+            {
+                if (graphAssetOwner.GraphAsset != null && (agent != GraphOwner || graphAssetOwner.GraphAsset != GraphAsset || agent.Graph != GraphOwner.Graph))
+                    ForceLoad(graphAssetOwner);
+            }
+            else if (agent is IGraphOwner graphOwner)
+            {
+                if (agent != GraphOwner)
+                    ForceLoad(graphOwner);
+            }
         }
 
         protected override BaseGraphView NewGraphView(BaseGraphVM graph)
@@ -162,6 +166,7 @@ namespace CZToolKit.BehaviorTree.Editors
                     else
                         group.nodes.RemoveAt(i);
                 }
+
                 var vm = ViewModelFactory.CreateViewModel(group) as BaseGroupVM;
                 GraphView.CommandDispatcher.Do(new AddGroupCommand(graph, vm));
                 GraphView.AddToSelection(GraphView.GroupViews[vm]);

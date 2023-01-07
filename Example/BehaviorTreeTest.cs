@@ -33,14 +33,28 @@ public class BehaviorTreeTest : MonoBehaviour, IGraphAssetOwner
 
     public BaseGraphVM Graph
     {
-        get { return behaviorTree; }
+        get
+        {
+            if (behaviorTree == null)
+                behaviorTree = new BehaviorTreeVM(behaviorTreeAsset.DeserializeTGraph());
+            return behaviorTree;
+        }
+    }
+
+    public BehaviorTreeVM BehaviorTree
+    {
+        get
+        {
+            if (behaviorTree == null)
+                behaviorTree = new BehaviorTreeVM(behaviorTreeAsset.DeserializeTGraph());
+            return behaviorTree;
+        }
     }
 
     private void Start()
     {
-        behaviorTree = new BehaviorTreeVM(behaviorTreeAsset.DeserializeTGraph());
-        behaviorTree.Blackboard.Set("Owner", this);
-        behaviorTree.Start();
+        BehaviorTree.Blackboard.Set("Owner", this);
+        BehaviorTree.Start();
     }
 
     private void Update()

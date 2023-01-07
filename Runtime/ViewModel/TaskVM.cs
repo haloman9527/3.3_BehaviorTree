@@ -52,11 +52,6 @@ namespace CZToolKit.BehaviorTree
             get { return parent; }
         }
 
-        public BehaviorTreeVM Tree
-        {
-            get { return (BehaviorTreeVM)Owner; }
-        }
-
         #endregion
 
         protected TaskVM(Task model) : base(model)
