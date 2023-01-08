@@ -16,7 +16,7 @@
 
 #endregion
 
-using CZToolKit.Core.ViewModel;
+using CZToolKit.Common.ViewModel;
 using CZToolKit.GraphProcessor;
 using CZToolKit.GraphProcessor.Editors;
 using OdinSerializer;
