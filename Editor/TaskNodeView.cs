@@ -47,6 +47,7 @@ namespace CZToolKit.BehaviorTree.Editors
         {
             base.BuildContextualMenu(evt);
             evt.menu.AppendAction($"Execute", _ => { T_ViewModel.Start(); });
+            evt.menu.AppendAction($"Stop", _ => { T_ViewModel.Stop(); });
         }
 
         protected override void OnInitialized()

@@ -35,6 +35,11 @@ namespace CZToolKit.BehaviorTree
         private EntryVM entry;
         private LinkedList<IUpdateTask> updateTasks = new LinkedList<IUpdateTask>();
 
+        public TaskState RootState
+        {
+            get { return entry.CurrentState; }
+        }
+
         public BehaviorTreeVM(BehaviorTree model) : base(model)
         {
             if (model.entryID != 0 && !Nodes.ContainsKey(model.entryID))

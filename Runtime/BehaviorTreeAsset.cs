@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,13 +13,14 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
+
 using CZToolKit.GraphProcessor;
 using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityObject = UnityEngine.Object;
 
 namespace CZToolKit.BehaviorTree
@@ -26,12 +28,8 @@ namespace CZToolKit.BehaviorTree
     [CreateAssetMenu]
     public class BehaviorTreeAsset : ScriptableObject, IGraphAsset, IGraphAsset<BehaviorTree>
     {
-        [HideInInspector]
-        [SerializeField]
-        byte[] serializedGraph;
-        [HideInInspector]
-        [SerializeField]
-        List<UnityObject> graphUnityReferences = new List<UnityObject>();
+        [HideInInspector] [SerializeField] byte[] serializedGraph;
+        [HideInInspector] [SerializeField] List<UnityObject> graphUnityReferences = new List<UnityObject>();
 
         public Type GraphType => typeof(BehaviorTree);
 
