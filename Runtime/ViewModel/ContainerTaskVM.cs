@@ -50,7 +50,7 @@ namespace CZToolKit.BehaviorTree
         {
             if (CurrentState != TaskState.Active)
             {
-                Stopped(result);
+                // Stopped(result);
                 return;
             }
             this.OnChildStopped(child, result);
