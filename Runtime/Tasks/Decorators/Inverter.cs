@@ -37,9 +37,9 @@ namespace CZToolKit.BehaviorTree
             Child.Stop();
         }
 
-        protected override void OnChildStopped(TaskVM child, bool succeeded)
+        protected override void OnChildStopped(TaskVM child, bool result)
         {
-            Stopped(!succeeded);
+            Stopped(!result);
         }
     }
 }

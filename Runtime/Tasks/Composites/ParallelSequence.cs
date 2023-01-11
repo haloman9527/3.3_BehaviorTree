@@ -33,6 +33,7 @@ namespace CZToolKit.BehaviorTree
     {
         private int index;
         private int childrenCount = 0;
+        private int runningCount = 0;
         private int succeededCount = 0;
         private int failedCount = 0;
         private bool successState;
@@ -45,6 +46,7 @@ namespace CZToolKit.BehaviorTree
         {
             succeededCount = 0;
             failedCount = 0;
+            runningCount = 0;
             childrenCount = Children.Count;
             if (childrenCount == 0)
             {
@@ -54,6 +56,7 @@ namespace CZToolKit.BehaviorTree
 
             foreach (var child in Children)
             {
+                runningCount++;
                 child.Start();
             }
         }
@@ -73,11 +76,12 @@ namespace CZToolKit.BehaviorTree
 
         protected override void OnChildStopped(TaskVM child, bool result)
         {
+            runningCount--;
             if (result)
                 succeededCount++;
             else
                 failedCount++;
-            if (succeededCount + failedCount == childrenCount)
+            if (succeededCount + failedCount + runningCount == childrenCount)
                 Stopped(failedCount == 0);
         }
     }

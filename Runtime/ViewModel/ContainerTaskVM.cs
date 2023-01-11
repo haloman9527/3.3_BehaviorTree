@@ -48,11 +48,6 @@ namespace CZToolKit.BehaviorTree
 
         public void ChildStopped(TaskVM child, bool result)
         {
-            if (CurrentState != TaskState.Active)
-            {
-                // Stopped(result);
-                return;
-            }
             this.OnChildStopped(child, result);
         }
 

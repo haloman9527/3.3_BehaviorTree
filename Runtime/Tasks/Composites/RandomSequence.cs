@@ -44,21 +44,20 @@ namespace CZToolKit.BehaviorTree
         protected override void DoStart()
         {
             if (Children.Count == 0)
-            {
                 Stopped(true);
-                return;
-            }
-
-            for (int i = Children.Count - 1; i >= 0; i--)
+            else
             {
-                var index = Random.Range(0, i + 1);
-                var temp = Children[i];
-                Children[i] = Children[index];
-                Children[index] = temp;
-            }
+                for (int i = Children.Count - 1; i >= 0; i--)
+                {
+                    var index = Random.Range(0, i + 1);
+                    var temp = Children[i];
+                    Children[i] = Children[index];
+                    Children[index] = temp;
+                }
 
-            currentIndex = 0;
-            Children[currentIndex].Start();
+                currentIndex = 0;
+                Children[currentIndex].Start();
+            }
         }
 
         protected override void DoStop()

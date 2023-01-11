@@ -41,13 +41,12 @@ namespace CZToolKit.BehaviorTree
         protected override void DoStart()
         {
             if (Children.Count == 0)
-            {
                 Stopped(true);
-                return;
+            else
+            {
+                currentIndex = 0;
+                Children[currentIndex].Start();
             }
-
-            currentIndex = 0;
-            Children[currentIndex].Start();
         }
 
         protected override void DoStop()

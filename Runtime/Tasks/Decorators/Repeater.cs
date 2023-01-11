@@ -42,15 +42,21 @@ namespace CZToolKit.BehaviorTree
 
         protected override void DoStart()
         {
-            counter = 0;
-            childRunning = true;
-            Child.Start();
+            if (tModel.loopCount != 0)
+            {
+                counter = 0;
+                childRunning = true;
+                Child.Start();
+            }
+            else
+                Stopped(true);
         }
 
         protected override void DoStop()
         {
-            Child.Stop();
-            if (Child.CurrentState != TaskState.Active)
+            if (Child.CurrentState == TaskState.Active)
+                Child.Stop();
+            else
                 Stopped(false);
         }
 
@@ -72,9 +78,7 @@ namespace CZToolKit.BehaviorTree
                     Stopped(true);
             }
             else
-            {
                 Stopped(false);
-            }
         }
     }
 }
