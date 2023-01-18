@@ -17,12 +17,17 @@ using CZToolKit.Common;
 using CZToolKit.GraphProcessor.Editors;
 using System;
 using System.Collections.Generic;
+using CZToolKit.GraphProcessor;
 using UnityEditor.Experimental.GraphView;
 
 namespace CZToolKit.BehaviorTree.Editors
 {
     public class BehaviorTreeGraphView : BaseGraphView
     {
+        public BehaviorTreeGraphView(BaseGraphVM graph, BaseGraphWindow window, CommandDispatcher commandDispatcher) : base(graph, window, commandDispatcher)
+        {
+        }
+        
         protected override void OnInitialized()
         {
             schedule.Execute(UpdateState).Every(100);

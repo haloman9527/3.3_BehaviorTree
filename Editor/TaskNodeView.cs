@@ -98,7 +98,7 @@ namespace CZToolKit.BehaviorTree.Editors
 
         public void UpdateState()
         {
-            if (!Application.isPlaying || Owner.GraphWindow.GraphOwner == null)
+            if (!Application.isPlaying)
                 return;
             anim = Mathf.Clamp01(anim - 0.2f);
             if (T_ViewModel.CurrentState == TaskState.Active)
@@ -108,7 +108,7 @@ namespace CZToolKit.BehaviorTree.Editors
 
         private void OnStart()
         {
-            if (!Application.isPlaying || Owner.GraphWindow.GraphOwner == null)
+            if (!Application.isPlaying)
                 return;
             anim = 1;
             stateBorder.RemoveFromClassList("success");
@@ -120,7 +120,7 @@ namespace CZToolKit.BehaviorTree.Editors
 
         private void OnStop(bool result)
         {
-            if (!Application.isPlaying || Owner.GraphWindow.GraphOwner == null)
+            if (!Application.isPlaying)
                 return;
             anim = 1;
             stateBorder.RemoveFromClassList("success");

@@ -21,6 +21,7 @@ using CZToolKit.GraphProcessor;
 using CZToolKit.GraphProcessor.Editors;
 using OdinSerializer;
 using System.Collections.Generic;
+using CZToolKit.Common;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -59,9 +60,11 @@ namespace CZToolKit.BehaviorTree.Editors
             }
         }
 
-        protected override BaseGraphView NewGraphView(BaseGraphVM graph)
+        protected override BaseGraphView NewGraphView(CommandDispatcher commandDispatcher)
         {
-            return new BehaviorTreeGraphView();
+            if (Graph == null)
+                Graph = new BehaviorTreeVM(new BehaviorTree());
+            return new BehaviorTreeGraphView(Graph, this, commandDispatcher);
         }
 
         protected override void OnGraphLoaded()
@@ -178,6 +181,15 @@ namespace CZToolKit.BehaviorTree.Editors
 
         void Save()
         {
+            if (GraphAsset == null)
+            {
+                var path = EditorUtility.SaveFilePanelInProject("保存", "New BehavorTree", "asset", "Create BehaviorTree Asset");
+                if (string.IsNullOrEmpty(path))
+                    return;
+                GraphAsset = ScriptableObject.CreateInstance<BehaviorTreeAsset>();
+                AssetDatabase.CreateAsset(GraphAsset, path);
+            }
+
             if (GraphAsset is IGraphSerialization graphSerialization)
                 graphSerialization.SaveGraph(Graph.Model);
             GraphView.SetDirty();
