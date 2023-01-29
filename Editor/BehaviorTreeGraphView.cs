@@ -18,7 +18,9 @@ using CZToolKit.GraphProcessor.Editors;
 using System;
 using System.Collections.Generic;
 using CZToolKit.GraphProcessor;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 namespace CZToolKit.BehaviorTree.Editors
 {
@@ -44,7 +46,41 @@ namespace CZToolKit.BehaviorTree.Editors
             }
         }
 
-        protected override IEnumerable<Type> GetNodeTypes()
+        protected override void NodeCreationRequest(NodeCreationContext c)
+        {
+            var multiLayereEntryCount = 0;
+            var entries = new List<NodeEntry>(16);
+            foreach (var nodeType in GetNodeTypes())
+            {
+                var path = nodeType.Name;
+                var menu = (string[])null;
+                var hidden = false;
+                var menuAttribute = GraphProcessorEditorUtil.GetNodeMenu(nodeType);
+                if (menuAttribute != null)
+                {
+                    path = menuAttribute.path;
+                    menu = menuAttribute.menu;
+                    hidden = menuAttribute.hidden;
+                }
+                else
+                {
+                    menu = new string[] { nodeType.Name };
+                }
+
+                if (menu.Length > 1)
+                    multiLayereEntryCount++;
+                entries.Add(new NodeEntry(nodeType, path, menu, hidden));
+            }
+
+            entries.QuickSort((a, b) => -(a.menu.Length.CompareTo(b.menu.Length)));
+            entries.QuickSort(0, multiLayereEntryCount - 1, (a, b) => String.Compare(a.path, b.path, StringComparison.Ordinal));
+
+            var nodeMenu = ScriptableObject.CreateInstance<NodeMenuWindow>();
+            nodeMenu.Initialize("Nodes", this, entries);
+            SearchWindow.Open(new SearchWindowContext(c.screenMousePosition), nodeMenu);
+        }
+
+        private IEnumerable<Type> GetNodeTypes()
         {
             foreach (var type in Util_Reflection.GetChildTypes<Task>())
             {
