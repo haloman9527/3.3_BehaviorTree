@@ -2,7 +2,8 @@
     "name": "CZToolKit.BehaviorTree",
     "references": [
         "GUID:5957643ee62fb75498d29ee03d7011ef",
-        "GUID:563d9f79a73247849a4c82325e8175cb"
+        "GUID:563d9f79a73247849a4c82325e8175cb",
+        "GUID:d807c25be20b6f546987976aae9cc3fa"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
