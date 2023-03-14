@@ -14,11 +14,11 @@
  */
 #endregion
 using CZToolKit.Common;
+using CZToolKit.Common.Collection;
+using CZToolKit.GraphProcessor;
 using CZToolKit.GraphProcessor.Editors;
 using System;
 using System.Collections.Generic;
-using CZToolKit.GraphProcessor;
-using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -83,7 +83,7 @@ namespace CZToolKit.BehaviorTree.Editors
 
         private IEnumerable<Type> GetNodeTypes()
         {
-            foreach (var type in Util_Reflection.GetChildTypes<Task>())
+            foreach (var type in Util_TypeCache.GetTypesDerivedFrom<Task>())
             {
                 if (type.IsAbstract)
                     continue;
