@@ -13,7 +13,8 @@
  *
  */
 #endregion
-using CZToolKit.Common;
+
+using System.Reflection;
 using CZToolKit.GraphProcessor.Editors;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -33,7 +34,7 @@ namespace CZToolKit.BehaviorTree.Editors
             styleSheets.Add(Resources.Load<StyleSheet>("BehaviorTree/Uss/Task"));
 
             icon = new Image() { name = "icon" };
-            base.controlsContainer.Add(icon);
+            base.contentContainer.Add(icon);
             icon.style.unityBackgroundImageTintColor = new Color(1, 1, 1, 0.7f);
 
             stateBorder = new VisualElement();
@@ -53,7 +54,8 @@ namespace CZToolKit.BehaviorTree.Editors
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            if (Util_Attribute.TryGetTypeAttribute(ViewModel.Model.GetType(), out TaskIconAttribute iconAttr))
+            var iconAttr = ViewModel.ModelType.GetCustomAttribute<TaskIconAttribute>(true);
+            if (iconAttr != null)
             {
                 icon.style.backgroundImage = Resources.Load<Texture2D>(iconAttr.path);
             }
