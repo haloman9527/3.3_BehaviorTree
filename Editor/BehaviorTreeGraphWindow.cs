@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using CZToolKit.Common;
 using Sirenix.Serialization;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -137,6 +138,7 @@ namespace CZToolKit.BehaviorTree.Editors
             var nodeMaps = new Dictionary<int, BaseNodeVM>();
 
             GraphView.ClearSelection();
+            var selectables = new List<ISelectable>(32);
 
             foreach (var pair in nodes)
             {
@@ -144,7 +146,7 @@ namespace CZToolKit.BehaviorTree.Editors
                 var vm = ViewModelFactory.CreateViewModel(pair.Value) as BaseNodeVM;
                 GraphView.CommandDispatcher.Do(new AddNodeCommand(graph, vm));
                 nodeMaps[pair.Key] = vm;
-                GraphView.AddToSelection(GraphView.NodeViews[vm.ID]);
+                selectables.Add(GraphView.NodeViews[vm.ID]);
             }
 
             foreach (var connection in connections)
@@ -157,7 +159,7 @@ namespace CZToolKit.BehaviorTree.Editors
 
                 var vm = ViewModelFactory.CreateViewModel(connection) as BaseConnectionVM;
                 GraphView.CommandDispatcher.Do(new ConnectCommand(graph, vm));
-                GraphView.AddToSelection(GraphView.ConnectionViews[vm]);
+                selectables.Add(GraphView.ConnectionViews[vm]);
             }
 
             foreach (var group in groups)
@@ -172,10 +174,12 @@ namespace CZToolKit.BehaviorTree.Editors
 
                 var vm = ViewModelFactory.CreateViewModel(group) as BaseGroupVM;
                 GraphView.CommandDispatcher.Do(new AddGroupCommand(graph, vm));
-                GraphView.AddToSelection(GraphView.GroupViews[vm]);
+                selectables.Add(GraphView.GroupViews[vm]);
             }
 
             GraphView.CommandDispatcher.EndGroup();
+            
+            GraphView.AddToSelection(selectables);
         }
 
 
@@ -191,7 +195,9 @@ namespace CZToolKit.BehaviorTree.Editors
             }
 
             if (GraphAsset is IGraphSerialization graphSerialization)
+            {
                 graphSerialization.SaveGraph(Graph.Model);
+            }
             GraphView.SetDirty();
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
