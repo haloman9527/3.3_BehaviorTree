@@ -16,9 +16,9 @@
 
 #endregion
 
+using System;
 using CZToolKit.Common.ViewModel;
 using CZToolKit.GraphProcessor;
-using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
@@ -34,10 +34,13 @@ namespace CZToolKit.BehaviorTree
     public class RandomSelectorVM : CompositeTaskVM
     {
         private int currentIndex;
+        private Random random;
 
         public RandomSelectorVM(RandomSelector model) : base(model)
         {
             this[nameof(RandomSelector.randomSeed)] = new BindableProperty<int>(() => model.randomSeed, v => model.randomSeed = v);
+            
+            random = new Random(model.randomSeed);
         }
 
         protected override void DoStart()
@@ -48,7 +51,7 @@ namespace CZToolKit.BehaviorTree
             {
                 for (int i = Children.Count - 1; i >= 0; i--)
                 {
-                    var index = Random.Range(0, i + 1);
+                    var index = random.Next(0, i + 1);
                     var temp = Children[i];
                     Children[i] = Children[index];
                     Children[index] = temp;

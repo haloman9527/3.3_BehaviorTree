@@ -65,21 +65,23 @@ namespace CZToolKit.BehaviorTree.Editors
         {
             if (Graph == null)
                 Graph = new BehaviorTreeVM(new BehaviorTree());
-            return new BehaviorTreeGraphView(Graph, this, commandDispatcher);
+            
+            var graphView =  new BehaviorTreeGraphView(Graph, this, commandDispatcher);
+            graphView.RegisterCallback<KeyDownEvent>(KeyDownCallback);
+            return graphView;
         }
+        
 
-        protected override void OnGraphLoaded()
+        protected override void BuildToolBar()
         {
-            base.OnGraphLoaded();
-
+            base.BuildToolBar();
+            
             ToolbarButton btnSave = new ToolbarButton();
             btnSave.text = "Save";
             btnSave.clicked += Save;
             btnSave.style.width = 80;
             btnSave.style.unityTextAlign = TextAnchor.MiddleCenter;
             ToolbarRight.Add(btnSave);
-
-            GraphView.RegisterCallback<KeyDownEvent>(KeyDownCallback);
         }
 
         void KeyDownCallback(KeyDownEvent evt)
@@ -142,6 +144,7 @@ namespace CZToolKit.BehaviorTree.Editors
 
             foreach (var pair in nodes)
             {
+                pair.Value.id = graph.NewID();
                 pair.Value.position += new InternalVector2Int(50, 50);
                 var vm = ViewModelFactory.CreateViewModel(pair.Value) as BaseNodeVM;
                 GraphView.CommandDispatcher.Do(new AddNodeCommand(graph, vm));

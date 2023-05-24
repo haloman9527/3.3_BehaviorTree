@@ -29,9 +29,10 @@ namespace CZToolKit.BehaviorTree.Editors
         public BehaviorTreeGraphView(BaseGraphVM graph, BaseGraphWindow window, CommandDispatcher commandDispatcher) : base(graph, window, commandDispatcher)
         {
         }
-        
-        protected override void OnInitialized()
+
+        protected override void OnCreated()
         {
+            base.OnCreated();
             schedule.Execute(UpdateState).Every(100);
         }
 

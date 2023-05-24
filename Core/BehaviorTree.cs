@@ -20,13 +20,12 @@ using CZToolKit.Common.ViewModel;
 using CZToolKit.GraphProcessor;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace CZToolKit.BehaviorTree
 {
     public class BehaviorTree : BaseGraph
     {
-        [HideInInspector] public int entryID;
+        public int entryID;
     }
 
     [ViewModel(typeof(BehaviorTree))]
