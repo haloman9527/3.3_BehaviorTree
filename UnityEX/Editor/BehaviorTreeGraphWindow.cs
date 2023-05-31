@@ -61,12 +61,12 @@ namespace CZToolKit.BehaviorTree.Editors
             }
         }
 
-        protected override BaseGraphView NewGraphView(CommandDispatcher commandDispatcher)
+        protected override BaseGraphView NewGraphView(object argument)
         {
             if (Graph == null)
                 Graph = new BehaviorTreeVM(new BehaviorTree());
             
-            var graphView =  new BehaviorTreeGraphView(Graph, this, commandDispatcher);
+            var graphView =  new BehaviorTreeGraphView(Graph, this, new CommandDispatcher());
             graphView.RegisterCallback<KeyDownEvent>(KeyDownCallback);
             return graphView;
         }
