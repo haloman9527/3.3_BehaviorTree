@@ -1,8 +1,4 @@
-﻿.node{
-	/*max-height: 115px;*/
-}
-
-.node > #state-border {
+﻿.node > #state-border {
 	border-left-width:2px;
 	border-right-width:2px;
 	border-top-width:2px;
@@ -18,7 +14,7 @@
 	min-height: 20px;
 }
 
-#controls > #icon {
+#contents > #controls > #icon {
 	max-height: 40px;
 	height: 40px;
 	-unity-background-scale-mode: scale-to-fit;

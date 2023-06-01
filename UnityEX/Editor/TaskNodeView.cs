@@ -34,7 +34,7 @@ namespace CZToolKit.BehaviorTree.Editors
             styleSheets.Add(Resources.Load<StyleSheet>("BehaviorTree/Uss/Task"));
 
             icon = new Image() { name = "icon" };
-            base.contentContainer.Add(icon);
+            controls.Add(icon);
             icon.style.unityBackgroundImageTintColor = new Color(1, 1, 1, 0.7f);
 
             stateBorder = new VisualElement();
