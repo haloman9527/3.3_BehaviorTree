@@ -30,9 +30,9 @@ namespace CZToolKit.BehaviorTree.Editors
         {
         }
 
-        protected override void OnCreated()
+        protected override void OnInitialized()
         {
-            base.OnCreated();
+            base.OnInitialized();
             schedule.Execute(UpdateState).Every(100);
         }
 
