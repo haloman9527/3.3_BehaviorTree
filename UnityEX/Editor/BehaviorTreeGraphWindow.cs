@@ -175,9 +175,9 @@ namespace CZToolKit.BehaviorTree.Editors
                         group.nodes.RemoveAt(i);
                 }
 
-                var vm = ViewModelFactory.CreateViewModel(group) as BaseGroupVM;
-                GraphView.CommandDispatcher.Do(new AddGroupCommand(graph, vm));
-                selectables.Add(GraphView.GroupViews[vm]);
+                group.id = graph.NewID();
+                GraphView.CommandDispatcher.Do(new AddGroupCommand(graph, group));
+                selectables.Add(GraphView.GroupViews[group.id]);
             }
 
             GraphView.CommandDispatcher.EndGroup();
