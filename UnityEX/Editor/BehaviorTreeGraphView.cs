@@ -1,4 +1,5 @@
 #region 注 释
+
 /***
  *
  *  Title:
@@ -12,7 +13,9 @@
  *  Blog: https://www.crosshair.top/
  *
  */
+
 #endregion
+
 using CZToolKit;
 using CZToolKit.GraphProcessor;
 using CZToolKit.GraphProcessor.Editors;
@@ -48,27 +51,19 @@ namespace CZToolKit.BehaviorTree.Editors
 
         protected override void BuildNodeMenu(NodeMenuWindow nodeMenu)
         {
-            foreach (var nodeType in GetNodeTypes())
+            foreach (var pair in GraphProcessorUtil.NodeStaticInfos)
             {
-                if (nodeType.IsAbstract) 
+                if (!typeof(Task).IsAssignableFrom(pair.Key))
                     continue;
+
+                var nodeType = pair.Key;
                 var nodeStaticInfo = GraphProcessorUtil.NodeStaticInfos[nodeType];
                 if (nodeStaticInfo.hidden)
                     continue;
-                
+
                 var path = nodeStaticInfo.path;
                 var menu = nodeStaticInfo.menu;
                 nodeMenu.entries.Add(new NodeMenuWindow.NodeEntry(path, menu, nodeType));
-            }
-        }
-
-        private IEnumerable<Type> GetNodeTypes()
-        {
-            foreach (var type in Util_TypeCache.GetTypesDerivedFrom<Task>())
-            {
-                if (type.IsAbstract)
-                    continue;
-                yield return type;
             }
         }
 
