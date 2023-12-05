@@ -9,7 +9,7 @@
  *  Version:
  *  Writer: 半只龙虾人
  *  Github: https://github.com/HalfLobsterMan
- *  Blog: https://www.crosshair.top/
+ *  Blog: https://www.mindgear.net/
  *
  */
 #endregion
@@ -35,7 +35,6 @@ namespace CZToolKit.BehaviorTree.Editors
 
             icon = new Image() { name = "icon" };
             controls.Add(icon);
-            icon.style.unityBackgroundImageTintColor = new Color(1, 1, 1, 0.7f);
 
             stateBorder = new VisualElement();
             stateBorder.name = "state-border";

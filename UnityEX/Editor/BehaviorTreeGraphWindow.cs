@@ -10,7 +10,7 @@
  *  Version:
  *  Writer: 半只龙虾人
  *  Github: https://github.com/HalfLobsterMan
- *  Blog: https://www.crosshair.top/
+ *  Blog: https://www.mindgear.net/
  *
  */
 
@@ -61,7 +61,7 @@ namespace CZToolKit.BehaviorTree.Editors
             }
         }
 
-        protected override BaseGraphView NewGraphView(object argument)
+        protected override BaseGraphView NewGraphView()
         {
             if (Graph == null)
                 Graph = new BehaviorTreeVM(new BehaviorTree());
@@ -188,16 +188,16 @@ namespace CZToolKit.BehaviorTree.Editors
 
         void Save()
         {
-            if (GraphAsset == null)
+            if (GraphAsset.UnityAsset == null)
             {
                 var path = EditorUtility.SaveFilePanelInProject("保存", "New BehavorTree", "asset", "Create BehaviorTree Asset");
                 if (string.IsNullOrEmpty(path))
                     return;
                 GraphAsset = ScriptableObject.CreateInstance<BehaviorTreeAsset>();
-                AssetDatabase.CreateAsset(GraphAsset, path);
+                AssetDatabase.CreateAsset((ScriptableObject)GraphAsset, path);
             }
 
-            if (GraphAsset is IGraphSerialization graphSerialization)
+            if (GraphAsset is IGraphAsset graphSerialization)
             {
                 graphSerialization.SaveGraph(Graph.Model);
             }

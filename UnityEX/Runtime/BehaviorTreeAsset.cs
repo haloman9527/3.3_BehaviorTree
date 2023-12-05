@@ -10,7 +10,7 @@
  *  Version:
  *  Writer: 半只龙虾人
  *  Github: https://github.com/HalfLobsterMan
- *  Blog: https://www.crosshair.top/
+ *  Blog: https://www.mindgear.net/
  *
  */
 
@@ -32,6 +32,8 @@ namespace CZToolKit.BehaviorTree
         [HideInInspector] [SerializeField] List<UnityObject> graphUnityReferences = new List<UnityObject>();
 
         public Type GraphType => typeof(BehaviorTree);
+
+        public UnityObject UnityAsset => this;
 
         public void SaveGraph(BaseGraph graph)
         {

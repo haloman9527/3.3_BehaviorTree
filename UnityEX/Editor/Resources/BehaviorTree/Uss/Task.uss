@@ -1,44 +1,45 @@
-﻿.node > #state-border {
-	border-left-width:2px;
-	border-right-width:2px;
-	border-top-width:2px;
-	border-bottom-width:2px;
-	border-top-left-radius:9px;
-	border-top-right-radius:9px;
-	border-bottom-left-radius:9px;
-	border-bottom-right-radius:9px;
+﻿#state-border {
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
 }
 
-.node > #node-border > #title{
-	height: 25px;
-	min-height: 20px;
+#node-border > #title {
+    height: 25px;
+    min-height: 20px;
 }
 
-#contents > #controls > #icon {
-	max-height: 40px;
-	height: 40px;
-	-unity-background-scale-mode: scale-to-fit;
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-top: 3px;
-	margin-bottom: 3px;
-	display: none;
+#node-border > #contents {
+    display: none;
 }
 
-.success
-{
-	border-color:rgba(0, 255, 0, 1);
-	background-color:rgba(0, 255, 0, 1);
+#node-border > #contents > #controls > #icon {
+    max-height: 40px;
+    height: 40px;
+    -unity-background-scale-mode: scale-to-fit;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    -unity-background-image-tint-color: rgba(1, 1, 1, 0.7);
 }
 
-.failure
-{
-	border-color:rgba(255, 0, 0, 1);
-	background-color:rgba(255, 0, 0, 1);
+.success {
+    border-color: rgba(0, 255, 0, 1);
+    background-color: rgba(0, 255, 0, 1);
 }
 
-.running 
-{
-	border-color:rgba(255, 255, 0, 1);
-	background-color:rgba(255, 255, 0, 1);
+.failure {
+    border-color: rgba(255, 0, 0, 1);
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.running {
+    border-color: rgba(255, 255, 0, 1);
+    background-color: rgba(255, 255, 0, 1);
 }
