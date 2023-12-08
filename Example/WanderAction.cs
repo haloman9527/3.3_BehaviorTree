@@ -87,7 +87,7 @@ namespace CZToolKit.BehaviorTree
                     if (Vector3.Angle(navMeshAgent.transform.forward, item.transform.position - navMeshAgent.transform.position) <= t_model.sector / 2)
                     {
                         Owner.Blackboard.Set("Target", item.gameObject);
-                        Stopped(true);
+                        SelfStop(true);
                     }
                 }
             }

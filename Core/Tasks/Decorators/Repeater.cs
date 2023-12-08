@@ -49,7 +49,7 @@ namespace CZToolKit.BehaviorTree
                 Child.Start();
             }
             else
-                Stopped(true);
+                SelfStop(true);
         }
 
         protected override void DoStop()
@@ -57,7 +57,7 @@ namespace CZToolKit.BehaviorTree
             if (Child.CurrentState == TaskState.Active)
                 Child.Stop();
             else
-                Stopped(false);
+                SelfStop(false);
         }
 
         public void Update()
@@ -75,10 +75,10 @@ namespace CZToolKit.BehaviorTree
             if (result)
             {
                 if (tModel.loopCount > 0 && ++counter >= tModel.loopCount)
-                    Stopped(true);
+                    SelfStop(true);
             }
             else
-                Stopped(false);
+                SelfStop(false);
         }
     }
 }

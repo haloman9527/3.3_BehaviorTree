@@ -46,7 +46,7 @@ namespace CZToolKit.BehaviorTree
         protected override void DoStart()
         {
             if (Children.Count == 0)
-                Stopped(true);
+                SelfStop(true);
             else
             {
                 for (int i = Children.Count - 1; i >= 0; i--)
@@ -70,11 +70,11 @@ namespace CZToolKit.BehaviorTree
         protected override void OnChildStopped(TaskVM child, bool result)
         {
             if (result)
-                Stopped(true);
+                SelfStop(true);
             else if (currentIndex + 1 < Children.Count)
                 Continue();
             else
-                Stopped(false);
+                SelfStop(false);
         }
 
         private void Continue()

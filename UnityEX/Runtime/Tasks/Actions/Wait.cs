@@ -45,14 +45,14 @@ namespace CZToolKit.BehaviorTree
 
         protected override void DoStop()
         {
-            Stopped(false);
+            SelfStop(false);
         }
 
         public void Update()
         {
             var t_model = Model as Wait;
             if (Time.time - startTime > t_model.interval)
-                Stopped(true);
+                SelfStop(true);
         }
     }
 }

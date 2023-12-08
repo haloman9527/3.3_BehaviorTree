@@ -67,14 +67,14 @@ namespace CZToolKit.BehaviorTree
                 Owner.Blackboard.Set<GameObject>("Target", null);
                 navMeshAgent.isStopped = true;
                 Debug.Log("追不上");
-                Stopped(false);
+                SelfStop(false);
             }
 
             if (Vector3.Distance(navMeshAgent.transform.position, target.transform.position) <= t_model.stopDistance)
             {
                 Owner.Blackboard.Set<GameObject>("Target", null);
                 navMeshAgent.isStopped = true;
-                Stopped(true);
+                SelfStop(true);
             }
 
             navMeshAgent.destination = target.transform.position;

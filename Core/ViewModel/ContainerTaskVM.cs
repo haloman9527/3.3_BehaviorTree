@@ -46,12 +46,12 @@ namespace CZToolKit.BehaviorTree
             Ports[TaskVM.ChildrenPortName].onConnectionChanged -= RefreshChildren;
         }
 
-        public void ChildStopped(TaskVM child, bool result)
+        public void ChildStopped(TaskVM child, bool childSuccess)
         {
-            this.OnChildStopped(child, result);
+            this.OnChildStopped(child, childSuccess);
         }
 
-        protected abstract void OnChildStopped(TaskVM child, bool result);
+        protected abstract void OnChildStopped(TaskVM child, bool childSuccess);
         
         protected virtual void RefreshChildren()
         {

@@ -52,20 +52,17 @@ namespace CZToolKit.BehaviorTree.Editors
             if (agent is IGraphAssetOwner graphAssetOwner)
             {
                 if (graphAssetOwner.GraphAsset != null && (agent != GraphOwner || graphAssetOwner.GraphAsset != GraphAsset || agent.Graph != GraphOwner.Graph))
-                    ForceLoad(graphAssetOwner);
+                    LoadFromGraphAssetOwner(graphAssetOwner);
             }
             else if (agent is IGraphOwner graphOwner)
             {
                 if (agent != GraphOwner)
-                    ForceLoad(graphOwner);
+                    LoadFromGraphOwner(graphOwner);
             }
         }
 
         protected override BaseGraphView NewGraphView()
         {
-            if (Graph == null)
-                Graph = new BehaviorTreeVM(new BehaviorTree());
-            
             var graphView =  new BehaviorTreeGraphView(Graph, this, new CommandDispatcher());
             graphView.RegisterCallback<KeyDownEvent>(KeyDownCallback);
             return graphView;

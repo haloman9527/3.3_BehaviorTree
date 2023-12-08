@@ -49,7 +49,7 @@ namespace CZToolKit.BehaviorTree
             childrenCount = Children.Count;
             if (childrenCount == 0)
             {
-                Stopped(true);
+                SelfStop(true);
                 return;
             }
 
@@ -70,7 +70,7 @@ namespace CZToolKit.BehaviorTree
                 }
             }
             else
-                Stopped(false);
+                SelfStop(false);
         }
 
         protected override void OnChildStopped(TaskVM child, bool result)
@@ -80,8 +80,8 @@ namespace CZToolKit.BehaviorTree
                 succeededCount++;
             else
                 failedCount++;
-            if (succeededCount + failedCount + runningCount == childrenCount)
-                Stopped(succeededCount != 0);
+            if (succeededCount + failedCount == childrenCount)
+                SelfStop(succeededCount != 0);
         }
     }
 }

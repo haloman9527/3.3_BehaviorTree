@@ -44,12 +44,12 @@ namespace CZToolKit.BehaviorTree
         protected override void DoStart()
         {
             Debug.Log(Text);
-            Stopped(true);
+            SelfStop(true);
         }
 
         protected override void DoStop()
         {
-            Stopped(false);
+            SelfStop(false);
         }
     }
 }
