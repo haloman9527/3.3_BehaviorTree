@@ -32,7 +32,7 @@ namespace CZToolKit.BehaviorTree
     public class BehaviorTreeVM : BaseGraphVM
     {
         private EntryVM entry;
-        private LinkedList<IUpdateTask> updateTasks = new LinkedList<IUpdateTask>();
+        private Queue<IUpdateTask> updateTasks;
 
         public TaskState RootState
         {
@@ -48,6 +48,7 @@ namespace CZToolKit.BehaviorTree
             if (model.entryID == 0)
                 model.entryID = AddNode<Entry>(InternalVector2Int.zero).ID;
             entry = Nodes[model.entryID] as EntryVM;
+            updateTasks = new Queue<IUpdateTask>(16);
         }
 
         public void Start()
@@ -57,19 +58,15 @@ namespace CZToolKit.BehaviorTree
 
         public void Update()
         {
-            var t = updateTasks.First;
-            while (t != null)
+            var counter = updateTasks.Count;
+            while (counter-- > 0)
             {
-                if (t.Value.CurrentState != TaskState.Active)
+                var task = updateTasks.Dequeue();
+                if (task.CurrentState == TaskState.Active)
                 {
-                    updateTasks.Remove(t);
+                    task.Update();
+                    updateTasks.Enqueue(task);
                 }
-                else
-                {
-                    t.Value.Update();
-                }
-                
-                t = t.Next;
             }
         }
 
@@ -80,7 +77,7 @@ namespace CZToolKit.BehaviorTree
 
         internal void RegisterUpdateTask(IUpdateTask updateTask)
         {
-            updateTasks.AddLast(updateTask);
+            updateTasks.Enqueue(updateTask);
         }
     }
 }

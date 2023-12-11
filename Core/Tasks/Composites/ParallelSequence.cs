@@ -31,12 +31,8 @@ namespace CZToolKit.BehaviorTree
     [ViewModel(typeof(ParallelSequence))]
     public class ParallelSequenceVM : CompositeTaskVM
     {
-        private int index;
-        private int childrenCount = 0;
-        private int runningCount = 0;
-        private int succeededCount = 0;
+        private int successedCount = 0;
         private int failedCount = 0;
-        private bool successState;
 
         public ParallelSequenceVM(ParallelSequence model) : base(model)
         {
@@ -44,11 +40,9 @@ namespace CZToolKit.BehaviorTree
 
         protected override void DoStart()
         {
-            succeededCount = 0;
+            successedCount = 0;
             failedCount = 0;
-            runningCount = 0;
-            childrenCount = Children.Count;
-            if (childrenCount == 0)
+            if (Children.Count == 0)
             {
                 SelfStop(true);
                 return;
@@ -56,14 +50,13 @@ namespace CZToolKit.BehaviorTree
 
             foreach (var child in Children)
             {
-                runningCount++;
                 child.Start();
             }
         }
 
         protected override void DoStop()
         {
-            if (childrenCount != 0)
+            if (Children.Count != 0)
             {
                 foreach (var child in Children)
                 {
@@ -76,12 +69,11 @@ namespace CZToolKit.BehaviorTree
 
         protected override void OnChildStopped(TaskVM child, bool childSuccess)
         {
-            runningCount--;
             if (childSuccess)
-                succeededCount++;
+                successedCount++;
             else
                 failedCount++;
-            if (succeededCount + failedCount == childrenCount)
+            if (successedCount + failedCount >= Children.Count)
                 SelfStop(failedCount == 0);
         }
     }

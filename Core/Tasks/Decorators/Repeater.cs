@@ -25,24 +25,25 @@ namespace CZToolKit.BehaviorTree
     [NodeMenu("Decorator/Repeater")]
     public class Repeater : Task
     {
+        public bool ignoreFaild;
         public int loopCount;
     }
 
     [ViewModel(typeof(Repeater))]
     public class RepeaterVM : DecoratorTaskVM, IUpdateTask
     {
-        private Repeater tModel;
+        private Repeater model;
         private int counter;
         private bool childRunning;
 
         public RepeaterVM(Repeater model) : base(model)
         {
-            this.tModel = model;
+            this.model = model;
         }
 
         protected override void DoStart()
         {
-            if (tModel.loopCount != 0)
+            if (model.loopCount != 0)
             {
                 counter = 0;
                 childRunning = true;
@@ -72,9 +73,9 @@ namespace CZToolKit.BehaviorTree
         protected override void OnChildStopped(TaskVM child, bool result)
         {
             this.childRunning = false;
-            if (result)
+            if (model.ignoreFaild ||　result)
             {
-                if (tModel.loopCount > 0 && ++counter >= tModel.loopCount)
+                if (model.loopCount > 0 && ++counter >= model.loopCount)
                     SelfStop(true);
             }
             else
