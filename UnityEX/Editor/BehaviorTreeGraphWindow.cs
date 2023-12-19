@@ -9,7 +9,7 @@
  *  Date:
  *  Version:
  *  Writer: 半只龙虾人
- *  Github: https://github.com/HalfLobsterMan
+ *  Github: https://github.com/haloman9527
  *  Blog: https://www.mindgear.net/
  *
  */
@@ -125,13 +125,13 @@ namespace CZToolKit.BehaviorTree.Editors
 
             GraphView.CommandDispatcher.BeginGroup();
 
-            var nodesStr = SerializationUtility.SerializeValue(nodes, DataFormat.Binary);
-            var connectionsStr = SerializationUtility.SerializeValue(connections, DataFormat.Binary);
-            var groupsStr = SerializationUtility.SerializeValue(groups, DataFormat.Binary);
+            var nodesStr = Sirenix.Serialization.SerializationUtility.SerializeValue(nodes, DataFormat.Binary);
+            var connectionsStr = Sirenix.Serialization.SerializationUtility.SerializeValue(connections, DataFormat.Binary);
+            var groupsStr = Sirenix.Serialization.SerializationUtility.SerializeValue(groups, DataFormat.Binary);
 
-            nodes = SerializationUtility.DeserializeValue<Dictionary<int, BaseNode>>(nodesStr, DataFormat.Binary);
-            connections = SerializationUtility.DeserializeValue<List<BaseConnection>>(connectionsStr, DataFormat.Binary);
-            groups = SerializationUtility.DeserializeValue<List<BaseGroup>>(groupsStr, DataFormat.Binary);
+            nodes = Sirenix.Serialization.SerializationUtility.DeserializeValue<Dictionary<int, BaseNode>>(nodesStr, DataFormat.Binary);
+            connections = Sirenix.Serialization.SerializationUtility.DeserializeValue<List<BaseConnection>>(connectionsStr, DataFormat.Binary);
+            groups = Sirenix.Serialization.SerializationUtility.DeserializeValue<List<BaseGroup>>(groupsStr, DataFormat.Binary);
 
             var graph = GraphView.ViewModel;
             var nodeMaps = new Dictionary<int, BaseNodeVM>();
