@@ -63,34 +63,30 @@ namespace CZToolKit.BehaviorTree.Editors
 
         protected override BaseGraphView NewGraphView()
         {
-            var graphView =  new BehaviorTreeGraphView(Graph, this, new CommandDispatcher());
-            graphView.RegisterCallback<KeyDownEvent>(KeyDownCallback);
-            return graphView;
-        }
-        
-
-        protected override void BuildToolBar()
-        {
-            base.BuildToolBar();
-            
-            ToolbarButton btnSave = new ToolbarButton();
-            btnSave.text = "Save";
-            btnSave.clicked += Save;
-            btnSave.style.width = 80;
-            btnSave.style.unityTextAlign = TextAnchor.MiddleCenter;
-            ToolbarRight.Add(btnSave);
+            return new BehaviorTreeGraphView(Graph, this, new CommandDispatcher());
         }
 
-        void KeyDownCallback(KeyDownEvent evt)
+        protected override void OnBtnSaveClick()
         {
+            if (GraphAsset.UnityAsset == null)
+            {
+                var path = EditorUtility.SaveFilePanelInProject("保存", "New BehavorTree", "asset", "Create BehaviorTree Asset");
+                if (string.IsNullOrEmpty(path))
+                    return;
+                GraphAsset = ScriptableObject.CreateInstance<BehaviorTreeAsset>();
+                AssetDatabase.CreateAsset((ScriptableObject)GraphAsset, path);
+            }
+
+            base.OnBtnSaveClick();
+        }
+
+        protected override void OnKeyDownCallback(KeyDownEvent evt)
+        {
+            base.OnKeyDownCallback(evt);
             if (evt.commandKey || evt.ctrlKey)
             {
                 switch (evt.keyCode)
                 {
-                    case KeyCode.S:
-                        Save();
-                        evt.StopImmediatePropagation();
-                        break;
                     case KeyCode.D:
                         Duplicate();
                         evt.StopImmediatePropagation();
@@ -178,30 +174,8 @@ namespace CZToolKit.BehaviorTree.Editors
             }
 
             GraphView.CommandDispatcher.EndGroup();
-            
+
             GraphView.AddToSelection(selectables);
-        }
-
-
-        void Save()
-        {
-            if (GraphAsset.UnityAsset == null)
-            {
-                var path = EditorUtility.SaveFilePanelInProject("保存", "New BehavorTree", "asset", "Create BehaviorTree Asset");
-                if (string.IsNullOrEmpty(path))
-                    return;
-                GraphAsset = ScriptableObject.CreateInstance<BehaviorTreeAsset>();
-                AssetDatabase.CreateAsset((ScriptableObject)GraphAsset, path);
-            }
-
-            if (GraphAsset is IGraphAsset graphSerialization)
-            {
-                graphSerialization.SaveGraph(Graph.Model);
-            }
-            GraphView.SetDirty();
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-            GraphView.SetUnDirty();
         }
     }
 }

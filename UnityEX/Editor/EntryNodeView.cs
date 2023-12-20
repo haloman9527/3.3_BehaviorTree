@@ -28,7 +28,6 @@ namespace CZToolKit.BehaviorTree.Editors
             base.OnInitialized();
             SetMovable(false);
             SetDeletable(false);
-            SetSelectable(false);
         }
     }
 }
