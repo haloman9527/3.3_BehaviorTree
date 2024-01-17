@@ -29,7 +29,7 @@ namespace CZToolKit.BehaviorTree
     }
 
     [ViewModel(typeof(BehaviorTree))]
-    public class BehaviorTreeVM : BaseGraphVM
+    public class BehaviorTreeProcessor : BaseGraphProcessor
     {
         private EntryVM entry;
         private Queue<IUpdateTask> updateTasks;
@@ -39,7 +39,7 @@ namespace CZToolKit.BehaviorTree
             get { return entry.CurrentState; }
         }
 
-        public BehaviorTreeVM(BehaviorTree model) : base(model)
+        public BehaviorTreeProcessor(BehaviorTree model) : base(model)
         {
             if (model.entryID != 0 && !Nodes.ContainsKey(model.entryID))
                 model.entryID = 0;

@@ -28,7 +28,7 @@ namespace CZToolKit.BehaviorTree.Editors
 {
     public class BehaviorTreeGraphView : BaseGraphView
     {
-        public BehaviorTreeGraphView(BaseGraphVM graph, BaseGraphWindow window, CommandDispatcher commandDispatcher) : base(graph, window, commandDispatcher)
+        public BehaviorTreeGraphView(BaseGraphProcessor graph, BaseGraphWindow window, CommandDispatcher commandDispatcher) : base(graph, window, commandDispatcher)
         {
         }
 

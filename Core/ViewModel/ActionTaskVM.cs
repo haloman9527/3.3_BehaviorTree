@@ -21,7 +21,7 @@ namespace CZToolKit.BehaviorTree
     {
         protected ActionTaskVM(Task model) : base(model)
         {
-            AddPort(new BasePortVM(TaskVM.ParentPortName, BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(ContainerTaskVM)));
+            AddPort(new BasePortProcessor(TaskVM.ParentPortName, BasePort.Orientation.Vertical, BasePort.Direction.Input, BasePort.Capacity.Single, typeof(ContainerTaskVM)));
         }
     }
 }

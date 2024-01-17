@@ -130,7 +130,7 @@ namespace CZToolKit.BehaviorTree.Editors
             groups = Sirenix.Serialization.SerializationUtility.DeserializeValue<List<BaseGroup>>(groupsStr, DataFormat.Binary);
 
             var graph = GraphView.ViewModel;
-            var nodeMaps = new Dictionary<int, BaseNodeVM>();
+            var nodeMaps = new Dictionary<int, BaseNodeProcessor>();
 
             GraphView.ClearSelection();
             var selectables = new List<ISelectable>(32);
@@ -139,7 +139,7 @@ namespace CZToolKit.BehaviorTree.Editors
             {
                 pair.Value.id = graph.NewID();
                 pair.Value.position += new InternalVector2Int(50, 50);
-                var vm = ViewModelFactory.CreateViewModel(pair.Value) as BaseNodeVM;
+                var vm = ViewModelFactory.CreateViewModel(pair.Value) as BaseNodeProcessor;
                 GraphView.CommandDispatcher.Do(new AddNodeCommand(graph, vm));
                 nodeMaps[pair.Key] = vm;
                 selectables.Add(GraphView.NodeViews[vm.ID]);
@@ -153,7 +153,7 @@ namespace CZToolKit.BehaviorTree.Editors
                 if (nodeMaps.TryGetValue(connection.toNode, out var to))
                     connection.toNode = to.ID;
 
-                var vm = ViewModelFactory.CreateViewModel(connection) as BaseConnectionVM;
+                var vm = ViewModelFactory.CreateViewModel(connection) as BaseConnectionProcessor;
                 GraphView.CommandDispatcher.Do(new ConnectCommand(graph, vm));
                 selectables.Add(GraphView.ConnectionViews[vm]);
             }

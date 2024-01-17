@@ -24,29 +24,29 @@ public class BehaviorTreeTest : MonoBehaviour, IGraphAssetOwner
 {
     public BehaviorTreeAsset behaviorTreeAsset;
 
-    private BehaviorTreeVM behaviorTree;
+    private BehaviorTreeProcessor behaviorTree;
 
     public IGraphAsset GraphAsset
     {
         get { return behaviorTreeAsset; }
     }
 
-    public BaseGraphVM Graph
+    public BaseGraphProcessor Graph
     {
         get
         {
             if (behaviorTree == null)
-                behaviorTree = new BehaviorTreeVM(behaviorTreeAsset.DeserializeTGraph());
+                behaviorTree = new BehaviorTreeProcessor(behaviorTreeAsset.DeserializeTGraph());
             return behaviorTree;
         }
     }
 
-    public BehaviorTreeVM BehaviorTree
+    public BehaviorTreeProcessor BehaviorTree
     {
         get
         {
             if (behaviorTree == null)
-                behaviorTree = new BehaviorTreeVM(behaviorTreeAsset.DeserializeTGraph());
+                behaviorTree = new BehaviorTreeProcessor(behaviorTreeAsset.DeserializeTGraph());
             return behaviorTree;
         }
     }

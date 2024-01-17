@@ -21,7 +21,7 @@ using System;
 
 namespace CZToolKit.BehaviorTree
 {
-    public abstract class TaskVM : BaseNodeVM
+    public abstract class TaskVM : BaseNodeProcessor
     {
         #region Keyword
 
@@ -84,7 +84,7 @@ namespace CZToolKit.BehaviorTree
             OnStart?.Invoke();
             DoStart();
             if (CurrentState == TaskState.Active && this is IUpdateTask updateTask)
-                (Owner as BehaviorTreeVM).RegisterUpdateTask(updateTask);
+                (Owner as BehaviorTreeProcessor).RegisterUpdateTask(updateTask);
         }
 
         public void Stop()

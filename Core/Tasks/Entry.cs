@@ -34,7 +34,7 @@ namespace CZToolKit.BehaviorTree
     {
         public EntryVM(Entry model) : base(model)
         {
-            AddPort(new BasePortVM(TaskVM.ChildrenPortName, BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(TaskVM)));
+            AddPort(new BasePortProcessor(TaskVM.ChildrenPortName, BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(TaskVM)));
         }
 
         public TaskVM GetFirstChild()
