@@ -16,7 +16,7 @@
 
 #endregion
 
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
@@ -30,11 +30,11 @@ namespace CZToolKit.BehaviorTree
     }
 
     [ViewModel(typeof(Sequence))]
-    public class SequenceVM : CompositeTaskVM
+    public class SequenceProcessor : CompositeTaskProcessor
     {
         private int currentIndex;
 
-        public SequenceVM(Sequence model) : base(model)
+        public SequenceProcessor(Sequence model) : base(model)
         {
         }
 
@@ -56,7 +56,7 @@ namespace CZToolKit.BehaviorTree
             Children[currentIndex].Stop();
         }
 
-        protected override void OnChildStopped(TaskVM child, bool result)
+        protected override void OnChildStopped(TaskProcessor child, bool result)
         {
             if (!result)
                 SelfStop(false);

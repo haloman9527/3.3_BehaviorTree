@@ -17,7 +17,7 @@
 #endregion
 
 using System;
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
@@ -31,12 +31,12 @@ namespace CZToolKit.BehaviorTree
     }
 
     [ViewModel(typeof(RandomSelector))]
-    public class RandomSelectorVM : CompositeTaskVM
+    public class RandomSelectorProcessor : CompositeTaskProcessor
     {
         private int currentIndex;
         private Random random;
 
-        public RandomSelectorVM(RandomSelector model) : base(model)
+        public RandomSelectorProcessor(RandomSelector model) : base(model)
         {
             this[nameof(RandomSelector.randomSeed)] = new BindableProperty<int>(() => model.randomSeed, v => model.randomSeed = v);
             
@@ -67,7 +67,7 @@ namespace CZToolKit.BehaviorTree
             Children[currentIndex].Stop();
         }
 
-        protected override void OnChildStopped(TaskVM child, bool result)
+        protected override void OnChildStopped(TaskProcessor child, bool result)
         {
             if (result)
                 SelfStop(true);

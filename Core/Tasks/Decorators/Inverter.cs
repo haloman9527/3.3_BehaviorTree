@@ -13,7 +13,7 @@
  *
  */
 #endregion
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
@@ -23,9 +23,9 @@ namespace CZToolKit.BehaviorTree
     public class Inverter : Task { }
 
     [ViewModel(typeof(Inverter))]
-    public class InverterVM : DecoratorTaskVM
+    public class InverterProcessor : DecoratorTaskProcessor
     {
-        public InverterVM(Inverter model) : base(model) { }
+        public InverterProcessor(Inverter model) : base(model) { }
 
         protected override void DoStart()
         {
@@ -37,7 +37,7 @@ namespace CZToolKit.BehaviorTree
             Child.Stop();
         }
 
-        protected override void OnChildStopped(TaskVM child, bool result)
+        protected override void OnChildStopped(TaskProcessor child, bool result)
         {
             SelfStop(!result);
         }

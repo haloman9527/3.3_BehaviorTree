@@ -13,7 +13,7 @@
  *
  */
 #endregion
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
@@ -23,9 +23,9 @@ namespace CZToolKit.BehaviorTree
     public class Failure : Task { }
 
     [ViewModel(typeof(Failure))]
-    public class FailureVM : DecoratorTaskVM
+    public class FailureProcessor : DecoratorTaskProcessor
     {
-        public FailureVM(Failure model) : base(model) { }
+        public FailureProcessor(Failure model) : base(model) { }
 
         protected override void DoStart()
         {
@@ -37,7 +37,7 @@ namespace CZToolKit.BehaviorTree
             Child.Stop();
         }
 
-        protected override void OnChildStopped(TaskVM child, bool succeeded)
+        protected override void OnChildStopped(TaskProcessor child, bool succeeded)
         {
             SelfStop(false);
         }

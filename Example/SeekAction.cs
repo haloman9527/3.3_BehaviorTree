@@ -16,7 +16,7 @@
 
 #endregion
 
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.GraphProcessor;
 using System;
 using UnityEngine;
@@ -33,9 +33,9 @@ namespace CZToolKit.BehaviorTree
     }
 
     [ViewModel(typeof(SeekAction))]
-    public class SeekActionVM : ActionTaskVM, IUpdateTask
+    public class SeekActionProcessor : ActionTaskProcessor, IUpdateTask
     {
-        public SeekActionVM(SeekAction model) : base(model)
+        public SeekActionProcessor(SeekAction model) : base(model)
         {
             Title = "追逐";
         }

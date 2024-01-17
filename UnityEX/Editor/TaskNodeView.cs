@@ -23,7 +23,7 @@ using UnityEngine.UIElements;
 namespace CZToolKit.BehaviorTree.Editors
 {
     [CustomView(typeof(Task))]
-    public class TaskNodeView : BaseSimpleNodeView<TaskVM>
+    public class TaskNodeView : BaseSimpleNodeView<TaskProcessor>
     {
         Image icon;
         IconBadge badge;

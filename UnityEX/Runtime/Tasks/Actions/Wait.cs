@@ -16,7 +16,7 @@
 
 #endregion
 
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.GraphProcessor;
 using UnityEngine;
 
@@ -29,11 +29,11 @@ namespace CZToolKit.BehaviorTree
     }
 
     [ViewModel(typeof(Wait))]
-    public class WaitVM : ActionTaskVM, IUpdateTask
+    public class WaitProcessor : ActionTaskProcessor, IUpdateTask
     {
         float startTime;
 
-        public WaitVM(Wait model) : base(model)
+        public WaitProcessor(Wait model) : base(model)
         {
             this[nameof(Wait.interval)] = new BindableProperty<float>(() => model.interval, v => model.interval = v);
         }

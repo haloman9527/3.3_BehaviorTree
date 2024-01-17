@@ -13,7 +13,7 @@
  *
  */
 #endregion
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.GraphProcessor;
 using UnityEngine;
 
@@ -27,7 +27,7 @@ namespace CZToolKit.BehaviorTree
     }
     
     [ViewModel(typeof(LogTask))]
-    public class LogTaskVM : ActionTaskVM
+    public class LogTaskProcessor : ActionTaskProcessor
     {
 
         public string Text
@@ -36,7 +36,7 @@ namespace CZToolKit.BehaviorTree
             set { SetPropertyValue(nameof(Text), value); }
         }
         
-        public LogTaskVM(LogTask model) : base(model)
+        public LogTaskProcessor(LogTask model) : base(model)
         {
             this[nameof(Text)] = new BindableProperty<string>(() => model.text, v => { model.text = v; });
         }

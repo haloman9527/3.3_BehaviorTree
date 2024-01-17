@@ -16,7 +16,6 @@
 
 #endregion
 
-using CZToolKit.VM;
 using CZToolKit.GraphProcessor;
 using CZToolKit.GraphProcessor.Editors;
 using System.Collections.Generic;

@@ -20,16 +20,16 @@ using System.Collections.Generic;
 
 namespace CZToolKit.BehaviorTree
 {
-    public abstract class ContainerTaskVM : TaskVM
+    public abstract class ContainerTaskProcessor : TaskProcessor
     {
-        private List<TaskVM> children;
+        private List<TaskProcessor> children;
 
-        protected List<TaskVM> Children
+        protected List<TaskProcessor> Children
         {
             get { return children; }
         }
 
-        protected ContainerTaskVM(Task model) : base(model)
+        protected ContainerTaskProcessor(Task model) : base(model)
         {
         }
 
@@ -37,37 +37,37 @@ namespace CZToolKit.BehaviorTree
         {
             base.OnEnabled();
             RefreshChildren();
-            Ports[TaskVM.ChildrenPortName].onConnectionChanged += RefreshChildren;
+            Ports[TaskProcessor.ChildrenPortName].onConnectionChanged += RefreshChildren;
         }
 
         protected override void OnDisabled()
         {
             base.OnDisabled();
-            Ports[TaskVM.ChildrenPortName].onConnectionChanged -= RefreshChildren;
+            Ports[TaskProcessor.ChildrenPortName].onConnectionChanged -= RefreshChildren;
         }
 
-        public void ChildStopped(TaskVM child, bool childSuccess)
+        public void ChildStopped(TaskProcessor child, bool childSuccess)
         {
             this.OnChildStopped(child, childSuccess);
         }
 
-        protected abstract void OnChildStopped(TaskVM child, bool childSuccess);
+        protected abstract void OnChildStopped(TaskProcessor child, bool childSuccess);
         
         protected virtual void RefreshChildren()
         {
             if (children == null)
-                children = new List<TaskVM>(GetChildren());
+                children = new List<TaskProcessor>(GetChildren());
             else
             {
                 children.Clear();
                 children.AddRange(GetChildren());
             }
 
-            IEnumerable<TaskVM> GetChildren()
+            IEnumerable<TaskProcessor> GetChildren()
             {
-                foreach (var node in GetConnections(TaskVM.ChildrenPortName))
+                foreach (var node in GetConnections(TaskProcessor.ChildrenPortName))
                 {
-                    yield return (TaskVM)node;
+                    yield return (TaskProcessor)node;
                 }
             }
         }

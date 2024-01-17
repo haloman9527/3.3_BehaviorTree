@@ -16,7 +16,7 @@
 
 #endregion
 
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
@@ -29,12 +29,12 @@ namespace CZToolKit.BehaviorTree
     }
 
     [ViewModel(typeof(ParallelSequence))]
-    public class ParallelSequenceVM : CompositeTaskVM
+    public class ParallelSequenceProcessor : CompositeTaskProcessor
     {
         private int successedCount = 0;
         private int failedCount = 0;
 
-        public ParallelSequenceVM(ParallelSequence model) : base(model)
+        public ParallelSequenceProcessor(ParallelSequence model) : base(model)
         {
         }
 
@@ -67,7 +67,7 @@ namespace CZToolKit.BehaviorTree
                 SelfStop(false);
         }
 
-        protected override void OnChildStopped(TaskVM child, bool childSuccess)
+        protected override void OnChildStopped(TaskProcessor child, bool childSuccess)
         {
             if (childSuccess)
                 successedCount++;

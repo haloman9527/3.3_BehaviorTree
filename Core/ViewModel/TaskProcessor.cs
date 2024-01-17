@@ -21,7 +21,7 @@ using System;
 
 namespace CZToolKit.BehaviorTree
 {
-    public abstract class TaskVM : BaseNodeProcessor
+    public abstract class TaskProcessor : BaseNodeProcessor
     {
         #region Keyword
 
@@ -32,7 +32,7 @@ namespace CZToolKit.BehaviorTree
 
         #region Fields
 
-        private ContainerTaskVM parent;
+        private ContainerTaskProcessor parent;
         private TaskState currentState;
 
         #endregion
@@ -47,14 +47,14 @@ namespace CZToolKit.BehaviorTree
             get { return currentState; }
         }
 
-        public ContainerTaskVM Parent
+        public ContainerTaskProcessor Parent
         {
             get { return parent; }
         }
 
         #endregion
 
-        protected TaskVM(Task model) : base(model)
+        protected TaskProcessor(Task model) : base(model)
         {
         }
 
@@ -111,7 +111,7 @@ namespace CZToolKit.BehaviorTree
         private void RefreshParent()
         {
             if (Ports.TryGetValue(ParentPortName, out var parentPort) && parentPort.Connections.Count > 0)
-                parent = parentPort.Connections[0].FromNode as ContainerTaskVM;
+                parent = parentPort.Connections[0].FromNode as ContainerTaskProcessor;
             else
                 parent = null;
         }

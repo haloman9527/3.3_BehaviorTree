@@ -16,7 +16,7 @@
 
 #endregion
 
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.ECS;
 using CZToolKit.GraphProcessor;
 using UnityEngine;
@@ -37,9 +37,9 @@ namespace CZToolKit.BehaviorTree
     }
 
     [ViewModel(typeof(WanderAction))]
-    public class WanderActionVM : ActionTaskVM, IUpdateTask
+    public class WanderActionProcessor : ActionTaskProcessor, IUpdateTask
     {
-        public WanderActionVM(WanderAction model) : base(model)
+        public WanderActionProcessor(WanderAction model) : base(model)
         {
             Title = "徘徊";
         }

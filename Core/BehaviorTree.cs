@@ -16,7 +16,7 @@
 
 #endregion
 
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.GraphProcessor;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace CZToolKit.BehaviorTree
     [ViewModel(typeof(BehaviorTree))]
     public class BehaviorTreeProcessor : BaseGraphProcessor
     {
-        private EntryVM entry;
+        private EntryProcessor entry;
         private Queue<IUpdateTask> updateTasks;
 
         public TaskState RootState
@@ -47,7 +47,7 @@ namespace CZToolKit.BehaviorTree
                 model.entryID = model.nodes.FirstOrDefault(pair => pair.Value is Entry).Key;
             if (model.entryID == 0)
                 model.entryID = AddNode<Entry>(InternalVector2Int.zero).ID;
-            entry = Nodes[model.entryID] as EntryVM;
+            entry = Nodes[model.entryID] as EntryProcessor;
             updateTasks = new Queue<IUpdateTask>(16);
         }
 

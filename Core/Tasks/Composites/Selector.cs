@@ -16,7 +16,7 @@
 
 #endregion
 
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
@@ -30,11 +30,11 @@ namespace CZToolKit.BehaviorTree
     }
 
     [ViewModel(typeof(Selector))]
-    public class SelectorVM : CompositeTaskVM
+    public class SelectorProcessor : CompositeTaskProcessor
     {
         private int currentIndex;
 
-        public SelectorVM(Selector model) : base(model)
+        public SelectorProcessor(Selector model) : base(model)
         {
         }
 
@@ -54,7 +54,7 @@ namespace CZToolKit.BehaviorTree
             Children[currentIndex].Stop();
         }
 
-        protected override void OnChildStopped(TaskVM child, bool result)
+        protected override void OnChildStopped(TaskProcessor child, bool result)
         {
             if (result)
                 SelfStop(true);

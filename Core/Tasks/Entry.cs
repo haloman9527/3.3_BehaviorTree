@@ -16,7 +16,7 @@
 
 #endregion
 
-using CZToolKit.VM;
+using CZToolKit;
 using CZToolKit.GraphProcessor;
 
 namespace CZToolKit.BehaviorTree
@@ -30,19 +30,19 @@ namespace CZToolKit.BehaviorTree
     }
 
     [ViewModel(typeof(Entry))]
-    public class EntryVM : ContainerTaskVM
+    public class EntryProcessor : ContainerTaskProcessor
     {
-        public EntryVM(Entry model) : base(model)
+        public EntryProcessor(Entry model) : base(model)
         {
-            AddPort(new BasePortProcessor(TaskVM.ChildrenPortName, BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(TaskVM)));
+            AddPort(new BasePortProcessor(TaskProcessor.ChildrenPortName, BasePort.Orientation.Vertical, BasePort.Direction.Output, BasePort.Capacity.Single, typeof(TaskProcessor)));
         }
 
-        public TaskVM GetFirstChild()
+        public TaskProcessor GetFirstChild()
         {
-            var port = Ports[TaskVM.ChildrenPortName];
+            var port = Ports[TaskProcessor.ChildrenPortName];
             if (port.Connections.Count == 0)
                 return null;
-            return port.Connections[0].ToNode as TaskVM;
+            return port.Connections[0].ToNode as TaskProcessor;
         }
 
         protected override void DoStart()
@@ -64,7 +64,7 @@ namespace CZToolKit.BehaviorTree
             child?.Stop();
         }
 
-        protected override void OnChildStopped(TaskVM child, bool result)
+        protected override void OnChildStopped(TaskProcessor child, bool result)
         {
             SelfStop(result);
         }
