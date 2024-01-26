@@ -72,8 +72,7 @@ namespace CZToolKit.BehaviorTree
 
         public void Stop()
         {
-            if (entry.CurrentState == TaskState.Active)
-                entry.Stop();
+            entry.Stop();
         }
 
         internal void RegisterUpdateTask(IUpdateTask updateTask)

@@ -22,7 +22,7 @@ using CZToolKit.GraphProcessor;
 namespace CZToolKit.BehaviorTree
 {
     [NodeTitle("并行选择")]
-    [NodeTooltip("同时执行所有行为，直到所有行为完成，若全部失败，则返回失败，否则返回成功")]
+    [NodeTooltip("同时开始所有行为，直到所有行为完成，如果有一个行为返回Success，则返回Success，否则返回Failure")]
     [NodeMenu("Composite/Parallel Selector")]
     public class ParallelSelector : Task
     {
@@ -31,7 +31,6 @@ namespace CZToolKit.BehaviorTree
     [ViewModel(typeof(ParallelSelector))]
     public class ParallelSelectorProcessor : CompositeTaskProcessor
     {
-        private int succeededCount = 0;
         private int failedCount = 0;
 
         public ParallelSelectorProcessor(ParallelSelector model) : base(model)
@@ -40,7 +39,6 @@ namespace CZToolKit.BehaviorTree
 
         protected override void DoStart()
         {
-            succeededCount = 0;
             failedCount = 0;
             if (Children.Count == 0)
             {
@@ -63,18 +61,20 @@ namespace CZToolKit.BehaviorTree
                     child.Stop();
                 }
             }
-            else
-                SelfStop(false);
         }
 
         protected override void OnChildStopped(TaskProcessor child, bool result)
         {
             if (result)
-                succeededCount++;
+            {
+                SelfStop(true);
+            }
             else
+            {
                 failedCount++;
-            if (succeededCount + failedCount == Children.Count)
-                SelfStop(succeededCount != 0);
+                if (failedCount == Children.Count)
+                    SelfStop(false);
+            }
         }
     }
 }
