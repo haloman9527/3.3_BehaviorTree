@@ -54,19 +54,6 @@ namespace CZToolKit.BehaviorTree
             }
         }
 
-        protected override void DoStop()
-        {
-            if (Children.Count != 0)
-            {
-                foreach (var child in Children)
-                {
-                    child.Stop();
-                }
-            }
-            else
-                SelfStop(false);
-        }
-
         protected override void OnChildStopped(TaskProcessor child, bool childSuccess)
         {
             if (childSuccess)

@@ -21,7 +21,7 @@ using UnityEngine;
 namespace CZToolKit.BehaviorTree.Editors
 {
     [CustomView(typeof(Entry))]
-    public class EntryNodeView : TaskNodeView
+    public class EntryView : TaskView
     {
         protected override void OnInitialized()
         {

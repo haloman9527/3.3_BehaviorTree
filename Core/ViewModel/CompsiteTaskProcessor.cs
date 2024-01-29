@@ -23,7 +23,6 @@ namespace CZToolKit.BehaviorTree
 {
     public abstract class CompositeTaskProcessor : ContainerTaskProcessor
     {
-
         protected CompositeTaskProcessor(Task model) : base(model)
         {
             AddPort(new BasePortProcessor(TaskProcessor.ParentPortName, BasePort.Orientation.Vertical, BasePort.Direction.Left, BasePort.Capacity.Single, typeof(ContainerTaskProcessor)));

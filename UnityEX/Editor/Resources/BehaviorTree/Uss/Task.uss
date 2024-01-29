@@ -1,17 +1,29 @@
-﻿#state-border {
-    border-left-width: 2px;
-    border-right-width: 2px;
-    border-top-width: 2px;
-    border-bottom-width: 2px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    border-bottom-left-radius: 9px;
-    border-bottom-right-radius: 9px;
+﻿#node-border {
+    border-width: 0;
+    border-radius: 3px;
+    min-width: 80px;
 }
 
 #node-border > #title {
     height: 25px;
     min-height: 20px;
+}
+
+.action-task > #node-border {
+    background-color: rgba(10, 157, 0, 0.64);
+}
+
+.composite-task > #node-border {
+    background-color: rgba(255, 143, 0, 0.64);
+}
+
+.decorator-task > #node-border {
+    background-color: rgba(0, 214, 255, 0.64);
+}
+
+#node-border > #title > #title-label {
+    -unity-text-align: middle-center;
+    color: white;
 }
 
 #node-border > #contents {
@@ -27,6 +39,11 @@
     margin-top: 3px;
     margin-bottom: 3px;
     -unity-background-image-tint-color: rgba(1, 1, 1, 0.7);
+}
+
+#state-border {
+    border-width: 2px;
+    border-radius: 4px;
 }
 
 .success {

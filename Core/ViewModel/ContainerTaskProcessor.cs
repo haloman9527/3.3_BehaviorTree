@@ -46,10 +46,20 @@ namespace CZToolKit.BehaviorTree
             Ports[TaskProcessor.ChildrenPortName].onConnectionChanged -= RefreshChildren;
         }
 
+        protected override void DoStop()
+        {
+            if (Children != null && Children.Count != 0)
+            {
+                foreach (var child in Children)
+                {
+                    child.Stop();
+                }
+            }
+        }
+        
         public void ChildStopped(TaskProcessor child, bool childSuccess)
         {
-            if (this.CurrentState == TaskState.Active)
-                this.OnChildStopped(child, childSuccess);
+            this.OnChildStopped(child, childSuccess);
         }
 
         protected abstract void OnChildStopped(TaskProcessor child, bool childSuccess);

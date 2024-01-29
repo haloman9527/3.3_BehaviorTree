@@ -89,14 +89,12 @@ namespace CZToolKit.BehaviorTree
 
         public void Stop()
         {
-            currentState = TaskState.StopRequested;
             DoStop();
+            currentState = TaskState.InActive;
         }
 
         protected void SelfStop(bool success)
         {
-            if (this.CurrentState != TaskState.Active)
-                return;
             currentState = TaskState.InActive;
             OnStop?.Invoke(success);
             Parent?.ChildStopped(this, success);

@@ -62,11 +62,6 @@ namespace CZToolKit.BehaviorTree
             }
         }
 
-        protected override void DoStop()
-        {
-            Children[currentIndex].Stop();
-        }
-
         protected override void OnChildStopped(TaskProcessor child, bool result)
         {
             if (result)

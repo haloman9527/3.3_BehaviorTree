@@ -42,7 +42,7 @@ namespace CZToolKit.BehaviorTree.Editors
         {
             foreach (var node in NodeViews.Values)
             {
-                if (node is TaskNodeView taskView)
+                if (node is TaskView taskView)
                 {
                     taskView.UpdateState();
                 }

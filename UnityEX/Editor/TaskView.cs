@@ -23,13 +23,13 @@ using UnityEngine.UIElements;
 namespace CZToolKit.BehaviorTree.Editors
 {
     [CustomView(typeof(Task))]
-    public class TaskNodeView : BaseSimpleNodeView<TaskProcessor>
+    public class TaskView : BaseNodeView<TaskProcessor>
     {
         Image icon;
         IconBadge badge;
         VisualElement stateBorder;
         float anim = 0;
-        public TaskNodeView() : base()
+        public TaskView() : base()
         {
             styleSheets.Add(Resources.Load<StyleSheet>("BehaviorTree/Uss/Task"));
 
@@ -53,6 +53,24 @@ namespace CZToolKit.BehaviorTree.Editors
         protected override void OnInitialized()
         {
             base.OnInitialized();
+            switch (ViewModel)
+            {
+                case ActionTaskProcessor:
+                {
+                    this.AddToClassList("action-task");
+                    break;
+                }
+                case DecoratorTaskProcessor:
+                {
+                    this.AddToClassList("decorator-task");
+                    break;
+                }
+                case CompositeTaskProcessor:
+                {
+                    this.AddToClassList("composite-task");
+                    break;
+                }
+            }
             var iconAttr = ViewModel.ModelType.GetCustomAttribute<TaskIconAttribute>(true);
             if (iconAttr != null)
             {

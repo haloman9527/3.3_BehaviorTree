@@ -53,14 +53,6 @@ namespace CZToolKit.BehaviorTree
                 SelfStop(true);
         }
 
-        protected override void DoStop()
-        {
-            if (Child.CurrentState == TaskState.Active)
-                Child.Stop();
-            else
-                SelfStop(false);
-        }
-
         public void Update()
         {
             if (childRunning)
