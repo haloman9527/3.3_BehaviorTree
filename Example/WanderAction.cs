@@ -64,7 +64,7 @@ namespace CZToolKit.BehaviorTree
         {
             var navMeshAgent = Owner.Blackboard.Get<NavMeshAgent>("NavMeshAgent");
             var world = Owner.Blackboard.Get<World>("World");
-            var entity = Owner.Blackboard.Get<Entity>("Entity");
+            var entity = Owner.Blackboard.Get<Node>("Entity");
             var t_model = Model as WanderAction;
             if (Vector3.Distance(targetPos, navMeshAgent.transform.position) <= 2)
             {
