@@ -16,6 +16,7 @@
 
 #endregion
 
+#if UNITY_EDITOR
 using CZToolKit.GraphProcessor;
 using CZToolKit.GraphProcessor.Editors;
 using System.Collections.Generic;
@@ -178,3 +179,4 @@ namespace CZToolKit.BehaviorTree.Editors
         }
     }
 }
+#endif

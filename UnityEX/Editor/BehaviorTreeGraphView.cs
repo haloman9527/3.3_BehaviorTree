@@ -16,13 +16,10 @@
 
 #endregion
 
-using CZToolKit;
+#if UNITY_EDITOR
 using CZToolKit.GraphProcessor;
 using CZToolKit.GraphProcessor.Editors;
-using System;
-using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
-using UnityEngine;
 
 namespace CZToolKit.BehaviorTree.Editors
 {
@@ -77,3 +74,4 @@ namespace CZToolKit.BehaviorTree.Editors
         }
     }
 }
+#endif

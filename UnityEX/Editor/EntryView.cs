@@ -14,6 +14,7 @@
  */
 #endregion
 
+#if UNITY_EDITOR
 using CZToolKit.GraphProcessor;
 using CZToolKit.GraphProcessor.Editors;
 using UnityEngine;
@@ -31,3 +32,4 @@ namespace CZToolKit.BehaviorTree.Editors
         }
     }
 }
+#endif
