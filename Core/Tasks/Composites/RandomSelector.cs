@@ -3,9 +3,9 @@
 /***
  *
  *  Title:
- *  
+ *
  *  Description:
- *  
+ *
  *  Date:
  *  Version:
  *  Writer: 半只龙虾人
@@ -38,8 +38,8 @@ namespace CZToolKit.BehaviorTree
 
         public RandomSelectorProcessor(RandomSelector model) : base(model)
         {
-            this[nameof(RandomSelector.randomSeed)] = new BindableProperty<int>(() => model.randomSeed, v => model.randomSeed = v);
-            
+            this.RegisterProperty(nameof(RandomSelector.randomSeed), new BindableProperty<int>(() => model.randomSeed, v => model.randomSeed = v));
+
             random = new Random(model.randomSeed);
         }
 
@@ -56,7 +56,7 @@ namespace CZToolKit.BehaviorTree
                     Children[i] = Children[index];
                     Children[index] = temp;
                 }
-            
+
                 currentIndex = 0;
                 Children[currentIndex].Start();
             }

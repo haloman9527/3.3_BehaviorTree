@@ -3,9 +3,9 @@
 /***
  *
  *  Title:
- *  
+ *
  *  Description:
- *  
+ *
  *  Date:
  *  Version:
  *  Writer: 半只龙虾人
@@ -35,7 +35,7 @@ namespace CZToolKit.BehaviorTree
 
         public WaitProcessor(Wait model) : base(model)
         {
-            this[nameof(Wait.interval)] = new BindableProperty<float>(() => model.interval, v => model.interval = v);
+            this.RegisterProperty(nameof(Wait.interval), new BindableProperty<float>(() => model.interval, v => model.interval = v));
         }
 
         protected override void DoStart()

@@ -3,9 +3,9 @@
 /***
  *
  *  Title:
- *  
+ *
  *  Description:
- *  
+ *
  *  Date:
  *  Version:
  *  Writer: 半只龙虾人
@@ -39,7 +39,7 @@ namespace CZToolKit.BehaviorTree
 
         public RandomSequenceProcessor(RandomSequence model) : base(model)
         {
-            this[nameof(RandomSequence.randomSeed)] = new BindableProperty<int>(() => model.randomSeed, v => model.randomSeed = v);
+            this.RegisterProperty(nameof(RandomSequence.randomSeed), new BindableProperty<int>(() => model.randomSeed, v => model.randomSeed = v));
 
             random = new Random(model.randomSeed);
         }
