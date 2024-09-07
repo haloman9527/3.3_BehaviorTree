@@ -34,8 +34,8 @@ namespace CZToolKit.BehaviorTree
     {
         public string Text
         {
-            get { return GetPropertyValue<string>(nameof(Text)); }
-            set { SetPropertyValue(nameof(Text), value); }
+            get { return GetPropertyValue<string>(nameof(LogTask.text)); }
+            set { SetPropertyValue(nameof(LogTask.text), value); }
         }
 
         public LogTaskProcessor(LogTask model) : base(model)
