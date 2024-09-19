@@ -16,8 +16,6 @@
 
 #endregion
 
-using CZToolKit;
-using CZToolKit.ECS;
 using CZToolKit.GraphProcessor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -63,8 +61,6 @@ namespace CZToolKit.BehaviorTree
         public void Update()
         {
             var navMeshAgent = Owner.Blackboard.Get<NavMeshAgent>("NavMeshAgent");
-            var world = Owner.Blackboard.Get<World>("World");
-            var entity = Owner.Blackboard.Get<Entity>("Entity");
             var t_model = Model as WanderAction;
             if (Vector3.Distance(targetPos, navMeshAgent.transform.position) <= 2)
             {
