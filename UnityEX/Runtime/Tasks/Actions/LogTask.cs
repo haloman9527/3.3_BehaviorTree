@@ -34,13 +34,12 @@ namespace CZToolKit.BehaviorTree
     {
         public string Text
         {
-            get { return GetPropertyValue<string>(nameof(LogTask.text)); }
-            set { SetPropertyValue(nameof(LogTask.text), value); }
+            get => (Model as LogTask).text;
+            set => SetFieldValue(ref (Model as LogTask).text, value, nameof(LogTask.text));
         }
 
         public LogTaskProcessor(LogTask model) : base(model)
         {
-            this.RegisterProperty(nameof(LogTask.text), new BindableProperty<string>(() => model.text, v => { model.text = v; }));
         }
 
         protected override void DoStart()

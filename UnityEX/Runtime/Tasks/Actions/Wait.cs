@@ -33,9 +33,15 @@ namespace CZToolKit.BehaviorTree
     {
         float startTime;
 
+        public float Interval
+        {
+            get => (Model as Wait).interval;
+            set => SetFieldValue(ref (Model as Wait).interval, value, nameof(Wait.interval));
+        }
+
         public WaitProcessor(Wait model) : base(model)
         {
-            this.RegisterProperty(nameof(Wait.interval), new BindableProperty<float>(() => model.interval, v => model.interval = v));
+            
         }
 
         protected override void DoStart()

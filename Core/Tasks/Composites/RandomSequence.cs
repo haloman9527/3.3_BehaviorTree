@@ -37,10 +37,14 @@ namespace CZToolKit.BehaviorTree
         private int currentIndex;
         private Random random;
 
+        public int RandomSeed
+        {
+            get => (Model as RandomSequence).randomSeed;
+            set => SetFieldValue(ref (Model as RandomSequence).randomSeed, value, nameof(RandomSequence.randomSeed));
+        }
+
         public RandomSequenceProcessor(RandomSequence model) : base(model)
         {
-            this.RegisterProperty(nameof(RandomSequence.randomSeed), new BindableProperty<int>(() => model.randomSeed, v => model.randomSeed = v));
-
             random = new Random(model.randomSeed);
         }
 
