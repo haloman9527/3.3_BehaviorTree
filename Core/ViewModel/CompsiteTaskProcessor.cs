@@ -16,10 +16,10 @@
 
 #endregion
 
-using CZToolKit.GraphProcessor;
 using System.Collections.Generic;
+using Jiange.GraphProcessor;
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     public abstract class CompositeTaskProcessor : ContainerTaskProcessor
     {

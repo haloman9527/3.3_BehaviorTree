@@ -13,9 +13,10 @@
  *
  */
 #endregion
-using CZToolKit.GraphProcessor;
 
-namespace CZToolKit.BehaviorTree
+using Jiange.GraphProcessor;
+
+namespace Jiange.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Debug")]
     [NodeMenu("Action/Failure")]

@@ -14,7 +14,7 @@
  */
 #endregion
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     public abstract class Composite : Task { }
 }

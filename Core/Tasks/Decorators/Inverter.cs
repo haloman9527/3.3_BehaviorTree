@@ -13,10 +13,10 @@
  *
  */
 #endregion
-using CZToolKit;
-using CZToolKit.GraphProcessor;
+using Jiange;
+using Jiange.GraphProcessor;
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     [NodeTooltip("始终返回相反的结果")]
     [NodeMenu("Decorator/Inverter")]

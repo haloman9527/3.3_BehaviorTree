@@ -15,11 +15,11 @@
 #endregion
 
 #if UNITY_EDITOR
-using CZToolKit.GraphProcessor;
-using CZToolKit.GraphProcessor.Editors;
+using Jiange.GraphProcessor;
+using Jiange.GraphProcessor.Editors;
 using UnityEngine;
 
-namespace CZToolKit.BehaviorTree.Editors
+namespace Jiange.BehaviorTree.Editors
 {
     [CustomView(typeof(Entry))]
     public class EntryView : TaskView

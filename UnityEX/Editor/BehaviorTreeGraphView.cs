@@ -17,11 +17,11 @@
 #endregion
 
 #if UNITY_EDITOR
-using CZToolKit.GraphProcessor;
-using CZToolKit.GraphProcessor.Editors;
+using Jiange.GraphProcessor;
+using Jiange.GraphProcessor.Editors;
 using UnityEditor.Experimental.GraphView;
 
-namespace CZToolKit.BehaviorTree.Editors
+namespace Jiange.BehaviorTree.Editors
 {
     public class BehaviorTreeGraphView : BaseGraphView
     {

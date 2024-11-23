@@ -16,12 +16,12 @@
 
 #endregion
 
-using CZToolKit.GraphProcessor;
+using Jiange.GraphProcessor;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     [NodeMenu("Wander")]
     [NodeTooltip("在指定区域内徘徊，直到看到敌人")]

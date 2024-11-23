@@ -16,10 +16,10 @@
 
 #endregion
 
-using CZToolKit.GraphProcessor;
+using Jiange.GraphProcessor;
 using System;
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     public enum TaskState
     {

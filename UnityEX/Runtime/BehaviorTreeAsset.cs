@@ -16,14 +16,14 @@
 
 #endregion
 
-using CZToolKit.GraphProcessor;
 using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
+using Jiange.GraphProcessor;
 using UnityEngine;
 using UnityObject = UnityEngine.Object;
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     [CreateAssetMenu]
     public class BehaviorTreeAsset : ScriptableObject, IGraphAsset, IGraphAsset<BehaviorTree>

@@ -16,11 +16,11 @@
 
 #endregion
 
-using CZToolKit;
-using CZToolKit.GraphProcessor;
+using Jiange;
+using Jiange.GraphProcessor;
 using UnityEngine;
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Debug")]
     [NodeMenu("Action/Log")]

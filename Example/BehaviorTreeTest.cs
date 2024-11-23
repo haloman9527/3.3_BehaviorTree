@@ -16,8 +16,8 @@
 
 #endregion
 
-using CZToolKit.BehaviorTree;
-using CZToolKit.GraphProcessor;
+using Jiange.BehaviorTree;
+using Jiange.GraphProcessor;
 using UnityEngine;
 
 public class BehaviorTreeTest : MonoBehaviour, IGraphAssetOwner

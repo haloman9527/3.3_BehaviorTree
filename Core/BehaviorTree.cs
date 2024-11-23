@@ -16,12 +16,12 @@
 
 #endregion
 
-using CZToolKit;
-using CZToolKit.GraphProcessor;
+using Jiange;
 using System.Collections.Generic;
 using System.Linq;
+using Jiange.GraphProcessor;
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     public class BehaviorTree : BaseGraph
     {

@@ -17,10 +17,10 @@
 #endregion
 
 using System;
-using CZToolKit;
-using CZToolKit.GraphProcessor;
+using Jiange;
+using Jiange.GraphProcessor;
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/RandomSequence")]
     [NodeTitle("随机顺序")]

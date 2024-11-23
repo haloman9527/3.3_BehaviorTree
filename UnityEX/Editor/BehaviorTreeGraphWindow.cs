@@ -17,10 +17,10 @@
 #endregion
 
 #if UNITY_EDITOR
-using CZToolKit.GraphProcessor;
-using CZToolKit.GraphProcessor.Editors;
 using System.Collections.Generic;
-using CZToolKit;
+using Jiange;
+using Jiange.GraphProcessor;
+using Jiange.GraphProcessor.Editors;
 using Sirenix.Serialization;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -29,7 +29,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityObject = UnityEngine.Object;
 
-namespace CZToolKit.BehaviorTree.Editors
+namespace Jiange.BehaviorTree.Editors
 {
     [CustomView(typeof(BehaviorTree))]
     public class BehaviorTreeGraphWindow : BaseGraphWindow

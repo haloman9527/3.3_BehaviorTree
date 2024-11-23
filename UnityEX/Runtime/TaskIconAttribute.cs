@@ -15,7 +15,7 @@
 #endregion
 using System;
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     public class TaskIconAttribute : Attribute
     {

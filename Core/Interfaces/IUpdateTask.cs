@@ -16,7 +16,7 @@
 
 #endregion
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     public interface IUpdateTask : ITask
     {

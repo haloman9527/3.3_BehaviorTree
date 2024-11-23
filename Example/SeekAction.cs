@@ -16,13 +16,13 @@
 
 #endregion
 
-using CZToolKit;
-using CZToolKit.GraphProcessor;
+using Jiange;
 using System;
+using Jiange.GraphProcessor;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     [NodeTooltip("追逐敌人到一定距离后停下")]
     [NodeMenu("Seek")]

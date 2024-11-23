@@ -16,10 +16,10 @@
 
 #endregion
 
-using CZToolKit;
-using CZToolKit.GraphProcessor;
+using Jiange;
+using Jiange.GraphProcessor;
 
-namespace CZToolKit.BehaviorTree
+namespace Jiange.BehaviorTree
 {
     [NodeMenu("Entry", hidden = true)]
     [TaskIcon("BehaviorTree/Icons/Entry")]
