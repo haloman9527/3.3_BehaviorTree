@@ -17,11 +17,11 @@
 #endregion
 
 #if UNITY_EDITOR
-using Jiange.GraphProcessor;
-using Jiange.GraphProcessor.Editors;
+using Moyo.GraphProcessor;
+using Moyo.GraphProcessor.Editors;
 using UnityEditor.Experimental.GraphView;
 
-namespace Jiange.BehaviorTree.Editors
+namespace Moyo.BehaviorTree.Editors
 {
     public class BehaviorTreeGraphView : BaseGraphView
     {

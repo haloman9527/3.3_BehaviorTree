@@ -16,13 +16,13 @@
 
 #if UNITY_EDITOR
 using System.Reflection;
-using Jiange.GraphProcessor.Editors;
+using Moyo.GraphProcessor.Editors;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Jiange.BehaviorTree.Editors
+namespace Moyo.BehaviorTree.Editors
 {
     [CustomView(typeof(Task))]
     public class TaskView : BaseNodeView<TaskProcessor>

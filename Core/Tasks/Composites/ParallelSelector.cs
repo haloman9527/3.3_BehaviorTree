@@ -16,10 +16,10 @@
 
 #endregion
 
-using Jiange;
-using Jiange.GraphProcessor;
+using Moyo;
+using Moyo.GraphProcessor;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     [NodeTitle("并行选择")]
     [NodeTooltip("同时开始所有行为，直到所有行为完成，如果有一个行为返回Success，则返回Success，否则返回Failure")]

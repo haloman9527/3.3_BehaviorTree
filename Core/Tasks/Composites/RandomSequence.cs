@@ -17,10 +17,10 @@
 #endregion
 
 using System;
-using Jiange;
-using Jiange.GraphProcessor;
+using Moyo;
+using Moyo.GraphProcessor;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/RandomSequence")]
     [NodeTitle("随机顺序")]

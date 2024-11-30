@@ -15,7 +15,7 @@
 #endregion
 using System;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     public class TaskIconAttribute : Attribute
     {

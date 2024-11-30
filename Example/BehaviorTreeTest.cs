@@ -16,8 +16,8 @@
 
 #endregion
 
-using Jiange.BehaviorTree;
-using Jiange.GraphProcessor;
+using Moyo.BehaviorTree;
+using Moyo.GraphProcessor;
 using UnityEngine;
 
 public class BehaviorTreeTest : MonoBehaviour, IGraphAssetOwner

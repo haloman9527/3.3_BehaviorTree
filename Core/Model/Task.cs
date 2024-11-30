@@ -14,9 +14,9 @@
  */
 #endregion
 
-using Jiange.GraphProcessor;
+using Moyo.GraphProcessor;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Default")]
     public abstract class Task : BaseNode { }

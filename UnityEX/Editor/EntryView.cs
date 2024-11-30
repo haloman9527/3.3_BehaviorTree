@@ -15,11 +15,11 @@
 #endregion
 
 #if UNITY_EDITOR
-using Jiange.GraphProcessor;
-using Jiange.GraphProcessor.Editors;
+using Moyo.GraphProcessor;
+using Moyo.GraphProcessor.Editors;
 using UnityEngine;
 
-namespace Jiange.BehaviorTree.Editors
+namespace Moyo.BehaviorTree.Editors
 {
     [CustomView(typeof(Entry))]
     public class EntryView : TaskView

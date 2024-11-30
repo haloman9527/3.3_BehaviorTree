@@ -17,9 +17,9 @@
 #endregion
 
 using System.Collections.Generic;
-using Jiange.GraphProcessor;
+using Moyo.GraphProcessor;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     public abstract class CompositeTaskProcessor : ContainerTaskProcessor
     {

@@ -18,9 +18,9 @@
 
 #if UNITY_EDITOR
 using System.Collections.Generic;
-using Jiange;
-using Jiange.GraphProcessor;
-using Jiange.GraphProcessor.Editors;
+using Moyo;
+using Moyo.GraphProcessor;
+using Moyo.GraphProcessor.Editors;
 using Sirenix.Serialization;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -29,7 +29,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityObject = UnityEngine.Object;
 
-namespace Jiange.BehaviorTree.Editors
+namespace Moyo.BehaviorTree.Editors
 {
     [CustomView(typeof(BehaviorTree))]
     public class BehaviorTreeGraphWindow : BaseGraphWindow

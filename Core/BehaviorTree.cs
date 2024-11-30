@@ -16,12 +16,12 @@
 
 #endregion
 
-using Jiange;
+using Moyo;
 using System.Collections.Generic;
 using System.Linq;
-using Jiange.GraphProcessor;
+using Moyo.GraphProcessor;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     public class BehaviorTree : BaseGraph
     {

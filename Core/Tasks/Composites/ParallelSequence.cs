@@ -16,10 +16,10 @@
 
 #endregion
 
-using Jiange;
-using Jiange.GraphProcessor;
+using Moyo;
+using Moyo.GraphProcessor;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     [NodeTitle("并行顺序")]
     [NodeTooltip("同时执行所有行为，直到所有行为完成，若全部成功，则返回成功，否则返回失败")]

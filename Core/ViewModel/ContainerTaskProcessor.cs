@@ -18,7 +18,7 @@
 
 using System.Collections.Generic;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     public abstract class ContainerTaskProcessor : TaskProcessor
     {

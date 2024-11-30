@@ -16,10 +16,10 @@
 
 #endregion
 
-using Jiange.GraphProcessor;
+using Moyo.GraphProcessor;
 using System;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     public enum TaskState
     {

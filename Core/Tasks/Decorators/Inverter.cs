@@ -13,10 +13,10 @@
  *
  */
 #endregion
-using Jiange;
-using Jiange.GraphProcessor;
+using Moyo;
+using Moyo.GraphProcessor;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     [NodeTooltip("始终返回相反的结果")]
     [NodeMenu("Decorator/Inverter")]

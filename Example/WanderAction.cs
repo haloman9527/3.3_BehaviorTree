@@ -16,12 +16,12 @@
 
 #endregion
 
-using Jiange.GraphProcessor;
+using Moyo.GraphProcessor;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     [NodeMenu("Wander")]
     [NodeTooltip("在指定区域内徘徊，直到看到敌人")]

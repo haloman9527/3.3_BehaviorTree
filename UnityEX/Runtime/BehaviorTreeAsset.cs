@@ -19,11 +19,11 @@
 using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
-using Jiange.GraphProcessor;
+using Moyo.GraphProcessor;
 using UnityEngine;
 using UnityObject = UnityEngine.Object;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     [CreateAssetMenu]
     public class BehaviorTreeAsset : ScriptableObject, IGraphAsset, IGraphAsset<BehaviorTree>

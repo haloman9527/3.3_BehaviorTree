@@ -16,7 +16,7 @@
 
 #endregion
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     public interface IUpdateTask : ITask
     {

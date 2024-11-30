@@ -16,11 +16,11 @@
 
 #endregion
 
-using Jiange;
-using Jiange.GraphProcessor;
+using Moyo;
+using Moyo.GraphProcessor;
 using UnityEngine;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     [NodeMenu("Action/Wait")]
     public class Wait : Task

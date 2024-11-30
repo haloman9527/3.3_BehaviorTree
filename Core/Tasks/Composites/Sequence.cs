@@ -16,10 +16,10 @@
 
 #endregion
 
-using Jiange;
-using Jiange.GraphProcessor;
+using Moyo;
+using Moyo.GraphProcessor;
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Sequence")]
     [NodeTitle("顺序执行")]

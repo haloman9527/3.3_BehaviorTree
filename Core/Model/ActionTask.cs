@@ -14,7 +14,7 @@
  */
 #endregion
 
-namespace Jiange.BehaviorTree
+namespace Moyo.BehaviorTree
 {
     public abstract partial class ActionTask : Task { }
 }
