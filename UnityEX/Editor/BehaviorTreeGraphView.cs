@@ -25,10 +25,6 @@ namespace Moyo.BehaviorTree.Editors
 {
     public class BehaviorTreeGraphView : BaseGraphView
     {
-        public BehaviorTreeGraphView(BaseGraphProcessor graph, BaseGraphWindow window, CommandDispatcher commandDispatcher) : base(graph, window, commandDispatcher)
-        {
-        }
-
         protected override void OnInitialized()
         {
             base.OnInitialized();

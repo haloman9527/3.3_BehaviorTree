@@ -1,12 +1,12 @@
 ﻿#node-border {
     border-width: 0;
     border-radius: 3px;
-    min-width: 80px;
+    min-width: 100px;
 }
 
 #node-border > #title {
-    height: 25px;
-    min-height: 20px;
+    height: 30px;
+    min-height: 30px;
 }
 
 .action-task > #node-border {
@@ -23,7 +23,8 @@
 
 #node-border > #title > #title-label {
     -unity-text-align: middle-center;
-    color: white;
+    font-size: 16px;
+    color: rgb(36, 36, 36);
 }
 
 #node-border > #contents {

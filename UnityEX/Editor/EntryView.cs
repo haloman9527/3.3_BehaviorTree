@@ -27,8 +27,8 @@ namespace Moyo.BehaviorTree.Editors
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            SetMovable(false);
-            SetDeletable(false);
+            this.Deletable = false;
+            this.Movable = false;
         }
     }
 }

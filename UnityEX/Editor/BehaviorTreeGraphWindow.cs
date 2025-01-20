@@ -27,6 +27,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Group = Moyo.GraphProcessor.Group;
 using UnityObject = UnityEngine.Object;
 
 namespace Moyo.BehaviorTree.Editors
@@ -63,7 +64,7 @@ namespace Moyo.BehaviorTree.Editors
 
         protected override BaseGraphView NewGraphView()
         {
-            return new BehaviorTreeGraphView(Graph, this, new CommandDispatcher());
+            return new BehaviorTreeGraphView();
         }
 
         protected override void OnBtnSaveClick()
@@ -102,7 +103,7 @@ namespace Moyo.BehaviorTree.Editors
             // 收集所有节点，连线
             Dictionary<int, BaseNode> nodes = new Dictionary<int, BaseNode>();
             List<BaseConnection> connections = new List<BaseConnection>();
-            List<BaseGroup> groups = new List<BaseGroup>();
+            List<Group> groups = new List<Group>();
             foreach (var item in GraphView.selection)
             {
                 switch (item)
@@ -127,7 +128,7 @@ namespace Moyo.BehaviorTree.Editors
 
             nodes = Sirenix.Serialization.SerializationUtility.DeserializeValue<Dictionary<int, BaseNode>>(nodesStr, DataFormat.Binary);
             connections = Sirenix.Serialization.SerializationUtility.DeserializeValue<List<BaseConnection>>(connectionsStr, DataFormat.Binary);
-            groups = Sirenix.Serialization.SerializationUtility.DeserializeValue<List<BaseGroup>>(groupsStr, DataFormat.Binary);
+            groups = Sirenix.Serialization.SerializationUtility.DeserializeValue<List<Group>>(groupsStr, DataFormat.Binary);
 
             var graph = GraphView.ViewModel;
             var nodeMaps = new Dictionary<int, BaseNodeProcessor>();

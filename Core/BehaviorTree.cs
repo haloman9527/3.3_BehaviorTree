@@ -43,8 +43,8 @@ namespace Moyo.BehaviorTree
         {
             if (model.entryID != 0 && !Nodes.ContainsKey(model.entryID))
                 model.entryID = 0;
-            if (model.entryID == 0)
-                model.entryID = model.nodes.FirstOrDefault(pair => pair.Value is Entry).Key;
+            if (model.entryID == 0 && model.nodes.FirstOrDefault(node => node is Entry) is Entry e)
+                model.entryID = e.id;
             if (model.entryID == 0)
                 model.entryID = AddNode<Entry>(InternalVector2Int.zero).ID;
             entry = Nodes[model.entryID] as EntryProcessor;

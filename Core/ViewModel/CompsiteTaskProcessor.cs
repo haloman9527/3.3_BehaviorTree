@@ -25,8 +25,8 @@ namespace Moyo.BehaviorTree
     {
         protected CompositeTaskProcessor(Task model) : base(model)
         {
-            AddPort(new BasePortProcessor(TaskProcessor.ParentPortName, BasePort.Orientation.Vertical, BasePort.Direction.Left, BasePort.Capacity.Single, typeof(ContainerTaskProcessor)));
-            AddPort(new BasePortProcessor(TaskProcessor.ChildrenPortName, BasePort.Orientation.Vertical, BasePort.Direction.Right, BasePort.Capacity.Multi, typeof(TaskProcessor)));
+            AddPort(new BasePortProcessor(TaskProcessor.ParentPortName, BasePort.Direction.Top, BasePort.Capacity.Single, typeof(ContainerTaskProcessor)));
+            AddPort(new BasePortProcessor(TaskProcessor.ChildrenPortName, BasePort.Direction.Bottom, BasePort.Capacity.Multi, typeof(TaskProcessor)));
         }
     }
 }

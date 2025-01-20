@@ -34,8 +34,8 @@ namespace Moyo.BehaviorTree
     {
         public string Text
         {
-            get => (Model as LogTask).text;
-            set => SetFieldValue(ref (Model as LogTask).text, value, nameof(LogTask.text));
+            get => this.ModelAs<LogTask>().text;
+            set => SetFieldValue(ref this.ModelAs<LogTask>().text, value, nameof(LogTask.text));
         }
 
         public LogTaskProcessor(LogTask model) : base(model)

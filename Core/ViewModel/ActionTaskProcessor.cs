@@ -22,7 +22,7 @@ namespace Moyo.BehaviorTree
     {
         protected ActionTaskProcessor(Task model) : base(model)
         {
-            AddPort(new BasePortProcessor(TaskProcessor.ParentPortName, BasePort.Orientation.Vertical, BasePort.Direction.Left, BasePort.Capacity.Single, typeof(ContainerTaskProcessor)));
+            AddPort(new BasePortProcessor(TaskProcessor.ParentPortName, BasePort.Direction.Top, BasePort.Capacity.Single, typeof(ContainerTaskProcessor)));
         }
     }
 }

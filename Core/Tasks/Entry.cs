@@ -34,7 +34,7 @@ namespace Moyo.BehaviorTree
     {
         public EntryProcessor(Entry model) : base(model)
         {
-            AddPort(new BasePortProcessor(TaskProcessor.ChildrenPortName, BasePort.Orientation.Vertical, BasePort.Direction.Right, BasePort.Capacity.Single, typeof(TaskProcessor)));
+            AddPort(new BasePortProcessor(TaskProcessor.ChildrenPortName, BasePort.Direction.Bottom, BasePort.Capacity.Single, typeof(TaskProcessor)));
         }
 
         public TaskProcessor GetFirstChild()
