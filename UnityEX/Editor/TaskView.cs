@@ -34,7 +34,6 @@ namespace Moyo.BehaviorTree.Editors
         public TaskView() : base()
         {
             styleSheets.Add(Resources.Load<StyleSheet>("BehaviorTree/Uss/Task"));
-
             icon = new Image() { name = "icon" };
             controls.Add(icon);
 

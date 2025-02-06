@@ -69,7 +69,7 @@ namespace Moyo.BehaviorTree.Editors
 
         protected override void OnBtnSaveClick()
         {
-            if (GraphAsset.UnityAsset == null)
+            if (GraphAsset == null)
             {
                 var path = EditorUtility.SaveFilePanelInProject("保存", "New BehavorTree", "asset", "Create BehaviorTree Asset");
                 if (string.IsNullOrEmpty(path))

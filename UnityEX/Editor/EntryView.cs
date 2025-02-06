@@ -15,9 +15,7 @@
 #endregion
 
 #if UNITY_EDITOR
-using Moyo.GraphProcessor;
 using Moyo.GraphProcessor.Editors;
-using UnityEngine;
 
 namespace Moyo.BehaviorTree.Editors
 {

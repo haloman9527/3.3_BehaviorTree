@@ -36,7 +36,7 @@ public class BehaviorTreeTest : MonoBehaviour, IGraphAssetOwner
         get
         {
             if (behaviorTree == null)
-                behaviorTree = new BehaviorTreeProcessor(behaviorTreeAsset.DeserializeTGraph());
+                behaviorTree = new BehaviorTreeProcessor(behaviorTreeAsset.LoadGraph() as BehaviorTree);
             return behaviorTree;
         }
     }
@@ -46,7 +46,7 @@ public class BehaviorTreeTest : MonoBehaviour, IGraphAssetOwner
         get
         {
             if (behaviorTree == null)
-                behaviorTree = new BehaviorTreeProcessor(behaviorTreeAsset.DeserializeTGraph());
+                behaviorTree = new BehaviorTreeProcessor(behaviorTreeAsset.LoadGraph() as BehaviorTree);
             return behaviorTree;
         }
     }

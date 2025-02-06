@@ -3,9 +3,9 @@
 /***
  *
  *  Title:
- *  
+ *
  *  Description:
- *  
+ *
  *  Date:
  *  Version:
  *  Writer: 半只龙虾人
@@ -16,13 +16,14 @@
 
 #endregion
 
-using Moyo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Moyo.GraphProcessor;
 
 namespace Moyo.BehaviorTree
 {
+    [Serializable]
     public class BehaviorTree : BaseGraph
     {
         public int entryID;
@@ -34,10 +35,7 @@ namespace Moyo.BehaviorTree
         private EntryProcessor entry;
         private Queue<IUpdateTask> updateTasks;
 
-        public TaskState RootState
-        {
-            get { return entry.CurrentState; }
-        }
+        public TaskState RootState => entry.CurrentState;
 
         public BehaviorTreeProcessor(BehaviorTree model) : base(model)
         {
