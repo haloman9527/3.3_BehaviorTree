@@ -17,10 +17,10 @@
 #endregion
 
 using System;
-using Moyo;
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
+using Atom;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/RandomSequence")]
     [NodeTitle("随机顺序")]

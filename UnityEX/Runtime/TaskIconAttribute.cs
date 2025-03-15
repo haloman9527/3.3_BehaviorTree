@@ -15,7 +15,7 @@
 #endregion
 using System;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     public class TaskIconAttribute : Attribute
     {

@@ -19,9 +19,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     [Serializable]
     public class BehaviorTree : BaseGraph

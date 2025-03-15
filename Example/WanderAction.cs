@@ -16,12 +16,12 @@
 
 #endregion
 
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     [NodeMenu("Wander")]
     [NodeTooltip("在指定区域内徘徊，直到看到敌人")]

@@ -16,7 +16,7 @@
 
 #endregion
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     public interface IUpdateTask : ITask
     {

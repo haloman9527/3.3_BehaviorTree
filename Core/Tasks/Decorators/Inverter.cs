@@ -13,10 +13,11 @@
  *
  */
 #endregion
-using Moyo;
-using Moyo.GraphProcessor;
 
-namespace Moyo.BehaviorTree
+using Atom.GraphProcessor;
+using Atom;
+
+namespace Atom.BehaviorTree
 {
     [NodeTooltip("始终返回相反的结果")]
     [NodeMenu("Decorator/Inverter")]

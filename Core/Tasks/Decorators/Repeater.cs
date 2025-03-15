@@ -16,10 +16,10 @@
 
 #endregion
 
-using Moyo;
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
+using Atom;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Repeater")]
     [NodeMenu("Decorator/Repeater")]

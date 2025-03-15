@@ -18,7 +18,7 @@
 
 using System.Collections.Generic;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     public abstract class ContainerTaskProcessor : TaskProcessor
     {

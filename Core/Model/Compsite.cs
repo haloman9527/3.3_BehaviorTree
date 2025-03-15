@@ -14,7 +14,7 @@
  */
 #endregion
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     public abstract class Composite : Task { }
 }

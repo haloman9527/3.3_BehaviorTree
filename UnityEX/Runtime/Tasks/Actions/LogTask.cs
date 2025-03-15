@@ -16,11 +16,11 @@
 
 #endregion
 
-using Moyo;
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
+using Atom;
 using UnityEngine;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Debug")]
     [NodeMenu("Action/Log")]

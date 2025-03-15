@@ -17,10 +17,10 @@
 #endregion
 
 using System;
-using Moyo;
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
+using Atom;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     [NodeTitle("随机选择")]
     [NodeTooltip("随机顺序执行，直到某一行为成功，则返回成功，若所有行为都失败，则返回失败")]

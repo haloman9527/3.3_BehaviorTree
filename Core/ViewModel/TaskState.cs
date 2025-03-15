@@ -16,10 +16,10 @@
 
 #endregion
 
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
 using System;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     public enum TaskState
     {

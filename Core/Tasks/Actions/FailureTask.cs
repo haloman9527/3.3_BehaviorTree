@@ -14,9 +14,9 @@
  */
 #endregion
 
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     [TaskIcon("BehaviorTree/Icons/Debug")]
     [NodeMenu("Action/Failure")]

@@ -17,11 +17,11 @@
 #endregion
 
 using System;
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     [CreateAssetMenu]
     public class BehaviorTreeAsset : ScriptableObject, IGraphAsset

@@ -15,9 +15,9 @@
 #endregion
 
 #if UNITY_EDITOR
-using Moyo.GraphProcessor.Editors;
+using Atom.GraphProcessor.Editors;
 
-namespace Moyo.BehaviorTree.Editors
+namespace Atom.BehaviorTree.Editors
 {
     [CustomView(typeof(Entry))]
     public class EntryView : TaskView

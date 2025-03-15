@@ -16,10 +16,10 @@
 
 #endregion
 
-using Moyo;
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
+using Atom;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     [NodeMenu("Entry", hidden = true)]
     [TaskIcon("BehaviorTree/Icons/Entry")]

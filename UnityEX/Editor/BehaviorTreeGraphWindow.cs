@@ -18,19 +18,20 @@
 
 #if UNITY_EDITOR
 using System.Collections.Generic;
-using Moyo;
-using Moyo.GraphProcessor;
-using Moyo.GraphProcessor.Editors;
+using Atom.GraphProcessor;
+using Atom.GraphProcessor.Editors;
+using Atom;
 using Sirenix.Serialization;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Group = Moyo.GraphProcessor.Group;
+using GraphProcessor_Group = Atom.GraphProcessor.Group;
+using Group = Atom.GraphProcessor.Group;
 using UnityObject = UnityEngine.Object;
 
-namespace Moyo.BehaviorTree.Editors
+namespace Atom.BehaviorTree.Editors
 {
     [CustomView(typeof(BehaviorTree))]
     public class BehaviorTreeGraphWindow : BaseGraphWindow
@@ -103,7 +104,7 @@ namespace Moyo.BehaviorTree.Editors
             // 收集所有节点，连线
             Dictionary<int, BaseNode> nodes = new Dictionary<int, BaseNode>();
             List<BaseConnection> connections = new List<BaseConnection>();
-            List<Group> groups = new List<Group>();
+            List<GraphProcessor_Group> groups = new List<GraphProcessor_Group>();
             foreach (var item in GraphView.selection)
             {
                 switch (item)
@@ -128,7 +129,7 @@ namespace Moyo.BehaviorTree.Editors
 
             nodes = Sirenix.Serialization.SerializationUtility.DeserializeValue<Dictionary<int, BaseNode>>(nodesStr, DataFormat.Binary);
             connections = Sirenix.Serialization.SerializationUtility.DeserializeValue<List<BaseConnection>>(connectionsStr, DataFormat.Binary);
-            groups = Sirenix.Serialization.SerializationUtility.DeserializeValue<List<Group>>(groupsStr, DataFormat.Binary);
+            groups = Sirenix.Serialization.SerializationUtility.DeserializeValue<List<GraphProcessor_Group>>(groupsStr, DataFormat.Binary);
 
             var graph = GraphView.ViewModel;
             var nodeMaps = new Dictionary<int, BaseNodeProcessor>();

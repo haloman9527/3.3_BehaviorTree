@@ -17,9 +17,9 @@
 #endregion
 
 using System;
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     public abstract class TaskProcessor : BaseNodeProcessor
     {

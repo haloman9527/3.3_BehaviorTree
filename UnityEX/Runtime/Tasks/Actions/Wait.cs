@@ -16,11 +16,11 @@
 
 #endregion
 
-using Moyo;
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
+using Atom;
 using UnityEngine;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     [NodeMenu("Action/Wait")]
     public class Wait : Task

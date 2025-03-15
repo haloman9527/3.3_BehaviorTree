@@ -16,13 +16,13 @@
 
 #endregion
 
-using Moyo;
+using Atom;
 using System;
-using Moyo.GraphProcessor;
+using Atom.GraphProcessor;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Moyo.BehaviorTree
+namespace Atom.BehaviorTree
 {
     [NodeTooltip("追逐敌人到一定距离后停下")]
     [NodeMenu("Seek")]
