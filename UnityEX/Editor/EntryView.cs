@@ -22,9 +22,9 @@ namespace Atom.BehaviorTree.Editors
     [CustomView(typeof(Entry))]
     public class EntryView : TaskView
     {
-        protected override void OnInitialized()
+        protected override void DoInit()
         {
-            base.OnInitialized();
+            base.DoInit();
             this.Deletable = false;
             this.Movable = false;
         }

@@ -51,9 +51,13 @@ namespace Atom.BehaviorTree.Editors
             evt.menu.AppendAction($"Stop", _ => { T_ViewModel.Stop(); });
         }
 
-        protected override void OnInitialized()
+        protected override void DoInit()
         {
-            base.OnInitialized();
+            base.DoInit();
+            if (T_ViewModel.CurrentState == TaskState.Active)
+                OnStart();
+            T_ViewModel.OnStart += OnStart;
+            T_ViewModel.OnStop += OnStop;
             switch (ViewModel)
             {
                 case ActionTaskProcessor:
@@ -92,18 +96,9 @@ namespace Atom.BehaviorTree.Editors
             }
         }
 
-        protected override void OnBindingProperties()
+        protected override void DoUnInit()
         {
-            base.OnBindingProperties();
-            if (T_ViewModel.CurrentState == TaskState.Active)
-                OnStart();
-            T_ViewModel.OnStart += OnStart;
-            T_ViewModel.OnStop += OnStop;
-        }
-
-        protected override void OnUnBindingProperties()
-        {
-            base.OnUnBindingProperties();
+            base.DoUnInit();
             T_ViewModel.OnStart -= OnStart;
             T_ViewModel.OnStop -= OnStop;
         }

@@ -25,9 +25,9 @@ namespace Atom.BehaviorTree.Editors
 {
     public class BehaviorTreeGraphView : BaseGraphView
     {
-        protected override void OnInitialized()
+        protected override void OnCreated()
         {
-            base.OnInitialized();
+            base.OnCreated();
             schedule.Execute(UpdateState).Every(100);
         }
 

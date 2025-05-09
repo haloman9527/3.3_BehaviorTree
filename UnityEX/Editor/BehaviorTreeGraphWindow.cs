@@ -68,18 +68,18 @@ namespace Atom.BehaviorTree.Editors
             return new BehaviorTreeGraphView();
         }
 
-        protected override void OnBtnSaveClick()
+        protected override void Save()
         {
             if (GraphAsset == null)
             {
                 var path = EditorUtility.SaveFilePanelInProject("保存", "New BehavorTree", "asset", "Create BehaviorTree Asset");
                 if (string.IsNullOrEmpty(path))
                     return;
-                GraphAsset = ScriptableObject.CreateInstance<BehaviorTreeAsset>();
-                AssetDatabase.CreateAsset((ScriptableObject)GraphAsset, path);
+                var asset = ScriptableObject.CreateInstance<BehaviorTreeAsset>();
+                AssetDatabase.CreateAsset(asset, path);
+                this.LoadFromGraphAsset(asset);
             }
-
-            base.OnBtnSaveClick();
+            base.Save();
         }
 
         protected override void OnKeyDownCallback(KeyDownEvent evt)
@@ -121,8 +121,6 @@ namespace Atom.BehaviorTree.Editors
                 }
             }
 
-            GraphView.CommandDispatcher.BeginGroup();
-
             var nodesStr = Sirenix.Serialization.SerializationUtility.SerializeValue(nodes, DataFormat.Binary);
             var connectionsStr = Sirenix.Serialization.SerializationUtility.SerializeValue(connections, DataFormat.Binary);
             var groupsStr = Sirenix.Serialization.SerializationUtility.SerializeValue(groups, DataFormat.Binary);
@@ -142,7 +140,7 @@ namespace Atom.BehaviorTree.Editors
                 pair.Value.id = graph.NewID();
                 pair.Value.position += new InternalVector2Int(50, 50);
                 var vm = ViewModelFactory.ProduceViewModel(pair.Value) as BaseNodeProcessor;
-                GraphView.CommandDispatcher.Do(new AddNodeCommand(graph, vm));
+                GraphView.Context.Do(new AddNodeCommand(graph, vm));
                 nodeMaps[pair.Key] = vm;
                 selectables.Add(GraphView.NodeViews[vm.ID]);
             }
@@ -156,7 +154,7 @@ namespace Atom.BehaviorTree.Editors
                     connection.toNode = to.ID;
 
                 var vm = ViewModelFactory.ProduceViewModel(connection) as BaseConnectionProcessor;
-                GraphView.CommandDispatcher.Do(new ConnectCommand(graph, vm));
+                GraphView.Context.Do(new ConnectCommand(graph, vm));
                 selectables.Add(GraphView.ConnectionViews[vm]);
             }
 
@@ -171,11 +169,9 @@ namespace Atom.BehaviorTree.Editors
                 }
 
                 group.id = graph.NewID();
-                GraphView.CommandDispatcher.Do(new AddGroupCommand(graph, group));
+                GraphView.Context.Do(new AddGroupCommand(graph, group));
                 selectables.Add(GraphView.GroupViews[group.id]);
             }
-
-            GraphView.CommandDispatcher.EndGroup();
 
             GraphView.AddToSelection(selectables);
         }
