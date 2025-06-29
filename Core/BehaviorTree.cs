@@ -26,7 +26,7 @@ namespace Atom.BehaviorTree
     [Serializable]
     public class BehaviorTree : BaseGraph
     {
-        public int entryID;
+        public long entryID;
     }
 
     [ViewModel(typeof(BehaviorTree))]
