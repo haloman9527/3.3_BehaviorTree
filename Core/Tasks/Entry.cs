@@ -34,7 +34,7 @@ namespace Atom.BehaviorTree
     {
         public EntryProcessor(Entry model) : base(model)
         {
-            AddPort(new BasePortProcessor(TaskProcessor.ChildrenPortName, BasePort.Direction.Bottom, BasePort.Capacity.Single, typeof(TaskProcessor)));
+            AddPort(new PortProcessor(TaskProcessor.ChildrenPortName, BasePort.Direction.Bottom, BasePort.Capacity.Single, typeof(TaskProcessor)));
         }
 
         public TaskProcessor GetFirstChild()

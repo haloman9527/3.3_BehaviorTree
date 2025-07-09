@@ -22,7 +22,7 @@ namespace Atom.BehaviorTree
     {
         protected ActionTaskProcessor(Task model) : base(model)
         {
-            AddPort(new BasePortProcessor(TaskProcessor.ParentPortName, BasePort.Direction.Top, BasePort.Capacity.Single, typeof(ContainerTaskProcessor)));
+            AddPort(new PortProcessor(TaskProcessor.ParentPortName, BasePort.Direction.Top, BasePort.Capacity.Single, typeof(ContainerTaskProcessor)));
         }
     }
 }

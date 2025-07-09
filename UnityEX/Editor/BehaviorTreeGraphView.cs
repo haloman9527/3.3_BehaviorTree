@@ -44,19 +44,15 @@ namespace Atom.BehaviorTree.Editors
 
         protected override void BuildNodeMenu(NodeMenuWindow nodeMenu)
         {
-            foreach (var pair in GraphProcessorUtil.NodeStaticInfos)
+            foreach (var nodeInfo in GraphProcessorUtil.GetNodeStaticInfos())
             {
-                if (!typeof(Task).IsAssignableFrom(pair.Key))
+                if (!typeof(Task).IsAssignableFrom(nodeInfo.NodeType))
                     continue;
 
-                var nodeType = pair.Key;
-                var nodeStaticInfo = GraphProcessorUtil.NodeStaticInfos[nodeType];
-                if (nodeStaticInfo.hidden)
+                if (nodeInfo.Hidden)
                     continue;
 
-                var path = nodeStaticInfo.path;
-                var menu = nodeStaticInfo.menu;
-                nodeMenu.entries.Add(new NodeMenuWindow.NodeEntry(path, menu, nodeType));
+                nodeMenu.entries.Add(new NodeMenuWindow.NodeEntry(nodeInfo.Path, nodeInfo.Menu, nodeInfo.NodeType));
             }
         }
 

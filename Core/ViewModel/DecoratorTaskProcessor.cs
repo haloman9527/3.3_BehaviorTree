@@ -29,8 +29,8 @@ namespace Atom.BehaviorTree
 
         protected DecoratorTaskProcessor(Task model) : base(model)
         {
-            AddPort(new BasePortProcessor(TaskProcessor.ParentPortName, BasePort.Direction.Top, BasePort.Capacity.Single, typeof(ContainerTaskProcessor)));
-            AddPort(new BasePortProcessor(TaskProcessor.ChildrenPortName, BasePort.Direction.Bottom, BasePort.Capacity.Single, typeof(TaskProcessor)));
+            AddPort(new PortProcessor(TaskProcessor.ParentPortName, BasePort.Direction.Top, BasePort.Capacity.Single, typeof(ContainerTaskProcessor)));
+            AddPort(new PortProcessor(TaskProcessor.ChildrenPortName, BasePort.Direction.Bottom, BasePort.Capacity.Single, typeof(TaskProcessor)));
         }
     }
 }

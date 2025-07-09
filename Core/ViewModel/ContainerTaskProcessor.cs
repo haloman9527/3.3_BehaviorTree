@@ -3,9 +3,9 @@
 /***
  *
  *  Title:
- *  
+ *
  *  Description:
- *  
+ *
  *  Date:
  *  Version:
  *  Writer: 半只龙虾人
@@ -17,6 +17,7 @@
 #endregion
 
 using System.Collections.Generic;
+using Atom.GraphProcessor;
 
 namespace Atom.BehaviorTree
 {
@@ -36,14 +37,16 @@ namespace Atom.BehaviorTree
         protected override void OnEnabled()
         {
             base.OnEnabled();
-            RefreshChildren();
-            Ports[TaskProcessor.ChildrenPortName].onConnectionChanged += RefreshChildren;
+            RefreshChildren(null);
+            Ports[TaskProcessor.ChildrenPortName].OnConnected += RefreshChildren;
+            Ports[TaskProcessor.ChildrenPortName].onDisconnected += RefreshChildren;
         }
 
         protected override void OnDisabled()
         {
             base.OnDisabled();
-            Ports[TaskProcessor.ChildrenPortName].onConnectionChanged -= RefreshChildren;
+            Ports[TaskProcessor.ChildrenPortName].OnConnected -= RefreshChildren;
+            Ports[TaskProcessor.ChildrenPortName].onDisconnected -= RefreshChildren;
         }
 
         protected override void DoStop()
@@ -56,15 +59,15 @@ namespace Atom.BehaviorTree
                 }
             }
         }
-        
+
         public void ChildStopped(TaskProcessor child, bool childSuccess)
         {
             this.OnChildStopped(child, childSuccess);
         }
 
         protected abstract void OnChildStopped(TaskProcessor child, bool childSuccess);
-        
-        protected virtual void RefreshChildren()
+
+        protected virtual void RefreshChildren(BaseConnectionProcessor connection)
         {
             if (children == null)
                 children = new List<TaskProcessor>(GetChildren());
@@ -76,7 +79,7 @@ namespace Atom.BehaviorTree
 
             IEnumerable<TaskProcessor> GetChildren()
             {
-                foreach (var node in GetConnections(TaskProcessor.ChildrenPortName))
+                foreach (var node in GetPortConnections(TaskProcessor.ChildrenPortName))
                 {
                     yield return (TaskProcessor)node;
                 }

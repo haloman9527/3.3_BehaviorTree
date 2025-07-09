@@ -85,11 +85,11 @@ namespace Atom.BehaviorTree.Editors
             {
                 badge = IconBadge.CreateError("需要子节点");
                 RefreshBadge();
-                ViewModel.Ports["Children"].onAfterConnected += _ =>
+                ViewModel.Ports["Children"].OnConnected += _ =>
                 {
                     RefreshBadge();
                 };
-                ViewModel.Ports["Children"].onAfterDisconnected += _ =>
+                ViewModel.Ports["Children"].onDisconnected += _ =>
                 {
                     RefreshBadge();
                 };

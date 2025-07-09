@@ -64,7 +64,7 @@ namespace Atom.BehaviorTree
             if (Ports.TryGetValue(ParentPortName, out var parentPort))
             {
                 RefreshParent();
-                parentPort.onConnectionChanged += RefreshParent;
+                parentPort.OnConnectionChanged += RefreshParent;
             }
         }
 
@@ -74,7 +74,7 @@ namespace Atom.BehaviorTree
             if (Ports.TryGetValue(ParentPortName, out var parentPort))
             {
                 parent = null;
-                parentPort.onConnectionChanged -= RefreshParent;
+                parentPort.OnConnectionChanged -= RefreshParent;
             }
         }
 
